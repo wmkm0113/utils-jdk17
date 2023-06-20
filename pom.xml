@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.nervousync</groupId>
     <artifactId>utils-jdk17</artifactId>
-    <version>2.0.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>Nervousync Java Utility Collections</name>
-    <url>https://gene.nervousync.org/index.shtml</url>
+    <url>https://nervousync.org/utils-jdk17/index.shtml</url>
     <description>Java utility collections, development by Nervousync Studio (NSYC)</description>
     <issueManagement>
-        <url>https://github.com/wmkm0113/Gene/issues</url>
+        <url>https://github.com/wmkm0113/utils-jdk17/issues</url>
         <system>Github Issues</system>
     </issueManagement>
     <licenses>
@@ -20,10 +20,10 @@
         </license>
     </licenses>
     <scm>
-        <tag>v2.0.0</tag>
-        <url>https://github.com/wmkm0113/Gene</url>
-        <connection>scm:git:https://github.com/wmkm0113/Gene.git</connection>
-        <developerConnection>scm:git:https://github.com/wmkm0113/Gene.git</developerConnection>
+        <tag>v1.0.0</tag>
+        <url>https://github.com/wmkm0113/utils-jdk17</url>
+        <connection>scm:git:https://github.com/wmkm0113/utils-jdk17.git</connection>
+        <developerConnection>scm:git:https://github.com/wmkm0113/utils-jdk17.git</developerConnection>
     </scm>
     <organization>
         <url>https://nervousync.org/</url>

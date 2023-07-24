@@ -19,6 +19,7 @@ package org.nervousync.zip.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import jakarta.annotation.Nonnull;
 import org.nervousync.zip.ZipFile;
 
 /**
@@ -51,7 +52,7 @@ public class ZipOutputStream extends DeflaterOutputStream {
 	}
 	
 	@Override
-	public void write(byte[] b, int off, int len) throws IOException {
+	public void write(@Nonnull byte[] b, int off, int len) throws IOException {
 		this.crc.update(b, off, len);
 		this.updateTotalBytesRead(len);
 		super.write(b, off, len);

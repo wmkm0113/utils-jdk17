@@ -20,7 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.CRC32;
 
-import org.nervousync.commons.core.Globals;
+import jakarta.annotation.Nonnull;
+import org.nervousync.commons.Globals;
 
 /**
  * The type Zip input stream.
@@ -53,12 +54,12 @@ public class ZipInputStream extends InputStream {
 	}
 	
 	@Override
-	public int read(byte[] b) throws IOException {
+	public int read(@Nonnull byte[] b) throws IOException {
 		return this.read(b, 0, b.length);
 	}
 	
 	@Override
-	public int read(byte[] b, int off, int len) throws IOException {
+	public int read(@Nonnull byte[] b, int off, int len) throws IOException {
 		int readLength = this.inputStream.read(b, off, len);
 		if (readLength != Globals.DEFAULT_VALUE_INT) {
 			this.crc.update(b, off, readLength);

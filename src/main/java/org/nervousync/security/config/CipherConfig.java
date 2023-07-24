@@ -16,29 +16,51 @@
  */
 package org.nervousync.security.config;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
- * The type Cipher config.
+ * <h2 class="en">Cipher configure</h2>
+ * <h2 class="zh-CN">密码设置</h2>
  *
- * @param algorithm Cipher Algorithm
- * @param mode      Cipher Mode
- * @param padding   Padding Mode
+ * @param algorithm <span class="en">Cipher Algorithm</span>
+ *                  <span class="zh-CN">密码算法</span>
+ * @param mode      <span class="en">Cipher Mode</span>
+ *                  <span class="zh-CN">分组密码模式</span>
+ *                  Cipher Mode
+ * @param padding   <span class="en">Padding Mode</span>
+ *                  <span class="zh-CN">数据填充模式</span>
+ * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
+ * @version $Revision : 1.0 $ $Date: Jan 13, 2016 15:47:22 $
  */
-public record CipherConfig(String algorithm, String mode, String padding) {
+public record CipherConfig(String algorithm, String mode, String padding) implements Serializable {
+    /**
+     * <span class="en">Serial version UID</span>
+     * <span class="zh-CN">序列化UID</span>
+     */
+    @Serial
+    private static final long serialVersionUID = -2132901674474697239L;
 
     /**
-     * Instantiates a new Cipher mode.
+     * <h3 class="en">Constructor method for CipherConfig</h3>
+     * <h3 class="zh-CN">密码设置的构造方法</h3>
      *
-     * @param algorithm the algorithm
-     * @param mode      the mode
-     * @param padding   the padding
+     * @param algorithm <span class="en">Cipher Algorithm</span>
+     *                  <span class="zh-CN">密码算法</span>
+     * @param mode      <span class="en">Cipher Mode</span>
+     *                  <span class="zh-CN">分组密码模式</span>
+     * @param padding   <span class="en">Padding Mode</span>
+     *                  <span class="zh-CN">数据填充模式</span>
      */
     public CipherConfig {
     }
 
     /**
-     * Gets algorithm.
+     * <h3 class="en">Getter method for Cipher Algorithm</h3>
+     * <h3 class="zh-CN">密码算法的Getter方法</h3>
      *
-     * @return the algorithm
+     * @return <span class="en">Cipher Algorithm</span>
+     * <span class="zh-CN">密码算法</span>
      */
     @Override
     public String algorithm() {
@@ -46,9 +68,11 @@ public record CipherConfig(String algorithm, String mode, String padding) {
     }
 
     /**
-     * Gets mode.
+     * <h3 class="en">Getter method for Cipher Mode</h3>
+     * <h3 class="zh-CN">分组密码模式的Getter方法</h3>
      *
-     * @return the mode
+     * @return <span class="en">Cipher Mode</span>
+     * <span class="zh-CN">分组密码模式</span>
      */
     @Override
     public String mode() {
@@ -56,15 +80,25 @@ public record CipherConfig(String algorithm, String mode, String padding) {
     }
 
     /**
-     * Gets padding.
+     * <h3 class="en">Getter method for Padding Mode</h3>
+     * <h3 class="zh-CN">数据填充模式的Getter方法</h3>
      *
-     * @return the padding
+     * @return <span class="en">Padding Mode</span>
+     * <span class="zh-CN">数据填充模式</span>
      */
     @Override
     public String padding() {
         return padding;
     }
 
+    /**
+     * <h3 class="en">Convert current cipher configure to string</h3>
+     * <h3 class="zh-CN">转换当前密码配置信息为字符串</h3>
+     *
+     * @return <span class="en">Converted string</span>
+     * <span class="zh-CN">转换后的字符串</span>
+     */
+    @Override
     public String toString() {
         return String.join("/", this.algorithm, this.mode, this.padding);
     }

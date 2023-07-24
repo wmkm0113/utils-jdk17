@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
-import org.nervousync.commons.core.Globals;
+import jakarta.annotation.Nonnull;
+import org.nervousync.commons.Globals;
+import org.nervousync.exceptions.zip.ZipException;
 import org.nervousync.zip.crypto.Decryptor;
 import org.nervousync.zip.ZipFile;
 
@@ -53,7 +55,7 @@ public class InflaterInputStream extends PartInputStream {
 	 */
 	public InflaterInputStream(final ZipFile zipFile, final int currentIndex, final long seekPosition, final long length,
 	                           final long originalSize, final Decryptor decryptor, final boolean isAESEncryptedFile)
-			throws IOException {
+			throws IOException, ZipException {
 		super(zipFile, currentIndex, seekPosition, length, decryptor, isAESEncryptedFile);
 		this.inflater = new Inflater(Boolean.TRUE);
 		this.buffer = new byte[Globals.DEFAULT_BUFFER_SIZE];
@@ -67,12 +69,12 @@ public class InflaterInputStream extends PartInputStream {
 	}
 	
 	@Override
-	public int read(byte[] b) throws IOException {
+	public int read(@Nonnull byte[] b) throws IOException {
 		return this.read(b, 0, b.length);
 	}
 	
 	@Override
-	public int read(byte[] b, int off, int len) throws IOException {
+	public int read(@Nonnull byte[] b, int off, int len) throws IOException {
 		if (off < 0 || len < 0 || off + len > b.length) {
 			throw new IndexOutOfBoundsException();
 		} else if (b.length == 0) {
@@ -99,7 +101,7 @@ public class InflaterInputStream extends PartInputStream {
 			
 			this.writeBytes += readLength;
 			return readLength;
-		} catch (DataFormatException e) {
+		} catch (DataFormatException | ZipException e) {
 			throw new IOException("Invalid data format", e);
 		}
 	}
@@ -138,7 +140,7 @@ public class InflaterInputStream extends PartInputStream {
 		super.close();
 	}
 	
-	private void finishInflating() throws IOException {
+	private void finishInflating() throws IOException, ZipException {
 		super.seekToEnd();
 		this.checkAndReadAESMacBytes();
 	}

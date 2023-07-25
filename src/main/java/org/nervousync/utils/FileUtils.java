@@ -411,15 +411,30 @@ public final class FileUtils {
             inputStream = new SmbFileInputStream(resourceLocation,
                     new BaseContext(new PropertyConfiguration(new Properties())));
         } else {
-            inputStream = FileUtils.class.getResourceAsStream(resourceLocation);
-            if (inputStream == null) {
-                try {
-                    inputStream = FileUtils.getURL(resourceLocation).openStream();
-                } catch (Exception e) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Utils", "Input_Stream_Open_Error", e);
+            JarPath jarPath = JarPath.parse(resourceLocation);
+            if (jarPath == null) {
+                inputStream = FileUtils.class.getResourceAsStream(resourceLocation);
+                if (inputStream == null) {
+                    try {
+                        inputStream = FileUtils.getURL(resourceLocation).openStream();
+                    } catch (FileNotFoundException e) {
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("Utils", "Input_Stream_Open_Error", e);
+                        }
+                        throw new IOException(e);
                     }
-                    throw new IOException(e);
+                }
+            } else {
+                try {
+                    inputStream = switch (StringUtils.getFilenameExtension(jarPath.filePath())) {
+                        case URL_PROTOCOL_JAR ->
+                                openInputStream(new JarFile(getFile(jarPath.filePath())), jarPath.entryPath());
+                        case URL_PROTOCOL_ZIP ->
+                                openInputStream(ZipFile.openZipFile(jarPath.filePath()), jarPath.entryPath());
+                        default -> null;
+                    };
+                } catch (ZipException e) {
+                    throw new IOException("", e);
                 }
             }
         }
@@ -823,13 +838,21 @@ public final class FileUtils {
      * <span class="zh-CN">如果URL无法解析为文件系统中的文件</span>
      */
     public static byte[] readFileBytes(final String resourceLocation) throws FileNotFoundException {
-        if (StringUtils.containsIgnoreCase(resourceLocation, JAR_URL_SEPARATOR)) {
-            int index = resourceLocation.indexOf(JAR_URL_SEPARATOR);
-            String filePath = resourceLocation.substring(0, index);
-            String entryPath = resourceLocation.substring(index + JAR_URL_SEPARATOR.length());
-            return FileUtils.readJarEntryBytes(filePath, entryPath);
+        JarPath jarPath = JarPath.parse(resourceLocation);
+        if (jarPath == null) {
+            return readFileBytes(FileUtils.getFile(resourceLocation));
         }
-        return readFileBytes(FileUtils.getFile(resourceLocation));
+        if (jarPath.filePath().toLowerCase().endsWith(URL_PROTOCOL_JAR)) {
+            return FileUtils.readJarEntryBytes(jarPath.filePath(), jarPath.entryPath());
+        } else if (jarPath.filePath().toLowerCase().endsWith(URL_PROTOCOL_ZIP)) {
+            try {
+                return ZipFile.openZipFile(jarPath.filePath()).readEntry(jarPath.entryPath());
+            } catch (ZipException ignored) {
+                return new byte[0];
+            }
+        } else {
+            return new byte[0];
+        }
     }
     /**
      * <h3 class="en">Read part content of given file path as byte arrays</h3>
@@ -3791,7 +3814,7 @@ public final class FileUtils {
      * @param entryPath <span class="en">Jar entry path</span>
      *                  <span class="zh-CN">Jar资源路径</span>
      */
-        private record JarPath(String filePath, String entryPath) {
+    private record JarPath(String filePath, String entryPath) {
         /**
          * <h3 class="en">Constructor for JarPath</h3>
          * <h3 class="zh-CN">Jar路径定义的构造方法</h3>
@@ -3803,7 +3826,24 @@ public final class FileUtils {
          */
         private JarPath {
         }
-
+        /**
+         * <h3 class="en">Static method for parse resource location string to JarPath instance</h3>
+         * <h3 class="zh-CN">静态方法用于解析资源路径字符串为JarPath实例对象</h3>
+         *
+         * @param resourceLocation  <span class="en">the location String</span>
+         *                          <span class="zh-CN">位置字符串</span>
+         *
+         * @return  <span class="en">Parsed JarPath instance or <code>null</code> if resource location string invalid</span>
+         *          <span class="zh-CN">解析后的 JarPath 实例对象，如果位置字符串不是合法的资源路径则返回 <code>null</code></span>
+         */
+        static JarPath parse(final String resourceLocation) {
+            if (StringUtils.containsIgnoreCase(resourceLocation, JAR_URL_SEPARATOR)) {
+                int index = resourceLocation.indexOf(JAR_URL_SEPARATOR);
+                return new JarPath(resourceLocation.substring(0, index),
+                        resourceLocation.substring(index + JAR_URL_SEPARATOR.length()));
+            }
+            return null;
+        }
         /**
          * <h3 class="en">Getter method for file path</h3>
          * <h3 class="zh-CN">Jar文件路径的Getter方法</h3>
@@ -3811,8 +3851,8 @@ public final class FileUtils {
          * @return <span class="en">Jar file path</span>
          * <span class="zh-CN">Jar文件路径</span>
          */
-            @Override
-            public String filePath() {
+        @Override
+        public String filePath() {
                 return filePath;
             }
 
@@ -3823,11 +3863,11 @@ public final class FileUtils {
          * @return <span class="en">Jar entry path</span>
          * <span class="zh-CN">Jar资源路径</span>
          */
-            @Override
-            public String entryPath() {
+        @Override
+        public String entryPath() {
                 return entryPath;
             }
-        }
+    }
     /**
      * <h3 class="en">Move file from base samba path to target samba path</h3>
      * <h3 class="zh-CN">从原samba文件地址移动到目标samba文件地址</h3>

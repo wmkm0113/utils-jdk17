@@ -72,7 +72,7 @@ import javax.net.ssl.*;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: May 13, 2014 15:36:52 $
+ * @version $Revision: 1.0.0 $ $Date: May 13, 2014 15:36:52 $
  */
 public final class RequestUtils {
     /**
@@ -394,7 +394,7 @@ public final class RequestUtils {
             }
         }
 
-        if (requestInfo.getTrustCertInfos() != null && requestInfo.getTrustCertInfos().size() > 0) {
+        if (requestInfo.getTrustCertInfos() != null && !requestInfo.getTrustCertInfos().isEmpty()) {
             try {
                 System.setProperty("jdk.internal.httpclient.disableHostnameVerification", Boolean.TRUE.toString());
                 SSLContext sslContext = SSLContext.getInstance("TLS");
@@ -563,7 +563,7 @@ public final class RequestUtils {
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static Map<String, String[]> parseParametersFromUri(final String uri, final boolean parseMatrix) {
-        if (ObjectUtils.isNull(uri) || uri.trim().length() == 0) {
+        if (ObjectUtils.isNull(uri) || uri.trim().isEmpty()) {
             return new HashMap<>();
         }
         int qSignPos = uri.indexOf('?');
@@ -583,7 +583,7 @@ public final class RequestUtils {
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static String getBaseFromUri(final String uri) {
-        if (ObjectUtils.isNull(uri) || uri.trim().length() == 0) {
+        if (ObjectUtils.isNull(uri) || uri.trim().isEmpty()) {
             return Globals.DEFAULT_VALUE_STRING;
         }
         int qSignPos = uri.indexOf('?');
@@ -629,7 +629,7 @@ public final class RequestUtils {
         for (Entry<String, String[]> entry : entrySet) {
             String[] values = entry.getValue();
             String key = entry.getKey();
-            if (result.length() > 0) {
+            if (!result.isEmpty()) {
                 result.append(ampersand);
             }
             try {
@@ -761,7 +761,7 @@ public final class RequestUtils {
                 String roleName;
                 if (bean instanceof String) {
                     roleName = (String) bean;
-                } else if (property != null && property.trim().length() > 0) {
+                } else if (property != null && !property.trim().isEmpty()) {
                     roleName = String.valueOf(ReflectionUtils.getFieldValue(property, bean));
                 } else {
                     roleName = String.valueOf(bean);
@@ -889,7 +889,7 @@ public final class RequestUtils {
 
         requestUrl.append(getRequestURI(request));
 
-        if (request.getQueryString() != null && request.getQueryString().length() > 0) {
+        if (request.getQueryString() != null && !request.getQueryString().isEmpty()) {
             requestUrl.append("?").append(request.getQueryString());
         }
 
@@ -1022,7 +1022,7 @@ public final class RequestUtils {
      *          <span class="zh-CN">生成的结果字符串</span>
      */
     private static String generateCookie(final String requestUrl, final List<CookieEntity> cookieList) {
-        if (cookieList == null || cookieList.size() == 0) {
+        if (cookieList == null || cookieList.isEmpty()) {
             return null;
         }
         StringBuilder stringBuilder = new StringBuilder();
@@ -1060,7 +1060,7 @@ public final class RequestUtils {
             stringBuilder.append("; ").append(cookieInfo.getName()).append("=").append(cookieInfo.getValue());
         }
 
-        if (stringBuilder.length() == 0) {
+        if (stringBuilder.isEmpty()) {
             return null;
         }
         return stringBuilder.substring(2);
@@ -1104,7 +1104,7 @@ public final class RequestUtils {
      * <h2 class="zh-CN">响应体拦截处理器</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: May 13, 2014 17:22:48 $
+     * @version $Revision: 1.0.0 $ $Date: May 13, 2014 17:22:48 $
      */
     private static final class ResponseContentHandler implements HttpResponse.BodyHandler<Supplier<ResponseInfo>> {
         /**

@@ -36,7 +36,7 @@ import org.nervousync.commons.Globals;
  * <h2 class="zh-CN">日期时间工具集</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2010 11:15:20 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2010 11:15:20 $
  */
 public final class DateTimeUtils {
 
@@ -194,7 +194,7 @@ public final class DateTimeUtils {
 	 * <span class="zh-CN">如果格式化的日期时间字符串为null或者为空字符串</span>
 	 */
 	public static Date parseDate(final String string, final String format) throws ParseException {
-		if (string == null || string.length() == 0) {
+		if (string == null || string.isEmpty()) {
 			throw new ParseException("Date string is null", 0);
 		}
 		String datetimeFormat = StringUtils.isEmpty(format) ? DEFAULT_DATE_PATTERN : format;
@@ -931,7 +931,7 @@ public final class DateTimeUtils {
 	 * <h2 class="zh-CN">UTC时钟</h2>
 	 *
 	 * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-	 * @version $Revision : 1.0 $ $Date: Jan 13, 2010 11:46:19 $
+	 * @version $Revision: 1.0.0 $ $Date: Jan 13, 2010 11:46:19 $
 	 */
 	private static final class UTCClock {
 		/**

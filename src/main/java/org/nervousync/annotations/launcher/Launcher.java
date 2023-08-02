@@ -25,7 +25,7 @@ import java.lang.annotation.*;
  * <h3 class="zh-CN">启动器类的标注</h3>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jun 28, 2022 15:25:33 $
+ * @version $Revision: 1.0.0 $ $Date: Jun 28, 2022 15:25:33 $
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

@@ -27,7 +27,7 @@ import org.nervousync.commons.Globals;
  * The type Zip input stream.
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Dec 2, 2017 10:29:09 AM $
+ * @version $Revision: 1.0.0 $ $Date: Dec 2, 2017 10:29:09 AM $
  */
 public class ZipInputStream extends InputStream {
 

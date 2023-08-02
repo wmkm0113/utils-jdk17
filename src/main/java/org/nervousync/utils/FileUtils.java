@@ -41,6 +41,7 @@ import jcifs.CIFSContext;
 import jcifs.CIFSException;
 import jcifs.Config;
 import jcifs.smb.NtlmPasswordAuthenticator;
+import org.nervousync.beans.path.TargetPath;
 import org.nervousync.exceptions.zip.ZipException;
 
 import jcifs.config.PropertyConfiguration;
@@ -59,7 +60,7 @@ import org.nervousync.zip.ZipFile;
  * <h2 class="zh-CN">文件操作工具集</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2010 11:08:14 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2010 11:08:14 $
  */
 public final class FileUtils {
     /**
@@ -339,7 +340,7 @@ public final class FileUtils {
      *          <span class="zh-CN">如果文件存在，则最后修改时间为 long 类型</span>
      */
     public static long lastModify(final String resourceLocation, final Properties properties) {
-        if (resourceLocation == null || resourceLocation.trim().length() == 0) {
+        if (resourceLocation == null || resourceLocation.trim().isEmpty()) {
             return Globals.DEFAULT_VALUE_LONG;
         }
         if (resourceLocation.startsWith(Globals.SAMBA_PROTOCOL)) {
@@ -411,8 +412,8 @@ public final class FileUtils {
             inputStream = new SmbFileInputStream(resourceLocation,
                     new BaseContext(new PropertyConfiguration(new Properties())));
         } else {
-            JarPath jarPath = JarPath.parse(resourceLocation);
-            if (jarPath == null) {
+            TargetPath targetPath = TargetPath.parse(resourceLocation);
+            if (targetPath == null) {
                 inputStream = FileUtils.class.getResourceAsStream(resourceLocation);
                 if (inputStream == null) {
                     try {
@@ -426,11 +427,13 @@ public final class FileUtils {
                 }
             } else {
                 try {
-                    inputStream = switch (StringUtils.getFilenameExtension(jarPath.filePath())) {
+                    inputStream = switch (StringUtils.getFilenameExtension(targetPath.getFilePath())) {
                         case URL_PROTOCOL_JAR ->
-                                openInputStream(new JarFile(getFile(jarPath.filePath())), jarPath.entryPath());
+                                openInputStream(new JarFile(getFile(targetPath.getFilePath())),
+                                        targetPath.getEntryPath());
                         case URL_PROTOCOL_ZIP ->
-                                openInputStream(ZipFile.openZipFile(jarPath.filePath()), jarPath.entryPath());
+                                openInputStream(ZipFile.openZipFile(targetPath.getFilePath()),
+                                        targetPath.getEntryPath());
                         default -> null;
                     };
                 } catch (ZipException e) {
@@ -838,15 +841,15 @@ public final class FileUtils {
      * <span class="zh-CN">如果URL无法解析为文件系统中的文件</span>
      */
     public static byte[] readFileBytes(final String resourceLocation) throws FileNotFoundException {
-        JarPath jarPath = JarPath.parse(resourceLocation);
-        if (jarPath == null) {
+        TargetPath targetPath = TargetPath.parse(resourceLocation);
+        if (targetPath == null) {
             return readFileBytes(FileUtils.getFile(resourceLocation));
         }
-        if (jarPath.filePath().toLowerCase().endsWith(URL_PROTOCOL_JAR)) {
-            return FileUtils.readJarEntryBytes(jarPath.filePath(), jarPath.entryPath());
-        } else if (jarPath.filePath().toLowerCase().endsWith(URL_PROTOCOL_ZIP)) {
+        if (targetPath.getFilePath().toLowerCase().endsWith(URL_PROTOCOL_JAR)) {
+            return FileUtils.readJarEntryBytes(targetPath.getFilePath(), targetPath.getEntryPath());
+        } else if (targetPath.getFilePath().toLowerCase().endsWith(URL_PROTOCOL_ZIP)) {
             try {
-                return ZipFile.openZipFile(jarPath.filePath()).readEntry(jarPath.entryPath());
+                return ZipFile.openZipFile(targetPath.getFilePath()).readEntry(targetPath.getEntryPath());
             } catch (ZipException ignored) {
                 return new byte[0];
             }
@@ -1089,18 +1092,18 @@ public final class FileUtils {
                 .map(fullPath -> {
                     int index = fullPath.indexOf(JAR_URL_SEPARATOR);
                     if (index > 0) {
-                        return new JarPath(fullPath.substring(0, index),
+                        return TargetPath.newInstance(fullPath.substring(0, index),
                                 fullPath.substring(index + JAR_URL_SEPARATOR.length()));
                     } else {
-                        return new JarPath(fullPath, Globals.DEFAULT_VALUE_STRING);
+                        return TargetPath.newInstance(fullPath, Globals.DEFAULT_VALUE_STRING);
                     }
                 })
-                .filter(jarPath -> FileUtils.isExists(jarPath.filePath()))
-                .map(jarPath -> {
+                .filter(targetPath -> FileUtils.isExists(targetPath.getFilePath()))
+                .map(targetPath -> {
                     final List<String> returnList = new ArrayList<>();
                     JarFile jarFile = null;
                     try {
-                        File file = FileUtils.getFile(jarPath.filePath());
+                        File file = FileUtils.getFile(targetPath.getFilePath());
                         BasicFileAttributes basicFileAttributes =
                                 Files.readAttributes(file.toPath(), BasicFileAttributes.class);
                         if (basicFileAttributes.isDirectory()) {
@@ -1110,8 +1113,8 @@ public final class FileUtils {
                             jarFile.entries().asIterator().forEachRemaining(jarEntry -> {
                                 if (!jarEntry.isDirectory()) {
                                     String entryName = jarEntry.getName();
-                                    if (StringUtils.isEmpty(jarPath.entryPath())
-                                            || entryName.startsWith(jarPath.entryPath())) {
+                                    if (StringUtils.isEmpty(targetPath.getEntryPath())
+                                            || entryName.startsWith(targetPath.getEntryPath())) {
                                         returnList.add(entryName);
                                     }
                                 }
@@ -3390,7 +3393,7 @@ public final class FileUtils {
     public static boolean mergeFile(final String savePath, final SegmentationInfo segmentationInfo) {
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(savePath, "rw")) {
             String extName = StringUtils.getFilenameExtension(savePath);
-            if (extName.length() == 0) {
+            if (extName.isEmpty()) {
                 extName = Globals.DEFAULT_VALUE_STRING;
             }
             if (!segmentationInfo.getExtName().equalsIgnoreCase(extName)) {
@@ -3471,7 +3474,7 @@ public final class FileUtils {
 
         try {
             String extName = StringUtils.getFilenameExtension(filePath);
-            if (extName.length() == 0) {
+            if (extName.isEmpty()) {
                 extName = Globals.DEFAULT_VALUE_STRING;
             } else {
                 extName = extName.toLowerCase();
@@ -3803,70 +3806,6 @@ public final class FileUtils {
         public boolean accept(File pathname) {
             return pathname.isDirectory();
         }
-    }
-
-    /**
-     * <h2 class="en">Jar path define</h2>
-     * <h2 class="zh-CN">Jar路径定义</h2>
-     *
-     * @param filePath  <span class="en">Jar file path</span>
-     *                  <span class="zh-CN">Jar文件路径</span>
-     * @param entryPath <span class="en">Jar entry path</span>
-     *                  <span class="zh-CN">Jar资源路径</span>
-     */
-    private record JarPath(String filePath, String entryPath) {
-        /**
-         * <h3 class="en">Constructor for JarPath</h3>
-         * <h3 class="zh-CN">Jar路径定义的构造方法</h3>
-         *
-         * @param filePath  <span class="en">Jar file path</span>
-         *                  <span class="zh-CN">Jar文件路径</span>
-         * @param entryPath <span class="en">Jar entry path</span>
-         *                  <span class="zh-CN">Jar资源路径</span>
-         */
-        private JarPath {
-        }
-        /**
-         * <h3 class="en">Static method for parse resource location string to JarPath instance</h3>
-         * <h3 class="zh-CN">静态方法用于解析资源路径字符串为JarPath实例对象</h3>
-         *
-         * @param resourceLocation  <span class="en">the location String</span>
-         *                          <span class="zh-CN">位置字符串</span>
-         *
-         * @return  <span class="en">Parsed JarPath instance or <code>null</code> if resource location string invalid</span>
-         *          <span class="zh-CN">解析后的 JarPath 实例对象，如果位置字符串不是合法的资源路径则返回 <code>null</code></span>
-         */
-        static JarPath parse(final String resourceLocation) {
-            if (StringUtils.containsIgnoreCase(resourceLocation, JAR_URL_SEPARATOR)) {
-                int index = resourceLocation.indexOf(JAR_URL_SEPARATOR);
-                return new JarPath(resourceLocation.substring(0, index),
-                        resourceLocation.substring(index + JAR_URL_SEPARATOR.length()));
-            }
-            return null;
-        }
-        /**
-         * <h3 class="en">Getter method for file path</h3>
-         * <h3 class="zh-CN">Jar文件路径的Getter方法</h3>
-         *
-         * @return <span class="en">Jar file path</span>
-         * <span class="zh-CN">Jar文件路径</span>
-         */
-        @Override
-        public String filePath() {
-                return filePath;
-            }
-
-        /**
-         * <h3 class="en">Getter method for entry path</h3>
-         * <h3 class="zh-CN">Jar资源路径的Getter方法</h3>
-         *
-         * @return <span class="en">Jar entry path</span>
-         * <span class="zh-CN">Jar资源路径</span>
-         */
-        @Override
-        public String entryPath() {
-                return entryPath;
-            }
     }
     /**
      * <h3 class="en">Move file from base samba path to target samba path</h3>

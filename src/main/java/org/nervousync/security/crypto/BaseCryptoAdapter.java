@@ -32,7 +32,7 @@ import java.security.Key;
  * <h2 class="zh-CN">加密解密适配器的抽象类</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2012 11:30:24 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 11:30:24 $
  */
 public abstract class BaseCryptoAdapter extends SecureAdapter {
     /**
@@ -130,7 +130,7 @@ public abstract class BaseCryptoAdapter extends SecureAdapter {
      * <h2 class="zh-CN">加密解密密钥定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: Jan 13, 2012 11:32:08 $
+     * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 11:32:08 $
      */
     public static final class CipherKey {
         /**

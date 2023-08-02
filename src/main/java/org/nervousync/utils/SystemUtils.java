@@ -44,7 +44,7 @@ import org.nervousync.exceptions.beans.network.NetworkInfoException;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jul 24, 2015 11:43:24 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 24, 2015 11:43:24 $
  */
 public final class SystemUtils {
     /**
@@ -384,7 +384,7 @@ public final class SystemUtils {
 			List<String> macAddressList = new ArrayList<>();
 			
 			for (NetworkInfo networkInfo : networkList) {
-				if (!networkInfo.isVirtual() && networkInfo.getMacAddress().length() > 0 
+				if (!networkInfo.isVirtual() && !networkInfo.getMacAddress().isEmpty()
 						&& !macAddressList.contains(networkInfo.getMacAddress())) {
 					macAddressList.add(networkInfo.getMacAddress());
 				}

@@ -31,7 +31,7 @@ import javax.crypto.spec.DESKeySpec;
  * <h2 class="zh-CN">对称DES加密解密适配器的实现类</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2012 13:28:27 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 13:28:27 $
  */
 public final class DESCryptoAdapterImpl extends SymmetricCryptoAdapter {
 

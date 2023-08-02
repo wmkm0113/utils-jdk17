@@ -34,7 +34,7 @@ import org.nervousync.utils.RawUtils;
  * AES Crypto
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Dec 2, 2017 11:16:18 AM $
+ * @version $Revision: 1.0.0 $ $Date: Dec 2, 2017 11:16:18 AM $
  */
 public class AESCrypto {
 

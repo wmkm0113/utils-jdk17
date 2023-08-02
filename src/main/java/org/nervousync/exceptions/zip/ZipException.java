@@ -26,7 +26,7 @@ import java.io.Serial;
  * <h2 class="zh-CN">ZIP异常</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Nov 22, 2017 4:08:31 PM $
+ * @version $Revision: 1.0.0 $ $Date: Nov 22, 2017 4:08:31 PM $
  */
 public final class ZipException extends AbstractException {
 	/**
@@ -34,7 +34,7 @@ public final class ZipException extends AbstractException {
 	 * <span class="zh-CN">序列化UID</span>
 	 */
 	@Serial
-    private static final long serialVersionUID = -4262795571663295796L;
+	private static final long serialVersionUID = -4262795571663295796L;
 	/**
 	 * <h3 class="en">Constructor method for ZipException</h3>
 	 * <span class="en">Create a new ZipException with the specified message.</span>
@@ -73,16 +73,14 @@ public final class ZipException extends AbstractException {
 	 *
 	 * @param errorCode 	<span class="en">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param bundle        <span class="en">Resource bundle name</span>
-     *                      <span class="zh-CN">资源包名</span>
      * @param messageKey    <span class="en">Message identify key</span>
      *                      <span class="zh-CN">信息识别键值</span>
      * @param collections   <span class="en">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	public ZipException(final long errorCode, final String bundle, final String messageKey,
+	public ZipException(final long errorCode, final String messageKey,
 						final Object... collections) {
-		super(errorCode, bundle, messageKey, collections);
+		super(errorCode, messageKey, collections);
 	}
 	/**
 	 * <h3 class="en">Constructor method for ZipException</h3>
@@ -92,8 +90,6 @@ public final class ZipException extends AbstractException {
 	 *
 	 * @param errorCode 	<span class="en">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param bundle        <span class="en">Resource bundle name</span>
-     *                      <span class="zh-CN">资源包名</span>
      * @param messageKey    <span class="en">Message identify key</span>
      *                      <span class="zh-CN">信息识别键值</span>
 	 * @param cause 		<span class="en">The root cause</span>
@@ -101,8 +97,8 @@ public final class ZipException extends AbstractException {
      * @param collections   <span class="en">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	public ZipException(final long errorCode, final String bundle, final String messageKey,
+	public ZipException(final long errorCode, final String messageKey,
 						final Throwable cause, final Object... collections) {
-		super(errorCode, bundle, messageKey, cause, collections);
+		super(errorCode, messageKey, cause, collections);
 	}
 }

@@ -27,7 +27,7 @@ import org.nervousync.utils.FileUtils;
  * The type Central directory.
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Nov 28, 2017 4:52:40 PM $
+ * @version $Revision: 1.0.0 $ $Date: Nov 28, 2017 4:52:40 PM $
  */
 public final class CentralDirectory {
 
@@ -107,7 +107,7 @@ public final class CentralDirectory {
 	 * @return the general file header
 	 */
 	public GeneralFileHeader retrieveGeneralFileHeader(String entryPath) {
-		if (this.fileHeaders != null && this.fileHeaders.size() > 0) {
+		if (this.fileHeaders != null && !this.fileHeaders.isEmpty()) {
 			for (GeneralFileHeader generalFileHeader : this.fileHeaders) {
 				if (FileUtils.matchFilePath(generalFileHeader.getEntryPath(), entryPath, true)) {
 					return generalFileHeader;
@@ -124,7 +124,7 @@ public final class CentralDirectory {
 	 * @return the int
 	 */
 	public int retrieveIndexOfGeneralFileHeader(GeneralFileHeader generalFileHeader) {
-		if (this.fileHeaders != null && this.fileHeaders.size() > 0) {
+		if (this.fileHeaders != null && !this.fileHeaders.isEmpty()) {
 			for (int index = 0 ; index < this.fileHeaders.size() ; index++) {
 				if (FileUtils.matchFilePath(generalFileHeader.getEntryPath(), 
 						this.fileHeaders.get(index).getEntryPath(), true)) {

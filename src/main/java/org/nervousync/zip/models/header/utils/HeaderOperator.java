@@ -51,7 +51,7 @@ import org.nervousync.utils.RawUtils;
  * The type Header operator.
  *
  * @author Steven Wee   <a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Dec 2, 2017 6:07:27 PM $
+ * @version $Revision: 1.0.0 $ $Date: Dec 2, 2017 6:07:27 PM $
  */
 public final class HeaderOperator {
 
@@ -130,7 +130,7 @@ public final class HeaderOperator {
 			throw new ZipException("input byte array list is null, cannot convert to byte array");
 		}
 
-		if (arrayList.size() > 0) {
+		if (!arrayList.isEmpty()) {
 			byte[] returnBytes = new byte[arrayList.size()];
 
 			for (int i = 0; i < arrayList.size(); i++) {

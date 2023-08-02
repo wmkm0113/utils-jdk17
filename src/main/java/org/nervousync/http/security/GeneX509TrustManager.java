@@ -37,7 +37,7 @@ import java.util.List;
  * <h2 class="zh-CN">X509证书管理器</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Dec 18, 2020 20:51：28 $
+ * @version $Revision: 1.0.0 $ $Date: Dec 18, 2020 20:51：28 $
  */
 public class GeneX509TrustManager implements X509TrustManager {
 	/**

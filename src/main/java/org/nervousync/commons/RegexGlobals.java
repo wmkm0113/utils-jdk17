@@ -20,7 +20,7 @@ package org.nervousync.commons;
  * Regex Library
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Apr 10, 2017 5:23:06 PM $
+ * @version $Revision: 1.0.0 $ $Date: Apr 10, 2017 5:23:06 PM $
  */
 public final class RegexGlobals {
 	/**

@@ -56,7 +56,7 @@ import org.nervousync.zip.models.central.Zip64EndCentralDirectoryRecord;
  * Zip File
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Nov 28, 2017 5:01:20 PM $
+ * @version $Revision: 1.0.0 $ $Date: Nov 28, 2017 5:01:20 PM $
  */
 public final class ZipFile implements Cloneable {
 
@@ -807,7 +807,7 @@ public final class ZipFile implements Cloneable {
 				if (i == 0) {
 					if (this.centralDirectory != null 
 							&& this.centralDirectory.getFileHeaders() != null 
-							&& this.centralDirectory.getFileHeaders().size() > 0) {
+							&& !this.centralDirectory.getFileHeaders().isEmpty()) {
 						byte[] buffer = new byte[4];
 						
 						input.seek(0L);
@@ -1033,7 +1033,7 @@ public final class ZipFile implements Cloneable {
 		return file.getName();
 	}
 	private boolean isNoEntry() {
-		return this.centralDirectory.getFileHeaders().size() == 0;
+		return this.centralDirectory.getFileHeaders().isEmpty();
 	}
 	
 	private boolean isDirectory(String entryPath) throws ZipException {
@@ -1067,7 +1067,7 @@ public final class ZipFile implements Cloneable {
 	private void removeFilesIfExists(List<String> entryList) throws ZipException {
 		if (this.centralDirectory != null
 				&& this.centralDirectory.getFileHeaders() != null
-				&& this.centralDirectory.getFileHeaders().size() != 0) {
+				&& !this.centralDirectory.getFileHeaders().isEmpty()) {
 			for (String entryPath : entryList) {
 				GeneralFileHeader generalFileHeader = this.retrieveGeneralFileHeader(entryPath);
 				if (generalFileHeader != null) {
@@ -2233,7 +2233,7 @@ public final class ZipFile implements Cloneable {
 		}
 
 		if (this.centralDirectory == null || this.centralDirectory.getFileHeaders() == null
-				|| this.centralDirectory.getFileHeaders().size() == 0) {
+				|| this.centralDirectory.getFileHeaders().isEmpty()) {
 			return Globals.INITIALIZE_INT_VALUE;
 		}
 
@@ -2434,7 +2434,7 @@ public final class ZipFile implements Cloneable {
 			// version made by
 			// version needed to extract
 			if (this.centralDirectory != null && this.centralDirectory.getFileHeaders() != null
-					&& this.centralDirectory.getFileHeaders().size() > 0) {
+					&& !this.centralDirectory.getFileHeaders().isEmpty()) {
 				HeaderOperator.appendShortToArrayList((short)this.centralDirectory.getFileHeaders().get(0).getMadeVersion(), headerBytesList);
 				HeaderOperator.appendShortToArrayList((short)this.centralDirectory.getFileHeaders().get(0).getExtractNeeded(), headerBytesList);
 			} else {
@@ -3053,7 +3053,7 @@ public final class ZipFile implements Cloneable {
 			throw new ZipException("File header is null!");
 		}
 
-		if (fileHeader.getExtraDataRecords() != null && fileHeader.getExtraDataRecords().size() > 0) {
+		if (fileHeader.getExtraDataRecords() != null && !fileHeader.getExtraDataRecords().isEmpty()) {
 			for (ExtraDataRecord extraDataRecord : fileHeader.getExtraDataRecords()) {
 				if (extraDataRecord != null) {
 					if (extraDataRecord.getHeader() == ((short) Globals.AESSIG)) {
@@ -3151,7 +3151,7 @@ public final class ZipFile implements Cloneable {
 
 		Zip64ExtendInfo zip64ExtendInfo = null;
 		if (fileHeader instanceof GeneralFileHeader) {
-			if (fileHeader.getExtraDataRecords() != null && fileHeader.getExtraDataRecords().size() > 0) {
+			if (fileHeader.getExtraDataRecords() != null && !fileHeader.getExtraDataRecords().isEmpty()) {
 				zip64ExtendInfo = readZip64ExtendInfo(fileHeader.getExtraDataRecords(),
 						fileHeader.getOriginalSize(), fileHeader.getCompressedSize(),
 						((GeneralFileHeader) fileHeader).getOffsetLocalHeader(),
@@ -3167,7 +3167,7 @@ public final class ZipFile implements Cloneable {
 				}
 			}
 		} else if (fileHeader instanceof LocalFileHeader) {
-			if (fileHeader.getExtraDataRecords() == null || fileHeader.getExtraDataRecords().size() == 0) {
+			if (fileHeader.getExtraDataRecords() == null || fileHeader.getExtraDataRecords().isEmpty()) {
 				return;
 			}
 
@@ -3227,7 +3227,7 @@ public final class ZipFile implements Cloneable {
 			extraDataRecords.add(extraDataRecord);
 		}
 
-		if (extraDataRecords.size() > 0) {
+		if (!extraDataRecords.isEmpty()) {
 			return extraDataRecords;
 		}
 		

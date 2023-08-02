@@ -89,7 +89,7 @@ import org.nervousync.security.factory.SecureFactory;
  * </span>
  *
  * @author Steven Wee     <a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jul 31, 2012 20:54:04 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 31, 2012 20:54:04 $
  */
 public final class MailUtils {
 	/**
@@ -120,7 +120,7 @@ public final class MailUtils {
      * <h2 class="zh-CN">电子邮件代理</h2>
      *
      * @author Steven Wee     <a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: Jul 31, 2012 21:03:46 $
+     * @version $Revision: 1.0.0 $ $Date: Jul 31, 2012 21:03:46 $
      */
     public static final class Agent {
         /**

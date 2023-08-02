@@ -44,7 +44,7 @@ import org.nervousync.exceptions.zip.ZipException;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Nov 28, 2017 17:34:55 $
+ * @version $Revision: 1.0.0 $ $Date: Nov 28, 2017 17:34:55 $
  */
 public final class RawUtils {
 	/**
@@ -1022,7 +1022,7 @@ public final class RawUtils {
 
 		int calValue = 0;
 		for (int i = 0 ; i < bitArray.length ; i++) {
-			calValue += Math.pow(2, i) * bitArray[i];
+			calValue += (int) (Math.pow(2, i) * bitArray[i]);
 		}
 		return (byte)calValue;
 	}

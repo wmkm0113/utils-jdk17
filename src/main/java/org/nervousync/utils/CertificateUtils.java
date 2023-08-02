@@ -65,7 +65,7 @@ import java.util.Optional;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jun 25, 2015 16:26:15 $
+ * @version $Revision: 1.0.0 $ $Date: Jun 25, 2015 16:26:15 $
  */
 public final class CertificateUtils {
     /**

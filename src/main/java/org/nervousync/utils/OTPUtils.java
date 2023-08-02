@@ -41,7 +41,7 @@ import java.security.SecureRandom;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jun 04, 2019 10:47:28 $
+ * @version $Revision: 1.0.0 $ $Date: Jun 04, 2019 10:47:28 $
  */
 public final class OTPUtils {
     /**

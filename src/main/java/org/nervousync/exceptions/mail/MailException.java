@@ -25,14 +25,14 @@ import java.io.Serial;
  * <h2 class="zh-CN">电子邮件异常</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Jul 23, 2023 12:16:58 PM $
+ * @version $Revision: 1.0.0 $ $Date: Jul 23, 2023 12:16:58 PM $
  */
 public final class MailException extends AbstractException {
 	/**
 	 * <span class="en">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-    @Serial
+	@Serial
     private static final long serialVersionUID = -3903147941241857531L;
     /**
 	 * <h3 class="en">Constructor method for LocationConvertException</h3>
@@ -42,16 +42,14 @@ public final class MailException extends AbstractException {
 	 *
 	 * @param errorCode 	<span class="en">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param bundle        <span class="en">Resource bundle name</span>
-     *                      <span class="zh-CN">资源包名</span>
      * @param messageKey    <span class="en">Message identify key</span>
      *                      <span class="zh-CN">信息识别键值</span>
      * @param collections   <span class="en">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	public MailException(final long errorCode, final String bundle, final String messageKey,
+	public MailException(final long errorCode, final String messageKey,
 									final Object... collections) {
-		super(errorCode, bundle, messageKey, collections);
+		super(errorCode, messageKey, collections);
 	}
 	/**
 	 * <h3 class="en">Constructor method for LocationConvertException</h3>
@@ -61,8 +59,6 @@ public final class MailException extends AbstractException {
 	 *
 	 * @param errorCode 	<span class="en">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param bundle        <span class="en">Resource bundle name</span>
-     *                      <span class="zh-CN">资源包名</span>
      * @param messageKey    <span class="en">Message identify key</span>
      *                      <span class="zh-CN">信息识别键值</span>
 	 * @param cause 		<span class="en">The root cause</span>
@@ -70,8 +66,8 @@ public final class MailException extends AbstractException {
      * @param collections   <span class="en">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	public MailException(final long errorCode, final String bundle, final String messageKey,
+	public MailException(final long errorCode, final String messageKey,
 									final Throwable cause, final Object... collections) {
-		super(errorCode, bundle, messageKey, cause, collections);
+		super(errorCode, messageKey, cause, collections);
 	}
 }

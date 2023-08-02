@@ -36,7 +36,7 @@ import jcifs.smb.SmbRandomAccessFile;
  * <span class="en">支持本地文件和网络文件（协议：smb://）</span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Dec 22, 2017 11:49:46 AM $
+ * @version $Revision: 1.0.0 $ $Date: Dec 22, 2017 11:49:46 AM $
  */
 public class NervousyncRandomAccessFile implements DataInput, DataOutput, Closeable {
 	/**

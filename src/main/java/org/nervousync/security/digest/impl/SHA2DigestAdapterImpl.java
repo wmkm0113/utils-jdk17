@@ -35,7 +35,7 @@ import java.security.MessageDigest;
  * <h2 class="zh-CN">SHA2摘要算法适配器的实现类</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2012 13:55:38 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 13:55:38 $
  */
 public final class SHA2DigestAdapterImpl extends BaseDigestAdapter {
     /**

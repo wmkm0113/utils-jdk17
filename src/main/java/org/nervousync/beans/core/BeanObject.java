@@ -52,7 +52,7 @@ import java.util.*;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 6, 2021 17:10:23 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 6, 2021 17:10:23 $
  */
 @OutputConfig(type = StringUtils.StringType.XML, formatted = true)
 public abstract class BeanObject implements Serializable {

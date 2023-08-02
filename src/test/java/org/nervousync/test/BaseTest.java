@@ -2,28 +2,29 @@ package org.nervousync.test;
 
 import org.apache.logging.log4j.Level;
 import org.junit.jupiter.api.*;
+import org.nervousync.commons.Globals;
 import org.nervousync.utils.LoggerUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class BaseTest {
 
-    protected transient final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected transient final LoggerUtils.Logger logger = LoggerUtils.getLogger(this.getClass());
 
     static {
-        LoggerUtils.initLoggerConfigure(Level.INFO);
+        LoggerUtils.initLoggerConfigure(Level.DEBUG);
     }
 
     @BeforeEach
     public final void init(final TestInfo testInfo) {
-        this.logger.info("Starting execute method {}", testInfo.getDisplayName());
+        this.logger.info("Execute_Begin_Test",
+                testInfo.getTestClass().map(Class::getName).orElse(Globals.DEFAULT_VALUE_STRING), testInfo.getDisplayName());
     }
 
     @AfterEach
     public void print(TestInfo testInfo) {
-        this.logger.info("Execute method {} finished", testInfo.getDisplayName());
+        this.logger.info("Execute_End_Test",
+                testInfo.getTestClass().map(Class::getName).orElse(Globals.DEFAULT_VALUE_STRING), testInfo.getDisplayName());
     }
 
 }

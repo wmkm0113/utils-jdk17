@@ -56,7 +56,7 @@ import javax.crypto.SecretKey;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2010 11:23:13 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2010 11:23:13 $
  */
 public final class SecurityUtils {
     /**
@@ -2616,20 +2616,12 @@ public final class SecurityUtils {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm, "BC");
             switch (algorithm.toUpperCase()) {
-                case "AES":
-                case "RC4":
-                    keyGenerator.init(keySize, SecureRandom.getInstance(randomAlgorithm));
-                    break;
-                case "SM4":
-                case "RC2":
-                    keyGenerator.init(keySize, new SecureRandom());
-                    break;
-                case "DES":
-                case "DESEDE":
-                case "BLOWFISH":
-                    break;
-                default:
-                    throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error", algorithm);
+                case "AES", "RC4" -> keyGenerator.init(keySize, SecureRandom.getInstance(randomAlgorithm));
+                case "SM4", "RC2" -> keyGenerator.init(keySize, new SecureRandom());
+                case "DES", "DESEDE", "BLOWFISH" -> {
+                }
+                default ->
+                        throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error", algorithm);
             }
             SecretKey secretKey = keyGenerator.generateKey();
             return secretKey.getEncoded();

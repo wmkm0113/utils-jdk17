@@ -44,7 +44,7 @@ import java.util.Properties;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 14, 2010 11:47:08 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 14, 2010 11:47:08 $
  */
 public final class PropertiesUtils {
     /**

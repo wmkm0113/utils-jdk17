@@ -49,7 +49,7 @@ import org.nervousync.utils.StringUtils;
  * The type Cipher output stream.
  *
  * @author Steven Wee <a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Nov 29, 2017 2:39:25 PM $
+ * @version $Revision: 1.0.0 $ $Date: Nov 29, 2017 2:39:25 PM $
  */
 public class CipherOutputStream extends OutputStream {
 
@@ -146,7 +146,7 @@ public class CipherOutputStream extends OutputStream {
 			if (this.zipFile.isSplitArchive()) {
 				if (this.zipFile.getCentralDirectory() == null
 						|| this.zipFile.getCentralDirectory().getFileHeaders() == null
-						|| this.zipFile.getCentralDirectory().getFileHeaders().size() == 0) {
+						|| this.zipFile.getCentralDirectory().getFileHeaders().isEmpty()) {
 					byte[] intBuffer = new byte[4];
 					RawUtils.writeInt(intBuffer, ByteOrder.LITTLE_ENDIAN, (int) Globals.EXTSIG);
 					this.outputStream.write(intBuffer);
@@ -396,7 +396,7 @@ public class CipherOutputStream extends OutputStream {
 		String entryPath;
 		if (this.zipOptions.isSourceExternalStream()) {
 			this.generalFileHeader.setLastModFileTime((int) DateTimeUtils.toDosTime(System.currentTimeMillis()));
-			if (this.zipOptions.getFileNameInZip() == null || this.zipOptions.getFileNameInZip().length() == 0) {
+			if (this.zipOptions.getFileNameInZip() == null || this.zipOptions.getFileNameInZip().isEmpty()) {
 				throw new ZipException(0x0000001B0016L, "Utils", "Null_File_Name_Zip_Error");
 			}
 			entryPath = this.zipOptions.getFileNameInZip();
@@ -408,7 +408,7 @@ public class CipherOutputStream extends OutputStream {
 					this.zipOptions.getRootFolderInZip(), this.zipOptions.getDefaultFolderPath());
 		}
 
-		if (entryPath == null || entryPath.length() == 0) {
+		if (entryPath == null || entryPath.isEmpty()) {
 			throw new ZipException(0x0000001B0016L, "Utils", "Null_File_Name_Zip_Error");
 		}
 		this.generalFileHeader.setEntryPath(entryPath);

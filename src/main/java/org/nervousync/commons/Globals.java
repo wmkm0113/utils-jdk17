@@ -23,7 +23,7 @@ import java.util.Locale;
  * Globals Constants Value
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jul 2, 2018 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 2, 2018 $
  */
 public final class Globals {
 	/**

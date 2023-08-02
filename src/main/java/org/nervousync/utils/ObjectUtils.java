@@ -27,7 +27,7 @@ import org.nervousync.commons.Globals;
  * <h2 class="zh-CN">对象操作工具集</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2010 16:26:58 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2010 16:26:58 $
  */
 public final class ObjectUtils {
     /**
@@ -181,7 +181,7 @@ public final class ObjectUtils {
             return (Array.getLength(object) == 0);
         } else {
             if (object instanceof String) {
-                return (((String) object).length() == 0);
+                return (((String) object).isEmpty());
             }
         }
         return Boolean.FALSE;

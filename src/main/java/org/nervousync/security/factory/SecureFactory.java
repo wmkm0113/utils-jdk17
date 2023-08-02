@@ -37,7 +37,7 @@ import java.util.*;
  * <p class="zh-CN">使用单例模式运行。用于在任何配置文件中保护密码。支持的算法：RSA1024/RSA2048/SM2/AES128/AES192/AES256/DES/3DES/SM4</p>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2012 12:33:56 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 12:33:56 $
  */
 public final class SecureFactory {
 	/**
@@ -368,7 +368,7 @@ public final class SecureFactory {
      * <h2 class="zh-CN">安全配置信息定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: Jan 13, 2012 12:38:45 $
+     * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 12:38:45 $
      */
     private static final class SecureNode {
         /**
@@ -539,7 +539,7 @@ public final class SecureFactory {
      * <h2 class="zh-CN">安全算法的枚举类</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: Jan 13, 2012 12:37:28 $
+     * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 12:37:28 $
      */
     public enum SecureAlgorithm {
         RSA1024, RSA2048, SM2, AES128, AES192, AES256, DES, TRIPLE_DES, SM4

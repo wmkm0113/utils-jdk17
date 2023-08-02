@@ -30,7 +30,7 @@ import java.util.Arrays;
  * <h2 class="zh-CN">摘要算法适配器的抽象类</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2012 11:46:55 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2012 11:46:55 $
  */
 public abstract class BaseDigestAdapter extends SecureAdapter {
     /**

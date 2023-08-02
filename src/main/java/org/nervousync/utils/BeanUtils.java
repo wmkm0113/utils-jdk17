@@ -43,7 +43,7 @@ import org.nervousync.enumerations.beans.DataFlow;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jun 25, 2015 14:55:15 $
+ * @version $Revision: 1.0.0 $ $Date: Jun 25, 2015 14:55:15 $
  */
 public final class BeanUtils {
     /**

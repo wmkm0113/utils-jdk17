@@ -60,6 +60,7 @@ libraryDependencies += "org.nervousync" % "utils-jdk17" % "${version}" % "provid
 ### 1. Create declaration and resource files
 Create nervousync.i18n file in META-INF
 ```
+groupId={Your group id}
 bundle={Your bundle string}
 languages={language string using ',' split}
 ```

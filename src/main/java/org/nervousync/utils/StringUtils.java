@@ -83,7 +83,7 @@ import javax.xml.validation.SchemaFactory;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2010 15:53:41 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2010 15:53:41 $
  */
 public final class StringUtils {
     /**
@@ -267,7 +267,7 @@ public final class StringUtils {
      *          <span class="zh-CN">解码后的二进制字节数组</span>
      */
     public static byte[] base32Decode(String string) {
-        if (string == null || string.length() == 0) {
+        if (string == null || string.isEmpty()) {
             return new byte[0];
         }
 
@@ -442,7 +442,7 @@ public final class StringUtils {
         String temp = content;
         List<String> checkedStrings = new ArrayList<>();
 
-        while (temp.length() > 0) {
+        while (!temp.isEmpty()) {
             String keyword = temp.substring(0, 1);
             if (!checkedStrings.contains(keyword)) {
                 huffmanTree.insertNode(new HuffmanTree.Node(keyword,
@@ -603,7 +603,7 @@ public final class StringUtils {
      *          <span class="zh-CN">如果 CharSequence 不为<code>null</code>并且有长度，则为 <code>true</code></span>
      */
     public static boolean notNull(final CharSequence str) {
-        return (str != null && str.length() > 0);
+        return (str != null && !str.isEmpty());
     }
     /**
      * <h3 class="en">Check that the given CharSequence is neither <code>null</code> nor only blank character.</h3>
@@ -625,7 +625,7 @@ public final class StringUtils {
      *          <span class="zh-CN">如果 CharSequence 不是<code>null</code>或空白字符并且有长度，则<code>true</code></span>
      */
     public static boolean notBlank(final String str) {
-        return (str != null && str.trim().length() > 0);
+        return (str != null && !str.trim().isEmpty());
     }
     /**
      * <h3 class="en">Check that the given CharSequence is neither <code>null</code> nor of length 0.</h3>
@@ -647,7 +647,7 @@ public final class StringUtils {
      *          <span class="zh-CN">如果 CharSequence 不为 <code>null</code> 并且有长度，则为 <code>true</code>。</span>
      */
     public static boolean hasLength(final CharSequence str) {
-        return (str != null && str.length() > 0);
+        return (str != null && !str.isEmpty());
     }
     /**
      * <h3 class="en">Check whether the given CharSequence has actual text.</h3>
@@ -867,7 +867,7 @@ public final class StringUtils {
             return str;
         }
         StringBuilder buf = new StringBuilder(str);
-        while (buf.length() > 0 && Character.isWhitespace(buf.charAt(0))) {
+        while (!buf.isEmpty() && Character.isWhitespace(buf.charAt(0))) {
             buf.deleteCharAt(0);
         }
         return buf.toString();
@@ -889,7 +889,7 @@ public final class StringUtils {
             return str;
         }
         StringBuilder buf = new StringBuilder(str);
-        while (buf.length() > 0 && Character.isWhitespace(buf.charAt(buf.length() - 1))) {
+        while (!buf.isEmpty() && Character.isWhitespace(buf.charAt(buf.length() - 1))) {
             buf.deleteCharAt(buf.length() - 1);
         }
         return buf.toString();
@@ -911,7 +911,7 @@ public final class StringUtils {
             return str;
         }
         StringBuilder buf = new StringBuilder(str);
-        while (buf.length() > 0 && buf.charAt(0) == leadingCharacter) {
+        while (!buf.isEmpty() && buf.charAt(0) == leadingCharacter) {
             buf.deleteCharAt(0);
         }
         return buf.toString();
@@ -933,7 +933,7 @@ public final class StringUtils {
             return str;
         }
         StringBuilder buf = new StringBuilder(str);
-        while (buf.length() > 0 && buf.charAt(buf.length() - 1) == trailingCharacter) {
+        while (!buf.isEmpty() && buf.charAt(buf.length() - 1) == trailingCharacter) {
             buf.deleteCharAt(buf.length() - 1);
         }
         return buf.toString();
@@ -1073,7 +1073,7 @@ public final class StringUtils {
      *          <span class="zh-CN">计数结果</span>
      */
     public static int countOccurrencesOf(final String str, final String sub) {
-        if (str == null || sub == null || str.length() == 0 || sub.length() == 0) {
+        if (str == null || sub == null || str.isEmpty() || sub.isEmpty()) {
             return 0;
         }
         int count = 0, pos = 0, idx;
@@ -1428,7 +1428,7 @@ public final class StringUtils {
                 variant = trimLeadingCharacter(variant, '_');
             }
         }
-        return (language.length() > 0 ? new Locale(language, country, variant) : null);
+        return (!language.isEmpty() ? new Locale(language, country, variant) : null);
     }
     //---------------------------------------------------------------------
     // Convenience methods for working with String arrays
@@ -1801,7 +1801,7 @@ public final class StringUtils {
             if (trimTokens) {
                 token = token.trim();
             }
-            if (!ignoreEmptyTokens || token.length() > 0) {
+            if (!ignoreEmptyTokens || !token.isEmpty()) {
                 tokens.add(token);
             }
         }
@@ -1886,7 +1886,7 @@ public final class StringUtils {
                 result.add(deleteAny(str.substring(pos, delPos), charsToDelete));
                 pos = delPos + delimiter.length();
             }
-            if (str.length() > 0 && pos <= str.length()) {
+            if (!str.isEmpty() && pos <= str.length()) {
                 // Add rest of String, but not in case of empty input.
                 result.add(deleteAny(str.substring(pos), charsToDelete));
             }
@@ -2688,7 +2688,7 @@ public final class StringUtils {
                     if (validateCode != -1) {
                         int sigma = 0;
                         for (int i = 0; i < 17; i++) {
-                            sigma += Character.digit(cardCode.charAt(i), 10) * (Math.pow(2, 17 - i) % 11);
+                            sigma += (int) (Character.digit(cardCode.charAt(i), 10) * (Math.pow(2, 17 - i) % 11));
                         }
                         return validateCode == ((12 - (sigma % 11)) % 11);
                     }
@@ -2701,7 +2701,7 @@ public final class StringUtils {
                     if (validateCode != -1) {
                         int sigma = 0;
                         for (int i = 0; i < 17; i++) {
-                            sigma += CHN_SOCIAL_CREDIT_CODE.indexOf(creditCode.charAt(i)) * (Math.pow(3, i) % 31);
+                            sigma += (int) (CHN_SOCIAL_CREDIT_CODE.indexOf(creditCode.charAt(i)) * (Math.pow(3, i) % 31));
                         }
 
                         int authCode = 31 - (sigma % 31);
@@ -2802,7 +2802,7 @@ public final class StringUtils {
      *          <span class="zh-CN">大写字符串，如果参数 str 为 <code>null</code>，则为 <code>null</code></span>
      */
     private static String changeFirstCharacterCase(final String str, final boolean capitalize) {
-        if (str == null || str.length() == 0) {
+        if (StringUtils.isEmpty(str)) {
             return str;
         }
         StringBuilder buf = new StringBuilder(str.length());

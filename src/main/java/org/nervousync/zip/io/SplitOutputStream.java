@@ -34,7 +34,7 @@ import org.nervousync.utils.StringUtils;
  * The type Split output stream.
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Nov 29, 2017 2:57:01 PM $
+ * @version $Revision: 1.0.0 $ $Date: Nov 29, 2017 2:57:01 PM $
  */
 public class SplitOutputStream extends OutputStream {
 
@@ -244,34 +244,36 @@ public class SplitOutputStream extends OutputStream {
     }
 
     private void startNextSplitFile() throws IOException {
-        String folderPath;
-
-        if (this.filePath.startsWith(Globals.SAMBA_PROTOCOL)) {
-            folderPath = this.filePath + Globals.DEFAULT_URL_SEPARATOR;
-        } else {
-            folderPath = this.filePath + Globals.DEFAULT_PAGE_SEPARATOR;
-        }
-
-        String currentSplitFile;
-        if (this.currentSplitFileIndex < 9) {
-            currentSplitFile = folderPath + fileName + ".zip.0" + (this.currentSplitFileIndex + 1);
-        } else {
-            currentSplitFile = folderPath + fileName + ".zip." + (this.currentSplitFileIndex + 1);
-        }
+        String splitFile = this.splitPath();
 
         this.dataOutput.close();
 
-        if (FileUtils.isExists(currentSplitFile)) {
-            throw new IOException("split file: " + currentSplitFile
+        if (FileUtils.isExists(splitFile)) {
+            throw new IOException("split file: " + splitFile
                     + " already exists in the current directory, cannot rename this file");
         }
 
-        if (!FileUtils.moveFile(this.currentFullPath, currentSplitFile)) {
+        if (!FileUtils.moveFile(this.currentFullPath, splitFile)) {
             throw new IOException("Cannot create split file!");
         }
 
         this.dataOutput = new NervousyncRandomAccessFile(this.currentFullPath, Boolean.TRUE);
         this.currentSplitFileIndex++;
+    }
+
+    private String splitPath() {
+        StringBuilder stringBuilder = new StringBuilder(this.filePath);
+        if (this.filePath.startsWith(Globals.SAMBA_PROTOCOL)) {
+            stringBuilder.append(Globals.DEFAULT_URL_SEPARATOR);
+        } else {
+            stringBuilder.append(Globals.DEFAULT_PAGE_SEPARATOR);
+        }
+        stringBuilder.append(this.fileName);
+        if (this.currentSplitFileIndex < 0) {
+            stringBuilder.append(".zip.0");
+        }
+        stringBuilder.append(this.currentSplitFileIndex + 1);
+        return stringBuilder.toString();
     }
 
     private boolean isHeaderData(byte[] buffer) throws IOException {

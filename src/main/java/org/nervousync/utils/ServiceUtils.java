@@ -53,7 +53,7 @@ import java.util.*;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision : 1.0 $ $Date: Jan 13, 2020 15:52:33 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 13, 2020 15:52:33 $
  */
 public final class ServiceUtils {
     /**
@@ -96,7 +96,7 @@ public final class ServiceUtils {
         String serviceName = serviceClient.name();
         URL wsdlLocation = new URL(serviceClient.wsdlLocation());
 
-        if (namespaceURI.length() == 0) {
+        if (namespaceURI.isEmpty()) {
             String packageName = serviceInterface.getPackage().getName();
             String[] packageNames = StringUtils.tokenizeToStringArray(packageName, ".");
             StringBuilder stringBuilder = new StringBuilder(wsdlLocation.getProtocol() + "://");
@@ -260,7 +260,7 @@ public final class ServiceUtils {
      * @param headerMap   <span class="en">Request header information map</span>
      *                    <span class="zh-CN">请求头部信息映射</span>
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: Jan 13, 2020 16:28:15 $
+     * @version $Revision: 1.0.0 $ $Date: Jan 13, 2020 16:28:15 $
      */
     private record RestfulInterceptor(String requestPath, Map<String, String> headerMap) implements InvocationHandler {
         /**
@@ -293,7 +293,7 @@ public final class ServiceUtils {
             }
 
             String methodName = method.getAnnotation(Path.class).value();
-            if (methodName.length() == 0) {
+            if (methodName.isEmpty()) {
                 methodName = method.getName();
             } else if (methodName.startsWith("/")) {
                 methodName = methodName.substring(1);
@@ -609,7 +609,7 @@ public final class ServiceUtils {
      * <h2 class="zh-CN">JavaBean参数定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-     * @version $Revision : 1.0 $ $Date: Jan 13, 2020 16:33:27 $
+     * @version $Revision: 1.0.0 $ $Date: Jan 13, 2020 16:33:27 $
      */
     private static final class BeanParameter {
         /**

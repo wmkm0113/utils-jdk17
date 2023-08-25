@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * <h2 class="en">Class Operate Utilities</h2>
+ * <h2 class="en-US">Class Operate Utilities</h2>
  * <h2 class="zh-CN">类操作工具集</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -38,43 +38,43 @@ import java.util.stream.Stream;
  */
 public final class ClassUtils {
 	/**
-	 * <span class="en">Suffix for array class names: "[]"</span>
+	 * <span class="en-US">Suffix for array class names: "[]"</span>
 	 * <span class="zh-CN">数组类名称后缀：“[]”</span>
 	 */
 	private static final String ARRAY_SUFFIX = "[]";
 	/**
-	 * <span class="en">Prefix for internal array class names: "[L"</span>
+	 * <span class="en-US">Prefix for internal array class names: "[L"</span>
 	 * <span class="zh-CN">内部数组类名的前缀：“[L”</span>
 	 */
 	private static final String INTERNAL_ARRAY_PREFIX = "[L";
 	/**
-	 * <span class="en">The inner class separator character '$'</span>
+	 * <span class="en-US">The inner class separator character '$'</span>
 	 * <span class="zh-CN">内部类分隔符'$'</span>
 	 */
 	private static final char INNER_CLASS_SEPARATOR = '$';
 	/**
-	 * <span class="en">The CGLIB class separator character "$$"</span>
+	 * <span class="en-US">The CGLIB class separator character "$$"</span>
 	 * <span class="zh-CN">CGLIB 类分隔符“$$”</span>
 	 */
 	private static final String CGLIB_CLASS_SEPARATOR = "$$";
 	/**
-	 * <span class="en">The Bytebuddy class separator character "$ByteBuddy"</span>
+	 * <span class="en-US">The Bytebuddy class separator character "$ByteBuddy"</span>
 	 * <span class="zh-CN">Bytebuddy 类分隔符“$ByteBuddy”</span>
 	 */
 	private static final String BYTEBUDDY_CLASS_SEPARATOR = "$ByteBuddy";
 	/**
-	 * <span class="en">The ".class" file suffix</span>
+	 * <span class="en-US">The ".class" file suffix</span>
 	 * <span class="zh-CN">“.class”文件后缀</span>
 	 */
 	public static final String CLASS_FILE_SUFFIX = ".class";
     /**
-     * <span class="en">Simple data types list</span>
+     * <span class="en-US">Simple data types list</span>
      * <span class="zh-CN">简单数据类型列表</span>
      */
     private static final List<DataType> SIMPLE_DATA_TYPES =
             Arrays.asList(DataType.NUMBER, DataType.STRING, DataType.BOOLEAN, DataType.DATE);
 	/**
-	 * <span class="en">
+	 * <span class="en-US">
 	 *     Map with the primitive wrapper type as a key and corresponding primitive type as value,
 	 *     for example: Integer.class -> int.class.
 	 * </span>
@@ -82,7 +82,7 @@ public final class ClassUtils {
 	 */
 	private static final Map<Object, Object> PRIMITIVE_WRAPPER_TYPE_MAP = new HashMap<>(8);
 	/**
-	 * <span class="en">
+	 * <span class="en-US">
 	 *     Map with primitive type name as a key and corresponding primitive type as value,
 	 *     for example: "int" -> "int.class".
 	 * </span>
@@ -90,7 +90,7 @@ public final class ClassUtils {
 	 */
 	private static final Map<Object, Object> PRIMITIVE_TYPE_NAME_MAP = new HashMap<>(16);
     /**
-     * <span class="en">Default classloader of utilities</span>
+     * <span class="en-US">Default classloader of utilities</span>
      * <span class="zh-CN">工具集用的默认类加载器</span>
      */
 	private static ClassLoader DEFAULT_CLASSLOADER = null;
@@ -114,32 +114,32 @@ public final class ClassUtils {
 				PRIMITIVE_TYPE_NAME_MAP.put(((Class<?>)primitiveClass).getName(), primitiveClass));
 	}
     /**
-     * <h3 class="en">Private constructor for ClassUtils</h3>
+     * <h3 class="en-US">Private constructor for ClassUtils</h3>
      * <h3 class="zh-CN">类操作工具集的私有构造函数</h3>
      */
 	private ClassUtils() {
 	}
     /**
-     * <h3 class="en">Check type class is simple data class, e.g. Number(include int, Integer, long, Long...), String, boolean and Date</h3>
+     * <h3 class="en-US">Check type class is simple data class, e.g. Number(include int, Integer, long, Long...), String, boolean and Date</h3>
      * <h3 class="zh-CN">检查类型类是简单的数据类，例如Number（包括 int、Integer、long、Long...）、String、布尔值和日期时间</h3>
      *
-     * @param typeClass <span class="en">Will check for type class</span>
+     * @param typeClass <span class="en-US">Will check for type class</span>
 	 *                  <span class="zh-CN">要检查的数据类</span>
      *
-     * @return 	<span class="en">Check result</span>
+     * @return 	<span class="en-US">Check result</span>
      * 			<span class="zh-CN">检查结果</span>
      */
     public static boolean simpleDataType(final Class<?> typeClass) {
         return SIMPLE_DATA_TYPES.contains(retrieveSimpleDataType(typeClass));
     }
     /**
-     * <h3 class="en">Retrieve simple data type enumeration value of the given data type class.</h3>
+     * <h3 class="en-US">Retrieve simple data type enumeration value of the given data type class.</h3>
      * <h3 class="zh-CN">检索给定数据类型类的简单数据类型枚举值。</h3>
      *
-     * @param clazz 	<span class="en">data type class</span>
+     * @param clazz 	<span class="en-US">data type class</span>
 	 *                  <span class="zh-CN">数据类型类</span>
      *
-	 * @return <span class="en">Retrieved simple data type enumeration value</span>
+	 * @return <span class="en-US">Retrieved simple data type enumeration value</span>
      * 			<span class="zh-CN">检索到的简单数据类型枚举值</span>
      */
     public static DataType retrieveSimpleDataType(final Class<?> clazz) {
@@ -175,21 +175,21 @@ public final class ClassUtils {
         }
     }
     /**
-     * <h3 class="en">Parse simple data value to target class instance.</h3>
+     * <h3 class="en-US">Parse simple data value to target class instance.</h3>
      * <h3 class="zh-CN">解析简单数据类型值为目标类实例对象。</h3>
      *
-     * @param <T>       <span class="en">Target type class</span>
+     * @param <T>       <span class="en-US">Target type class</span>
 	 *                  <span class="zh-CN">目标数据类</span>
-     * @param dataValue <span class="en">simple data value</span>
+     * @param dataValue <span class="en-US">simple data value</span>
 	 *                  <span class="zh-CN">简单数据类型值</span>
-     * @param typeClass <span class="en">Target type class</span>
+     * @param typeClass <span class="en-US">Target type class</span>
 	 *                  <span class="zh-CN">目标数据类</span>
      *
-	 * @return 	<span class="en">Target class instance</span>
+	 * @return 	<span class="en-US">Target class instance</span>
      * 			<span class="zh-CN">目标类实例对象</span>
      *
 	 * @throws ParseException
-     * <span class="en">If given data value string is null</span>
+     * <span class="en-US">If given data value string is null</span>
      * <span class="zh-CN">如果给定的数据值字符串为null</span>
      */
     public static <T> T parseSimpleData(final String dataValue, final Class<T> typeClass) throws ParseException {
@@ -229,8 +229,8 @@ public final class ClassUtils {
         return typeClass.cast(paramObj);
     }
 	/**
-	 * <h3 class="en">Return the default ClassLoader to use</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Return the default ClassLoader to use</h3>
+	 * <span class="en-US">
 	 *     typically the thread context ClassLoader, if available;
 	 *     the ClassLoader that loaded the ClassUtils class will be used as fallback.
 	 *     Call this method if you intend to use the thread context ClassLoader
@@ -247,7 +247,7 @@ public final class ClassUtils {
 	 * </span>
 	 * @see java.lang.Thread#getContextClassLoader() java.lang.Thread#getContextClassLoader()
 	 *
-	 * @return 	<span class="en">the default ClassLoader (never <code>null</code>)</span>
+	 * @return 	<span class="en-US">the default ClassLoader (never <code>null</code>)</span>
      * 			<span class="zh-CN">默认的类加载器（永远不为<code>null</code>）</span>
 	 */
 	public static ClassLoader getDefaultClassLoader() {
@@ -262,18 +262,18 @@ public final class ClassUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Override the thread context ClassLoader</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Override the thread context ClassLoader</h3>
+	 * <span class="en-US">
 	 *     Override the thread context ClassLoader with the environment's bean ClassLoader if necessary,
 	 *     i.e., if the bean ClassLoader is not equivalent to the thread context ClassLoader already.
 	 * </span>
 	 * <h3 class="zh-CN">重写线程上下文类加载器</h3>
 	 * <span class="zh-CN">如有必要，建议使用环境的类加载器覆写线程上下文类加载器。</span>
 	 *
-	 * @param classLoaderToUse 	<span class="en">the actual ClassLoader to use for the thread context</span>
+	 * @param classLoaderToUse 	<span class="en-US">the actual ClassLoader to use for the thread context</span>
 	 *                          <span class="zh-CN">用于线程上下文的实际类加载器</span>
 	 *
-	 * @return 	<span class="en">the original thread context ClassLoader, or <code>null</code> if not overridden</span>
+	 * @return 	<span class="en-US">the original thread context ClassLoader, or <code>null</code> if not overridden</span>
      * 			<span class="zh-CN">原始线程上下文类加载器，如果未覆盖则为 <code>null</code></span>
 	 */
 	public static ClassLoader overrideThreadContextClassLoader(final ClassLoader classLoaderToUse) {
@@ -287,38 +287,38 @@ public final class ClassUtils {
 		return null;
 	}
 	/**
-	 * <h3 class="en">Determine whether the <code>Class</code> identified by the supplied name is present and can be loaded.</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Determine whether the <code>Class</code> identified by the supplied name is present and can be loaded.</h3>
+	 * <span class="en-US">
 	 *     Will return <code>Boolean.FALSE</code> if either the class or
 	 *     one of its dependencies is not present or cannot be loaded.
 	 * </span>
 	 * <h3 class="zh-CN">确定由提供的名称标识的 <code>Class</code> 是否存在并且可以加载。</h3>
 	 * <span class="zh-CN">如果类或其依赖项之一不存在或无法加载，将返回 Boolean.FALSE。</span>
 	 *
-	 * @param className 	<span class="en">the name of the class to check</span>
+	 * @param className 	<span class="en-US">the name of the class to check</span>
 	 *                      <span class="zh-CN">要检查的类的名称</span>
 	 *
-	 * @return 	<span class="en">whether the specified class is present</span>
+	 * @return 	<span class="en-US">whether the specified class is present</span>
      * 			<span class="zh-CN">指定的类是否存在</span>
 	 */
 	public static boolean isPresent(final String className) {
 		return isPresent(className, getDefaultClassLoader());
 	}
 	/**
-	 * <h3 class="en">Determine whether the <code>Class</code> identified by the supplied name is present and can be loaded.</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Determine whether the <code>Class</code> identified by the supplied name is present and can be loaded.</h3>
+	 * <span class="en-US">
 	 *     Will return <code>Boolean.FALSE</code> if either the class or
 	 *     one of its dependencies is not present or cannot be loaded.
 	 * </span>
 	 * <h3 class="zh-CN">确定由提供的名称标识的 <code>Class</code> 是否存在并且可以加载。</h3>
 	 * <span class="zh-CN">如果类或其依赖项之一不存在或无法加载，将返回 Boolean.FALSE。</span>
 	 *
-	 * @param className 	<span class="en">the name of the class to check</span>
+	 * @param className 	<span class="en-US">the name of the class to check</span>
 	 *                      <span class="zh-CN">要检查的类的名称</span>
-	 * @param classLoader 	<span class="en">the ClassLoader to use (maybe <code>null</code>, which indicates the default ClassLoader)</span>
+	 * @param classLoader 	<span class="en-US">the ClassLoader to use (maybe <code>null</code>, which indicates the default ClassLoader)</span>
 	 *                      <span class="zh-CN">要使用的类加载器（可能是 <code>null</code>，这表示默认的类加载器）</span>
 	 *
-	 * @return 	<span class="en">whether the specified class is present</span>
+	 * @return 	<span class="en-US">whether the specified class is present</span>
      * 			<span class="zh-CN">指定的类是否存在</span>
 	 */
 	public static boolean isPresent(final String className, final ClassLoader classLoader) {
@@ -331,15 +331,15 @@ public final class ClassUtils {
 		}
 	}
     /**
-     * <h3 class="en">Check whether the given exception is compatible with the exceptions declared in a throw clause.</h3>
+     * <h3 class="en-US">Check whether the given exception is compatible with the exceptions declared in a throw clause.</h3>
      * <h3 class="zh-CN">检查给定的异常是否与 throw 子句中声明的异常兼容。</h3>
      *
-     * @param ex 					<span class="en">the exception to checked</span>
+     * @param ex 					<span class="en-US">the exception to checked</span>
 	 *                  			<span class="zh-CN">要检查的异常</span>
-     * @param declaredExceptions 	<span class="en">the exceptions declared in the throw clause</span>
+     * @param declaredExceptions 	<span class="en-US">the exceptions declared in the throw clause</span>
 	 *                  			<span class="zh-CN">throw 子句中声明的异常</span>
 	 *
-	 * @return 	<span class="en">whether the given exception is compatible</span>
+	 * @return 	<span class="en-US">whether the given exception is compatible</span>
 	 * 			<span class="zh-CN">给定的异常是否兼容</span>
      */
     public static boolean isCompatibleWithThrowClause(final Throwable ex, final Class<?>[] declaredExceptions) {
@@ -353,15 +353,15 @@ public final class ClassUtils {
         return Boolean.FALSE;
     }
 	/**
-     * <h3 class="en">Parse the original class name of given class instance</h3>
-	 * <p class="en">Unwrap the class name if class was enhancer by cglib/bytebuddy or class name if class not enhanced</p>
+     * <h3 class="en-US">Parse the original class name of given class instance</h3>
+	 * <p class="en-US">Unwrap the class name if class was enhancer by cglib/bytebuddy or class name if class not enhanced</p>
      * <h3 class="zh-CN">解析给定类对象的原始类名</h3>
 	 * <p class="zh-CN">如果给定的类是经过cglib/bytebuddy增强过，则解析原始类名，如果给定的类没有增强，则返回类名</p>
 	 *
-	 * @param clazz		<span class="en">Given class instance</span>
+	 * @param clazz		<span class="en-US">Given class instance</span>
 	 *                  <span class="zh-CN">给定的类对象</span>
 	 *
-	 * @return 	<span class="en">Parsed class name string</span>
+	 * @return 	<span class="en-US">Parsed class name string</span>
 	 * 			<span class="zh-CN">解析的类名字符串</span>
 	 */
 	public static String originalClassName(final Class<?> clazz) {
@@ -376,8 +376,8 @@ public final class ClassUtils {
 		return className;
 	}
 	/**
-     * <h3 class="en">Replacement for <code>Class.forName()</code></h3>
-	 * <span class="en">
+     * <h3 class="en-US">Replacement for <code>Class.forName()</code></h3>
+	 * <span class="en-US">
 	 *     Replacement for <code>Class.forName()</code> that also returns Class instances
 	 *     for primitives (like "int") and array class names (like "String[]").
 	 *     Always uses the default class loader: that is, preferably the thread context
@@ -391,22 +391,22 @@ public final class ClassUtils {
 	 * @see Class#forName(String, boolean, ClassLoader) Class#forName(String, boolean, ClassLoader)
 	 * @see ClassUtils#getDefaultClassLoader()
 	 *
-	 * @param className 	<span class="en">the name of the class</span>
+	 * @param className 	<span class="en-US">the name of the class</span>
 	 *                      <span class="zh-CN">类的名称</span>
 	 *
-	 * @return 	<span class="en">Class instance for the supplied name</span>
+	 * @return 	<span class="en-US">Class instance for the supplied name</span>
 	 * 			<span class="zh-CN">提供的名称的类实例</span>
 	 *
 	 * @throws IllegalArgumentException
-	 * <span class="en">if the class name was not resolvable (that is, the class could not be found or the class file could not be loaded)</span>
+	 * <span class="en-US">if the class name was not resolvable (that is, the class could not be found or the class file could not be loaded)</span>
 	 * <span class="zh-CN">如果类名不可解析（即找不到类或无法加载类文件）</span>
 	 */
 	public static Class<?> forName(final String className) throws IllegalArgumentException {
 		return forName(className, getDefaultClassLoader());
 	}
 	/**
-     * <h3 class="en">Replacement for <code>Class.forName()</code></h3>
-	 * <span class="en">
+     * <h3 class="en-US">Replacement for <code>Class.forName()</code></h3>
+	 * <span class="en-US">
 	 *     Replacement for <code>Class.forName()</code> that also returns Class instances
 	 *     for primitives (like "int") and array class names (like "String[]").
 	 * </span>
@@ -416,16 +416,16 @@ public final class ClassUtils {
 	 * </span>
 	 * @see Class#forName(String, boolean, ClassLoader) Class#forName(String, boolean, ClassLoader)
 	 *
-	 * @param className 	<span class="en">the name of the class</span>
+	 * @param className 	<span class="en-US">the name of the class</span>
 	 *                      <span class="zh-CN">类的名称</span>
-	 * @param classLoader 	<span class="en">the ClassLoader to use (maybe <code>null</code>, which indicates the default ClassLoader)</span>
+	 * @param classLoader 	<span class="en-US">the ClassLoader to use (maybe <code>null</code>, which indicates the default ClassLoader)</span>
 	 *                      <span class="zh-CN">要使用的类加载器（可能是 <code>null</code>，这表示默认的类加载器）</span>
 	 *
-	 * @return 	<span class="en">Class instance for the supplied name</span>
+	 * @return 	<span class="en-US">Class instance for the supplied name</span>
 	 * 			<span class="zh-CN">提供的名称的类实例</span>
 	 *
 	 * @throws IllegalArgumentException
-	 * <span class="en">if the class name was not resolvable (that is, the class could not be found or the class file could not be loaded)</span>
+	 * <span class="en-US">if the class name was not resolvable (that is, the class could not be found or the class file could not be loaded)</span>
 	 * <span class="zh-CN">如果类名不可解析（即找不到类或无法加载类文件）</span>
 	 */
 	public static Class<?> forName(final String className, final ClassLoader classLoader)
@@ -469,17 +469,17 @@ public final class ClassUtils {
 		}
 	}
 	/**
-     * <h3 class="en">Check whether the given class is cache-safe in the given context</h3>
-	 * <span class="en">whether it is loaded by the given ClassLoader or a parent of it.</span>
+     * <h3 class="en-US">Check whether the given class is cache-safe in the given context</h3>
+	 * <span class="en-US">whether it is loaded by the given ClassLoader or a parent of it.</span>
      * <h3 class="zh-CN">检查给定类在给定上下文中是否是缓存安全的</h3>
 	 * <span class="zh-CN">它是由给定的类加载器还是其父类加载。</span>
 	 *
-	 * @param clazz			<span class="en">the class to analyze</span>
+	 * @param clazz			<span class="en-US">the class to analyze</span>
 	 *                  	<span class="zh-CN">要分析的类</span>
-	 * @param classLoader 	<span class="en">the ClassLoader to potentially cache metadata in</span>
+	 * @param classLoader 	<span class="en-US">the ClassLoader to potentially cache metadata in</span>
 	 *                      <span class="zh-CN">可能会缓存元数据的类加载器</span>
 	 *
-	 * @return 	<span class="en">cache safe result</span>
+	 * @return 	<span class="en-US">cache safe result</span>
 	 * 			<span class="zh-CN">缓存安全结果</span>
 	 */
 	public static boolean cacheSafe(final Class<?> clazz, final ClassLoader classLoader) {
@@ -503,13 +503,13 @@ public final class ClassUtils {
 		return Boolean.FALSE;
 	}
 	/**
-	 * <h3 class="en">Determine the resource name of the class file, relative to the containing package: e.g. "String.class"</h3>
+	 * <h3 class="en-US">Determine the resource name of the class file, relative to the containing package: e.g. "String.class"</h3>
 	 * <h3 class="zh-CN">确定类文件的资源路径：例如“String.class”</h3>
 	 *
-	 * @param clazz	<span class="en">the class instance</span>
+	 * @param clazz	<span class="en-US">the class instance</span>
 	 *              <span class="zh-CN">类实例对象</span>
 	 *
-	 * @return 	<span class="en">the resource path of the ".class" file</span>
+	 * @return 	<span class="en-US">the resource path of the ".class" file</span>
 	 * 			<span class="zh-CN">".class"文件的资源路径</span>
 	 */
 	public static String classFileName(final Class<?> clazz) {
@@ -521,15 +521,15 @@ public final class ClassUtils {
 		return className.substring(lastDotIndex + 1) + CLASS_FILE_SUFFIX;
 	}
 	/**
-	 * <h3 class="en">Determine the package name of the given class.</h3>
-	 * <span class="en">e.g. "java.lang" for the <code>java.lang.String</code> class.</span>
+	 * <h3 class="en-US">Determine the package name of the given class.</h3>
+	 * <span class="en-US">e.g. "java.lang" for the <code>java.lang.String</code> class.</span>
 	 * <h3 class="zh-CN">确定给定类的包名称。</h3>
 	 * <span class="zh-CN">例如：<code>java.lang.String</code> -> “java.lang”</span>
 	 *
-	 * @param clazz	<span class="en">the class instance</span>
+	 * @param clazz	<span class="en-US">the class instance</span>
 	 *              <span class="zh-CN">类实例对象</span>
 	 *
-	 * @return 	<span class="en">the package name, or the empty String if the class is defined in the default package</span>
+	 * @return 	<span class="en-US">the package name, or the empty String if the class is defined in the default package</span>
 	 * 			<span class="zh-CN">包名称，如果类是在默认包中定义的，则为空字符串</span>
 	 */
 	public static String packageName(final Class<?> clazz) {
@@ -541,15 +541,15 @@ public final class ClassUtils {
 		return (lastDotIndex != -1 ? className.substring(0, lastDotIndex) : Globals.DEFAULT_VALUE_STRING);
 	}
 	/**
-	 * <h3 class="en">Return the qualified name of the given class.</h3>
-	 * <span class="en">usually simply the class name, but component type class name + "[]" for arrays.</span>
+	 * <h3 class="en-US">Return the qualified name of the given class.</h3>
+	 * <span class="en-US">usually simply the class name, but component type class name + "[]" for arrays.</span>
 	 * <h3 class="zh-CN">返回给定类的限定名称。</h3>
 	 * <span class="zh-CN">通常只是类名，但对于数组来说组件类型类名+“[]”。</span>
 	 *
-	 * @param clazz	<span class="en">the class instance</span>
+	 * @param clazz	<span class="en-US">the class instance</span>
 	 *              <span class="zh-CN">类实例对象</span>
 	 *
-	 * @return 	<span class="en">the qualified name of the class</span>
+	 * @return 	<span class="en-US">the qualified name of the class</span>
 	 * 			<span class="zh-CN">类的限定名称</span>
 	 */
 	public static String qualifiedName(final Class<?> clazz) {
@@ -563,18 +563,18 @@ public final class ClassUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Return a descriptive name for the given object's type.</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Return a descriptive name for the given object's type.</h3>
+	 * <span class="en-US">
 	 *     usually simply the class name, but component type class name + "[]" for arrays,
 	 *     and an appended list of implemented interfaces for JDK proxies.
 	 * </span>
 	 * <h3 class="zh-CN">返回给定对象类型的描述性名称。</h3>
 	 * <span class="zh-CN">通常只是类名，但组件类型类名+数组的“[]”，以及JDK代理的已实现接口的附加列表。</span>
 	 *
-	 * @param value <span class="en">the value to introspect</span>
+	 * @param value <span class="en-US">the value to introspect</span>
 	 *              <span class="zh-CN">给定实例对象</span>
 	 *
-	 * @return 	<span class="en">the descriptive name of the class</span>
+	 * @return 	<span class="en-US">the descriptive name of the class</span>
 	 * 			<span class="zh-CN">实现的接口名称</span>
 	 */
 	public static String descriptiveType(final Object value) {
@@ -594,13 +594,13 @@ public final class ClassUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Retrieve the primitive class of the given class.</h3>
+	 * <h3 class="en-US">Retrieve the primitive class of the given class.</h3>
 	 * <h3 class="zh-CN">检索给定类的原始类。</h3>
 	 *
-	 * @param clazz	<span class="en">the class instance</span>
+	 * @param clazz	<span class="en-US">the class instance</span>
 	 *              <span class="zh-CN">类实例对象</span>
 	 *
-	 * @return 	<span class="en">the primitive class or <code>null</code> if not found</span>
+	 * @return 	<span class="en-US">the primitive class or <code>null</code> if not found</span>
 	 * 			<span class="zh-CN">原始类，如果未找到则返回<code>null</code></span>
 	 */
 	public static Class<?> primitiveWrapper(final Class<?> clazz) {
@@ -614,15 +614,15 @@ public final class ClassUtils {
 		return null;
 	}
 	/**
-	 * <h3 class="en">Check the given check class and match class is mapping for primitive class -> wrapper class</h3>
+	 * <h3 class="en-US">Check the given check class and match class is mapping for primitive class -> wrapper class</h3>
 	 * <h3 class="zh-CN">检查给定的检查类和匹配类是否满足映射为原始类 -> 包装类</h3>
 	 *
-	 * @param checkClass 	<span class="en">the check class</span>
+	 * @param checkClass 	<span class="en-US">the check class</span>
 	 *                      <span class="zh-CN">检查类</span>
-	 * @param matchClass 	<span class="en">the match class</span>
+	 * @param matchClass 	<span class="en-US">the match class</span>
 	 *                      <span class="zh-CN">匹配类</span>
 	 *
-	 * @return 	<span class="en">Match result</span>
+	 * @return 	<span class="en-US">Match result</span>
 	 * 			<span class="zh-CN">匹配结果</span>
 	 */
 	public static boolean matchPrimitiveWrapper(final Class<?> checkClass, final Class<?> matchClass) {
@@ -635,15 +635,15 @@ public final class ClassUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Check if the given class represents a primitive wrapper.</h3>
-	 * <span class="en">i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
+	 * <h3 class="en-US">Check if the given class represents a primitive wrapper.</h3>
+	 * <span class="en-US">i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
 	 * <h3 class="zh-CN">检查给定的类是否表示基础类型包装类。</h3>
 	 * <span class="zh-CN">即 Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
 	 *
-	 * @param clazz <span class="en">the class to check</span>
+	 * @param clazz <span class="en-US">the class to check</span>
 	 *              <span class="zh-CN">要检查的类</span>
 	 *
-	 * @return 	<span class="en">whether the given class is a primitive wrapper class</span>
+	 * @return 	<span class="en-US">whether the given class is a primitive wrapper class</span>
 	 * 			<span class="zh-CN">给定的类是否为基础类型包装类</span>
 	 */
 	public static boolean isPrimitiveWrapper(final Class<?> clazz) {
@@ -653,8 +653,8 @@ public final class ClassUtils {
 		return PRIMITIVE_WRAPPER_TYPE_MAP.containsKey(clazz);
 	}
 	/**
-	 * <h3 class="en">Check if the given class is a primitive or primitive wrapper class.</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Check if the given class is a primitive or primitive wrapper class.</h3>
+	 * <span class="en-US">
 	 *     a primitive (i.e. boolean, byte, char, short, int, long, float, or double)
 	 *     or a primitive wrapper (i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double)
 	 * </span>
@@ -664,10 +664,10 @@ public final class ClassUtils {
 	 *     或者包装类（Boolean, Byte, Character, Short, Integer, Long, Float, Double）。
 	 * </span>
 	 *
-	 * @param clazz <span class="en">the class to check</span>
+	 * @param clazz <span class="en-US">the class to check</span>
 	 *              <span class="zh-CN">要检查的类</span>
 	 *
-	 * @return 	<span class="en">whether the given class is a primitive or primitive wrapper class</span>
+	 * @return 	<span class="en-US">whether the given class is a primitive or primitive wrapper class</span>
 	 * 			<span class="zh-CN">给定的类是否为基础类型或基础类型包装类</span>
 	 */
 	public static boolean isPrimitiveOrWrapper(final Class<?> clazz) {
@@ -677,15 +677,15 @@ public final class ClassUtils {
 		return (clazz.isPrimitive() || isPrimitiveWrapper(clazz));
 	}
 	/**
-	 * <h3 class="en">Check if the given class represents an array of primitives.</h3>
-	 * <span class="en">i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
+	 * <h3 class="en-US">Check if the given class represents an array of primitives.</h3>
+	 * <span class="en-US">i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
 	 * <h3 class="zh-CN">检查给定的类是否表示基础类型数组。</h3>
 	 * <span class="zh-CN">即 Boolean, Byte, Character, Short, Integer, Long, Float, Double.</span>
 	 *
-	 * @param clazz <span class="en">the class to check</span>
+	 * @param clazz <span class="en-US">the class to check</span>
 	 *              <span class="zh-CN">要检查的类</span>
 	 *
-	 * @return 	<span class="en">whether the given class is a primitive array class</span>
+	 * @return 	<span class="en-US">whether the given class is a primitive array class</span>
 	 * 			<span class="zh-CN">给定的类是否为基础类型数组</span>
 	 */
 	public static boolean isPrimitiveArray(final Class<?> clazz) {
@@ -695,15 +695,15 @@ public final class ClassUtils {
 		return (clazz.isArray() && clazz.getComponentType().isPrimitive());
 	}
 	/**
-	 * <h3 class="en">Check if the given class represents an array of primitive wrappers.</h3>
-	 * <span class="en">i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
+	 * <h3 class="en-US">Check if the given class represents an array of primitive wrappers.</h3>
+	 * <span class="en-US">i.e. Boolean, Byte, Character, Short, Integer, Long, Float, or Double.</span>
 	 * <h3 class="zh-CN">检查给定的类是否表示基础类型包装类数组。</h3>
 	 * <span class="zh-CN">即 Boolean, Byte, Character, Short, Integer, Long, Float, Double.</span>
 	 *
-	 * @param clazz <span class="en">the class to check</span>
+	 * @param clazz <span class="en-US">the class to check</span>
 	 *              <span class="zh-CN">要检查的类</span>
 	 *
-	 * @return 	<span class="en">whether the given class is a primitive wrapper array class</span>
+	 * @return 	<span class="en-US">whether the given class is a primitive wrapper array class</span>
 	 * 			<span class="zh-CN">给定的类是否为基础类型包装类数组</span>
 	 */
 	public static boolean isPrimitiveWrapperArray(final Class<?> clazz) {
@@ -713,15 +713,15 @@ public final class ClassUtils {
 		return (clazz.isArray() && isPrimitiveWrapper(clazz.getComponentType()));
 	}
 	/**
-	 * <h3 class="en">Check if the right-hand side type may be assigned to the left-hand side type.</h3>
+	 * <h3 class="en-US">Check if the right-hand side type may be assigned to the left-hand side type.</h3>
 	 * <h3 class="zh-CN">检查给定的检查类是目标类的子类或实现类</h3>
 	 *
-	 * @param targetType 	<span class="en">the target type</span>
+	 * @param targetType 	<span class="en-US">the target type</span>
 	 *              		<span class="zh-CN">目标类</span>
-	 * @param checkType 	<span class="en">the value type that should be assigned to the target type</span>
+	 * @param checkType 	<span class="en-US">the value type that should be assigned to the target type</span>
 	 *              		<span class="zh-CN">目标类的子类或实现类</span>
 	 *
-	 * @return 	<span class="en"><code>true</code> if the target type is assignable from the value type, <code>false</code> for otherwise.</span>
+	 * @return 	<span class="en-US"><code>true</code> if the target type is assignable from the value type, <code>false</code> for otherwise.</span>
 	 * 			<span class="zh-CN">检查类是目标类的子类或实现类，则返回<code>true</code>；否则返回<code>false</code>。</span>
 	 */
 	public static boolean isAssignable(final Class<?> targetType, final Class<?> checkType) {
@@ -734,15 +734,15 @@ public final class ClassUtils {
 		return (targetType.isAssignableFrom(checkType) || targetType.equals(PRIMITIVE_WRAPPER_TYPE_MAP.get(checkType)));
 	}
 	/**
-	 * <h3 class="en">Determine if the given type is assignable from the given value.</h3>
+	 * <h3 class="en-US">Determine if the given type is assignable from the given value.</h3>
 	 * <h3 class="zh-CN">确定给定的值是目标类的子类或实现类</h3>
 	 *
-	 * @param type 	<span class="en">the target type</span>
+	 * @param type 	<span class="en-US">the target type</span>
 	 *              <span class="zh-CN">目标类</span>
-	 * @param value <span class="en">the given value</span>
+	 * @param value <span class="en-US">the given value</span>
 	 *              <span class="zh-CN">给定值</span>
 	 *
-	 * @return 	<span class="en"><code>true</code> if the given value is assignable from the given type, <code>false</code> for otherwise.</span>
+	 * @return 	<span class="en-US"><code>true</code> if the given value is assignable from the given type, <code>false</code> for otherwise.</span>
 	 * 			<span class="zh-CN">给定的值是目标类的子类或实现类，则返回<code>true</code>；否则返回<code>false</code>。</span>
 	 */
 	public static boolean isAssignableValue(final Class<?> type, final Object value) {
@@ -752,34 +752,34 @@ public final class ClassUtils {
 		return (value != null ? isAssignable(type, value.getClass()) : !type.isPrimitive());
 	}
 	/**
-	 * <h3 class="en">Convert a "/"-based resource path to a "."-based fully qualified class name.</h3>
+	 * <h3 class="en-US">Convert a "/"-based resource path to a "."-based fully qualified class name.</h3>
 	 * <h3 class="zh-CN">将基于“/”的资源路径转换为基于“.”的完全限定类名。</h3>
 	 *
-	 * @param resourcePath 	<span class="en">the resource path pointing to a class</span>
+	 * @param resourcePath 	<span class="en-US">the resource path pointing to a class</span>
 	 *                      <span class="zh-CN">指向类的资源路径</span>
 	 *
-	 * @return 	<span class="en">the corresponding fully qualified class name.</span>
+	 * @return 	<span class="en-US">the corresponding fully qualified class name.</span>
 	 * 			<span class="zh-CN">相应的完全限定类名</span>
 	 */
 	public static String resourcePathToClassName(final String resourcePath) {
 		return resourcePath.replace(Globals.DEFAULT_RESOURCE_SEPARATOR, Globals.DEFAULT_PACKAGE_SEPARATOR);
 	}
 	/**
-	 * <h3 class="en">Convert a "."-based fully qualified class name to a "/"-based resource path.</h3>
+	 * <h3 class="en-US">Convert a "."-based fully qualified class name to a "/"-based resource path.</h3>
 	 * <h3 class="zh-CN">将基于“.”的完全限定类名转换为基于“/”的资源路径。</h3>
 	 *
-	 * @param className 	<span class="en">the fully qualified class name</span>
+	 * @param className 	<span class="en-US">the fully qualified class name</span>
 	 *                      <span class="zh-CN">完全限定的类名</span>
 	 *
-	 * @return 	<span class="en">the corresponding resource path, pointing to the class.</span>
+	 * @return 	<span class="en-US">the corresponding resource path, pointing to the class.</span>
 	 * 			<span class="zh-CN">对应指向类的资源路径</span>
 	 */
 	public static String classNameToResourcePath(String className) {
 		return className.replace(Globals.DEFAULT_PACKAGE_SEPARATOR, Globals.DEFAULT_RESOURCE_SEPARATOR) + CLASS_FILE_SUFFIX;
 	}
 	/**
-	 * <h3 class="en">Return a path suitable for use with <code>ClassLoader.getResource</code>.</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Return a path suitable for use with <code>ClassLoader.getResource</code>.</h3>
+	 * <span class="en-US">
 	 *     Also suitable for use with <code>Class.getResource</code> by prepending a
 	 *     slash ('/') to the return value. Built by taking the package of the specified
 	 *     class file, converting all dots ('.') to slashes ('/'), adding a trailing slash
@@ -796,12 +796,12 @@ public final class ClassUtils {
 	 * @see java.lang.ClassLoader#getResource(String)
 	 * @see java.lang.Class#getResource(String)
 	 *
-	 * @param clazz        	<span class="en">the Class whose package will be used as the base</span>
+	 * @param clazz        	<span class="en-US">the Class whose package will be used as the base</span>
 	 *                      <span class="zh-CN">其包将用作基础的类</span>
-	 * @param resourceName 	<span class="en">the resource name to append. A leading slash is optional.</span>
+	 * @param resourceName 	<span class="en-US">the resource name to append. A leading slash is optional.</span>
 	 *                      <span class="zh-CN">要附加的资源名称。前导斜杠是可选的。</span>
 	 *
-	 * @return 	<span class="en">the built-up resource path</span>
+	 * @return 	<span class="en-US">the built-up resource path</span>
 	 * 			<span class="zh-CN">构建的资源路径</span>
 	 */
 	public static String addResourcePathToPackagePath(final Class<?> clazz, final String resourceName) {
@@ -816,8 +816,8 @@ public final class ClassUtils {
 		return stringBuilder.toString();
 	}
 	/**
-	 * <h3 class="en">Given an input class object, return a string which consists of the class's package name as a pathname.</h3>
-	 * <span class="en">
+	 * <h3 class="en-US">Given an input class object, return a string which consists of the class's package name as a pathname.</h3>
+	 * <span class="en-US">
 	 *     i.e., all dots ('.') are replaced by slashes ('/'). Neither a leading nor trailing slash is added.
 	 *     The result could be concatenated with a slash and the name of a resource, and fed directly
 	 *     to <code>ClassLoader.getResource()</code>. For it to be fed to <code>Class.getResource</code> instead,
@@ -832,10 +832,10 @@ public final class ClassUtils {
 	 * @see java.lang.ClassLoader#getResource(String)
 	 * @see java.lang.Class#getResource(String)
 	 *
-	 * @param clazz 	<span class="en">the input class. A <code>null</code> value or the default (empty) package will result in an empty string ("") being returned.</span>
+	 * @param clazz 	<span class="en-US">the input class. A <code>null</code> value or the default (empty) package will result in an empty string ("") being returned.</span>
 	 *                  <span class="zh-CN">输入类。 <code>null</code> 值或默认（空）包将导致返回空字符串 ("")。</span>
 	 *
-	 * @return 	<span class="en">a path which represents the package name</span>
+	 * @return 	<span class="en-US">a path which represents the package name</span>
 	 * 			<span class="zh-CN">代表包名称的路径</span>
 	 */
 	public static String classPackageAsResourcePath(final Class<?> clazz) {
@@ -851,31 +851,31 @@ public final class ClassUtils {
 		return packageName.replace(Globals.DEFAULT_PACKAGE_SEPARATOR, Globals.DEFAULT_RESOURCE_SEPARATOR);
 	}
     /**
-	 * <h3 class="en">Check given field name was exists field in target class</h3>
+	 * <h3 class="en-US">Check given field name was exists field in target class</h3>
 	 * <h3 class="zh-CN">检查给定的字段名称是否存在于目标类中</h3>
      *
-	 * @param clazz <span class="en">Target class instance</span>
+	 * @param clazz <span class="en-US">Target class instance</span>
 	 *              <span class="zh-CN">目标类实例</span>
-     * @param name 	<span class="en">the name of the field</span>
+     * @param name 	<span class="en-US">the name of the field</span>
 	 *              <span class="zh-CN">字段名称</span>
      *
-	 * @return 	<span class="en">the field object exists results</span>
+	 * @return 	<span class="en-US">the field object exists results</span>
 	 * 			<span class="zh-CN">字段对象存在结果</span>
      */
     public static boolean existsField(final Class<?> clazz, final String name) {
         return ReflectionUtils.findField(clazz, name) != null;
     }
 	/**
-	 * <h3 class="en">
+	 * <h3 class="en-US">
 	 *     Return all interfaces that the given instance implements as arrays,
 	 *     including ones implemented by superclasses.
 	 * </h3>
 	 * <h3 class="zh-CN">返回给定实例作为数组实现的所有接口，包括由超类实现的接口。</h3>
 	 *
-	 * @param instance 	<span class="en">the instance to analyze for interfaces</span>
+	 * @param instance 	<span class="en-US">the instance to analyze for interfaces</span>
 	 *              	<span class="zh-CN">用于分析接口的实例</span>
 	 *
-	 * @return 	<span class="en">all interfaces that the given instance implements as arrays</span>
+	 * @return 	<span class="en-US">all interfaces that the given instance implements as arrays</span>
 	 * 			<span class="zh-CN">给定实例作为数组实现的所有接口</span>
 	 */
 	public static Class<?>[] getAllInterfaces(final Object instance) {
@@ -885,32 +885,32 @@ public final class ClassUtils {
 		return getAllInterfacesForClass(instance.getClass());
 	}
 	/**
-	 * <h3 class="en">Return all interfaces that the given class implements as arrays, including ones implemented by superclasses.</h3>
-	 * <span class="en">If the class itself is an interface, it gets returned as sole interface.</span>
+	 * <h3 class="en-US">Return all interfaces that the given class implements as arrays, including ones implemented by superclasses.</h3>
+	 * <span class="en-US">If the class itself is an interface, it gets returned as sole interface.</span>
 	 * <h3 class="zh-CN">返回给定类作为数组实现的所有接口，包括由超类实现的接口。</h3>
 	 * <span class="zh-CN">如果类本身是一个接口，它将作为唯一接口返回。</span>
 	 *
-	 * @param clazz 	<span class="en">the class to analyze for interfaces</span>
+	 * @param clazz 	<span class="en-US">the class to analyze for interfaces</span>
 	 *              	<span class="zh-CN">用于分析接口的类</span>
 	 *
-	 * @return 	<span class="en">all interfaces that the given instance implements as arrays</span>
+	 * @return 	<span class="en-US">all interfaces that the given instance implements as arrays</span>
 	 * 			<span class="zh-CN">给定实例作为数组实现的所有接口</span>
 	 */
 	public static Class<?>[] getAllInterfacesForClass(final Class<?> clazz) {
 		return getAllInterfacesForClass(clazz, null);
 	}
 	/**
-	 * <h3 class="en">Return all interfaces that the given class implements as arrays, including ones implemented by superclasses.</h3>
-	 * <span class="en">If the class itself is an interface, it gets returned as sole interface.</span>
+	 * <h3 class="en-US">Return all interfaces that the given class implements as arrays, including ones implemented by superclasses.</h3>
+	 * <span class="en-US">If the class itself is an interface, it gets returned as sole interface.</span>
 	 * <h3 class="zh-CN">返回给定类作为数组实现的所有接口，包括由超类实现的接口。</h3>
 	 * <span class="zh-CN">如果类本身是一个接口，它将作为唯一接口返回。</span>
 	 *
-	 * @param clazz 		<span class="en">the class to analyze for interfaces</span>
+	 * @param clazz 		<span class="en-US">the class to analyze for interfaces</span>
 	 *              		<span class="zh-CN">用于分析接口的类</span>
-	 * @param classLoader 	<span class="en">the ClassLoader that the interfaces need to be visible in (maybe <code>null</code> when accepting all declared interfaces)</span>
+	 * @param classLoader 	<span class="en-US">the ClassLoader that the interfaces need to be visible in (maybe <code>null</code> when accepting all declared interfaces)</span>
 	 *              		<span class="zh-CN">接口需要在其中可见的类加载器（如果为<code>null</code>，则接受所有声明的接口）</span>
 	 *
-	 * @return 	<span class="en">all interfaces that the given instance implements as arrays</span>
+	 * @return 	<span class="en-US">all interfaces that the given instance implements as arrays</span>
 	 * 			<span class="zh-CN">给定实例作为数组实现的所有接口</span>
 	 */
 	public static Class<?>[] getAllInterfacesForClass(final Class<?> clazz, final ClassLoader classLoader) {
@@ -934,15 +934,15 @@ public final class ClassUtils {
 		return interfaces.toArray(new Class[0]);
 	}
 	/**
-	 * <h3 class="en">Check whether the given class is visible in the given ClassLoader.</h3>
+	 * <h3 class="en-US">Check whether the given class is visible in the given ClassLoader.</h3>
 	 * <h3 class="zh-CN">检查给定的类在给定的类加载器中是否可见。</h3>
 	 *
-	 * @param clazz 		<span class="en">the class to check (typically an interface)</span>
+	 * @param clazz 		<span class="en-US">the class to check (typically an interface)</span>
 	 *              		<span class="zh-CN">要检查的类（通常是接口）</span>
-	 * @param classLoader 	<span class="en">the ClassLoader to check against (maybe <code>null</code> in which case this method will always return <code>Boolean.TRUE</code>)</span>
+	 * @param classLoader 	<span class="en-US">the ClassLoader to check against (maybe <code>null</code> in which case this method will always return <code>Boolean.TRUE</code>)</span>
 	 *              		<span class="zh-CN">要检查的类加载器（也许 <code>null</code> 在这种情况下，此方法将始终返回 <code>Boolean.TRUE</code>）</span>
 	 *
-	 * @return 	<span class="en">class is visible</span>
+	 * @return 	<span class="en-US">class is visible</span>
 	 * 			<span class="zh-CN">类可见</span>
 	 */
 	public static boolean isVisible(final Class<?> clazz, final ClassLoader classLoader) {
@@ -959,13 +959,13 @@ public final class ClassUtils {
 		}
 	}
     /**
-	 * <h3 class="en">Parse component type from given class.</h3>
+	 * <h3 class="en-US">Parse component type from given class.</h3>
 	 * <h3 class="zh-CN">从给定类中解析组件类型。</h3>
      *
-     * @param clazz 	<span class="en">Class instance</span>
+     * @param clazz 	<span class="en-US">Class instance</span>
 	 *              	<span class="zh-CN">类实例</span>
      *
-	 * @return 	<span class="en">Parsed component type or <code>null</code> if not a list or array</span>
+	 * @return 	<span class="en-US">Parsed component type or <code>null</code> if not a list or array</span>
 	 * 			<span class="zh-CN">解析的组件类型，如果不是列表或数组则为 <code>null</code></span>
      */
     public static Class<?> componentType(final Class<?> clazz) {
@@ -977,13 +977,13 @@ public final class ClassUtils {
         return clazz;
     }
 	/**
-	 * <h3 class="en">Build a nice qualified name for an array: component type class name + "[]".</h3>
+	 * <h3 class="en-US">Build a nice qualified name for an array: component type class name + "[]".</h3>
 	 * <h3 class="zh-CN">为数组建立一个好的限定名称：组件类型类名+“[]”。</h3>
 	 *
-	 * @param clazz 	<span class="en">the array class</span>
+	 * @param clazz 	<span class="en-US">the array class</span>
 	 *              	<span class="zh-CN">数组类</span>
 	 *
-	 * @return 	<span class="en">a qualified name for the array class</span>
+	 * @return 	<span class="en-US">a qualified name for the array class</span>
 	 * 			<span class="zh-CN">数组类的限定名称</span>
 	 */
 	private static String getQualifiedNameForArray(final Class<?> clazz) {

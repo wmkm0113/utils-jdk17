@@ -20,8 +20,8 @@ import org.nervousync.beans.location.GeoPoint;
 import org.nervousync.exceptions.location.LocationConvertException;
 
 /**
- * <h2 class="en">Geography Utilities</h2>
- * <span class="en">
+ * <h2 class="en-US">Geography Utilities</h2>
+ * <span class="en-US">
  *     <span>Current utilities implements features:</span>
  *     <ul>Convert GeoPoint at WGS84(GPS)/GCJ02/BD09</ul>
  *     <ul>Calculate distance of two given geography point. (Unit: Kilometers)</ul>
@@ -38,35 +38,35 @@ import org.nervousync.exceptions.location.LocationConvertException;
  */
 public final class LocationUtils {
 	/**
-	 * <span class="en">Earth radius</span>
+	 * <span class="en-US">Earth radius</span>
 	 * <span class="zh-CN">地球半径</span>
 	 */
 	private static final double EARTH_R = 6378245.0;
 	/**
-	 * <span class="en">Square value of earth eccentricity</span>
+	 * <span class="en-US">Square value of earth eccentricity</span>
 	 * <span class="zh-CN">地球偏心率平方值</span>
 	 */
 	private static final double EARTH_EE = 0.00669342162296594323;
 	/**
-	 * <h3 class="en">Private constructor for LocationUtils</h3>
+	 * <h3 class="en-US">Private constructor for LocationUtils</h3>
 	 * <h3 class="zh-CN">地理位置信息工具集的私有构造方法</h3>
 	 */
 	private LocationUtils() {
 	}
 	/**
-	 * <h3 class="en">Calculate distance of two given geography location. (Unit: Kilometers)</h3>
+	 * <h3 class="en-US">Calculate distance of two given geography location. (Unit: Kilometers)</h3>
 	 * <h3 class="zh-CN">计算两个物理坐标之间的距离，单位：公里</h3>
 	 *
-	 * @param beginPoint    <span class="en">GroPoint instance of beginning geography location</span>
+	 * @param beginPoint    <span class="en-US">GroPoint instance of beginning geography location</span>
 	 *                      <span class="zh-CN">起始位置坐标的GroPoint实例</span>
-	 * @param endPoint    	<span class="en">GroPoint instance of end geography location</span>
+	 * @param endPoint    	<span class="en-US">GroPoint instance of end geography location</span>
 	 *                      <span class="zh-CN">终止位置坐标的GroPoint实例</span>
 	 *
-	 * @return	<span class="en">Calculated distance value</span>
+	 * @return	<span class="en-US">Calculated distance value</span>
 	 * 			<span class="zh-CN">计算完成的距离值</span>
 	 *
 	 * @throws LocationConvertException
-	 * <span class="en">If convert GeoPoint instance to GPS location has error</span>
+	 * <span class="en-US">If convert GeoPoint instance to GPS location has error</span>
 	 * <span class="zh-CN">当转换GeoPoint为GPS坐标时出现错误</span>
 	 */
 	public static double calcDistance(final GeoPoint beginPoint, final GeoPoint endPoint)
@@ -80,17 +80,17 @@ public final class LocationUtils {
 
 	}
 	/**
-	 * <h3 class="en">Convert given GeoPoint instance to GPS GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert given GeoPoint instance to GPS GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换给定的GeoPoint实例为GPS坐标GeoPoint实例</h3>
 	 *
-	 * @param currentPoint 	<span class="en">Given GroPoint instance</span>
+	 * @param currentPoint 	<span class="en-US">Given GroPoint instance</span>
 	 *                      <span class="zh-CN">给定的坐标的GroPoint实例</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 *
 	 * @throws LocationConvertException
-	 * <span class="en">If convert GeoPoint instance to GPS location has error</span>
+	 * <span class="en-US">If convert GeoPoint instance to GPS location has error</span>
 	 * <span class="zh-CN">当转换GeoPoint为GPS坐标时出现错误</span>
 	 */
 	public static GeoPoint anyToGPS(final GeoPoint currentPoint) throws LocationConvertException {
@@ -112,17 +112,17 @@ public final class LocationUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Convert given GeoPoint instance to GCJ02 GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert given GeoPoint instance to GCJ02 GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换给定的GeoPoint实例为GCJ02坐标GeoPoint实例</h3>
 	 *
-	 * @param currentPoint 	<span class="en">Given GroPoint instance</span>
+	 * @param currentPoint 	<span class="en-US">Given GroPoint instance</span>
 	 *                      <span class="zh-CN">给定的坐标的GroPoint实例</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 *
 	 * @throws LocationConvertException
-	 * <span class="en">If convert GeoPoint instance to GPS location has error</span>
+	 * <span class="en-US">If convert GeoPoint instance to GPS location has error</span>
 	 * <span class="zh-CN">当转换GeoPoint为GPS坐标时出现错误</span>
 	 */
 	public static GeoPoint anyToGCJ02(final GeoPoint currentPoint) throws LocationConvertException {
@@ -137,17 +137,17 @@ public final class LocationUtils {
 		};
 	}
 	/**
-	 * <h3 class="en">Convert given GeoPoint instance to BD09 GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert given GeoPoint instance to BD09 GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换给定的GeoPoint实例为BD09坐标GeoPoint实例</h3>
 	 *
-	 * @param currentPoint 	<span class="en">Given GroPoint instance</span>
+	 * @param currentPoint 	<span class="en-US">Given GroPoint instance</span>
 	 *                      <span class="zh-CN">给定的坐标的GroPoint实例</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 *
 	 * @throws LocationConvertException
-	 * <span class="en">If convert GeoPoint instance to GPS location has error</span>
+	 * <span class="en-US">If convert GeoPoint instance to GPS location has error</span>
 	 * <span class="zh-CN">当转换GeoPoint为GPS坐标时出现错误</span>
 	 */
 	public static GeoPoint anyToBD09(final GeoPoint currentPoint) throws LocationConvertException {
@@ -169,15 +169,15 @@ public final class LocationUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Convert GCJ02 GeoPoint instance to BD09 GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert GCJ02 GeoPoint instance to BD09 GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换GCJ02坐标的GeoPoint实例为BD09坐标GeoPoint实例</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 */
 	private static GeoPoint GCJ02ToBD09(final double longitude, final double latitude) {
@@ -188,15 +188,15 @@ public final class LocationUtils {
 		return GeoPoint.bd09Point(bdLon, bdLat);
 	}
 	/**
-	 * <h3 class="en">Convert BD09 GeoPoint instance to GCJ02 GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert BD09 GeoPoint instance to GCJ02 GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换BD09坐标的GeoPoint实例为GCJ02坐标GeoPoint实例</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 */
 	private static GeoPoint BD09ToGCJ02(final double longitude, final double latitude) {
@@ -209,15 +209,15 @@ public final class LocationUtils {
 		return GeoPoint.gcj02Point(gcjLon, gcjLat);
 	}
 	/**
-	 * <h3 class="en">Convert GCJ02 GeoPoint instance to GPS GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert GCJ02 GeoPoint instance to GPS GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换GCJ02坐标的GeoPoint实例为GPS坐标GeoPoint实例</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 */
 	private static GeoPoint GCJ02ToGPS(final double longitude, final double latitude) {
@@ -230,15 +230,15 @@ public final class LocationUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Convert GPS GeoPoint instance to GCJ02 GeoPoint instance</h3>
+	 * <h3 class="en-US">Convert GPS GeoPoint instance to GCJ02 GeoPoint instance</h3>
 	 * <h3 class="zh-CN">转换GPS坐标的GeoPoint实例为GCJ02坐标GeoPoint实例</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 */
 	private static GeoPoint GPSToGCJ02(final double longitude, final double latitude) {
@@ -250,15 +250,15 @@ public final class LocationUtils {
 				latitude + deltaPoint.getLatitude());
 	}
 	/**
-	 * <h3 class="en">Calculate delta value of GeoPoint convert</h3>
+	 * <h3 class="en-US">Calculate delta value of GeoPoint convert</h3>
 	 * <h3 class="zh-CN">计算地理坐标的偏移量</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">Converted GeoPoint instance</span>
+	 * @return	<span class="en-US">Converted GeoPoint instance</span>
 	 * 			<span class="zh-CN">转换后的GeoPoint实例</span>
 	 */
 	private static GeoPoint deltaPoint(final double longitude, final double latitude) {
@@ -272,15 +272,15 @@ public final class LocationUtils {
 		return GeoPoint.deltaPoint(fixedLongitude, fixedLatitude);
 	}
 	/**
-	 * <h3 class="en">Calculate value of transformed latitude</h3>
+	 * <h3 class="en-US">Calculate value of transformed latitude</h3>
 	 * <h3 class="zh-CN">计算转换后的纬度值</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">transformed latitude value</span>
+	 * @return	<span class="en-US">transformed latitude value</span>
 	 * 			<span class="zh-CN">转换后的纬度值</span>
 	 */
 	private static double transformLatitude(final double longitude, final double latitude) {
@@ -291,15 +291,15 @@ public final class LocationUtils {
 		return result;
 	}
 	/**
-	 * <h3 class="en">Calculate value of transformed longitude</h3>
+	 * <h3 class="en-US">Calculate value of transformed longitude</h3>
 	 * <h3 class="zh-CN">计算转换后的经度值</h3>
 	 *
-	 * @param longitude		<span class="en">Longitude value of GeoPoint</span>
+	 * @param longitude		<span class="en-US">Longitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标经度值</span>
-	 * @param latitude		<span class="en">Latitude value of GeoPoint</span>
+	 * @param latitude		<span class="en-US">Latitude value of GeoPoint</span>
 	 *                      <span class="zh-CN">地理坐标纬度值</span>
 	 *
-	 * @return	<span class="en">transformed longitude value</span>
+	 * @return	<span class="en-US">transformed longitude value</span>
 	 * 			<span class="zh-CN">转换后的经度值</span>
 	 */
 	private static double transformLongitude(final double longitude, final double latitude) {

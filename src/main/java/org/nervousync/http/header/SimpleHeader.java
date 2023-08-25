@@ -17,34 +17,34 @@
 package org.nervousync.http.header;
 
 /**
- * <h2 class="en">Simple Header Define</h2>
+ * <h2 class="en-US">Simple Header Define</h2>
  * <h2 class="zh-CN">Cookie信息定义</h2>
  *
- * @param headerName  <span class="en">Header name</span>
+ * @param headerName  <span class="en-US">Header name</span>
  *                    <span class="zh-CN">Header名</span>
- * @param headerValue <span class="en">Header value</span>
+ * @param headerValue <span class="en-US">Header value</span>
  *                    <span class="zh-CN">Header值</span>
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
  * @version $Revision: 1.0 $ $Date: Jan 4, 2018 12:15:18 $
  */
 public record SimpleHeader(String headerName, String headerValue) {
 	/**
-	 * <h3 class="en">Constructor method for SimpleHeader</h3>
+	 * <h3 class="en-US">Constructor method for SimpleHeader</h3>
 	 * <h3 class="zh-CN">SimpleHeader构造方法</h3>
 	 *
-	 * @param headerName  <span class="en">Header name</span>
+	 * @param headerName  <span class="en-US">Header name</span>
 	 *                    <span class="zh-CN">Header名</span>
-	 * @param headerValue <span class="en">Header value</span>
+	 * @param headerValue <span class="en-US">Header value</span>
 	 *                    <span class="zh-CN">Header值</span>
 	 */
 	public SimpleHeader {
 	}
 
 	/**
-	 * <h3 class="en">Getter method for header name</h3>
+	 * <h3 class="en-US">Getter method for header name</h3>
 	 * <h3 class="zh-CN">Header名的Getter方法</h3>
 	 *
-	 * @return <span class="en">Header name</span>
+	 * @return <span class="en-US">Header name</span>
 	 * <span class="zh-CN">Header名</span>
 	 */
 	@Override
@@ -53,10 +53,10 @@ public record SimpleHeader(String headerName, String headerValue) {
 	}
 
 	/**
-	 * <h3 class="en">Getter method for header value</h3>
+	 * <h3 class="en-US">Getter method for header value</h3>
 	 * <h3 class="zh-CN">Header值的Getter方法</h3>
 	 *
-	 * @return <span class="en">Header value</span>
+	 * @return <span class="en-US">Header value</span>
 	 * <span class="zh-CN">Header值</span>
 	 */
 	@Override

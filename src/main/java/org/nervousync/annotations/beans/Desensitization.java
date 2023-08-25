@@ -14,24 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.nervousync.enumerations.snmp.auth;
+package org.nervousync.annotations.beans;
+
+import org.nervousync.utils.ObjectUtils;
+
+import java.lang.annotation.*;
 
 /**
- * <h2 class="en-US">SNMP Authentication Private Protocol Enumerations</h2>
- * <h2 class="zh-CN">SNMP身份验证私有协议枚举</h2>
+ * <h2 class="en-US">JavaBean Property Desensitization Annotation</h2>
+ * <span class="en-US">
+ *     After using this annotation on the properties of JavaBean,
+ *     you can call the desensitization method in ObjectUtils for automatic data desensitization
+ * </span>
+ * <h2 class="zh-CN">JavaBean属性脱敏注解</h2>
+ * <span class="zh-CN">在JavaBean的属性上使用此注解后，可以调用ObjectUtils中的desensitization方法进行数据自动脱敏</span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $ $Date: Oct 27, 2017 14:17:22 $
+ * @version $Revision: 1.0.0 $ $Date: Sep 25, 2022 14:28:33 $
  */
-public enum SNMPPrivProtocol {
-	/**
-     * <span class="en-US">DES Private Protocol</span>
-     * <span class="zh-CN">DES私有协议</span>
-	 */
-	PrivDES,
-	/**
-     * <span class="en-US">TripleDES Private Protocol</span>
-     * <span class="zh-CN">3DES私有协议</span>
-	 */
-	Priv3DES
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD})
+public @interface Desensitization {
+    ObjectUtils.SensitiveType value() default ObjectUtils.SensitiveType.NORMAL;
 }

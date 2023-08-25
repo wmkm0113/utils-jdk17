@@ -32,7 +32,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * <h2 class="en">Internationalization Utilities</h2>
+ * <h2 class="en-US">Internationalization Utilities</h2>
  * <h2 class="zh-CN">国际化工具集</h2>
  *.0
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -40,24 +40,24 @@ import java.util.jar.JarFile;
  */
 public final class MultilingualUtils {
     /**
-     * <span class="en">Logger instance</span>
+     * <span class="en-US">Logger instance</span>
      * <span class="zh-CN">日志实例</span>
      */
 	private final static Logger LOGGER = LoggerFactory.getLogger(MultilingualUtils.class);
 
     /**
-     * <span class="en">Registered resources map</span>
+     * <span class="en-US">Registered resources map</span>
      * <span class="zh-CN">已注册的资源信息映射表</span>
      */
     private static final Map<String, Map<String, MessageResource>> REGISTERED_RESOURCES = new HashMap<>();
     private static final Map<String, String> IDENTIFY_KEY_MAP = new HashMap<>();
     /**
-     * <span class="en">Default locale instance, usually value is default locale for this instance of the Java Virtual Machine.</span>
+     * <span class="en-US">Default locale instance, usually value is default locale for this instance of the Java Virtual Machine.</span>
      * <span class="zh-CN">默认区域设置实例，通常值是 Java 虚拟机实例的默认区域设置。</span>
      */
     private static String DEFAULT_LANGUAGE_CODE = toLanguageCode(Globals.DEFAULT_LOCALE);
     /**
-     * <span class="en">XML Schema file mapping resource path</span>
+     * <span class="en-US">XML Schema file mapping resource path</span>
      * <span class="zh-CN">XML约束文档的资源映射文件</span>
      */
     private static final String BUNDLE_RESOURCE_PATH = "META-INF/nervousync.i18n";
@@ -71,19 +71,19 @@ public final class MultilingualUtils {
         }
     }
     /**
-	 * <h3 class="en">Private constructor for MultilingualUtils</h3>
+	 * <h3 class="en-US">Private constructor for MultilingualUtils</h3>
 	 * <h3 class="zh-CN">国际化工具集的私有构造方法</h3>
      */
     private MultilingualUtils() {
     }
     /**
-	 * <h3 class="en">Convert locale instance to string.</h3>
+	 * <h3 class="en-US">Convert locale instance to string.</h3>
 	 * <h3 class="zh-CN">将语言环境实例转换为字符串。</h3>
      *
-     * @param locale    <span class="en">locale instance</span>
+     * @param locale    <span class="en-US">locale instance</span>
      *                  <span class="zh-CN">区域设置实例</span>
      *
-     * @return  <span class="en">Converted string</span>
+     * @return  <span class="en-US">Converted string</span>
      *          <span class="zh-CN">转换后的字符串</span>
      */
     public static String toLanguageCode(@Nonnull final Locale locale) {
@@ -93,48 +93,48 @@ public final class MultilingualUtils {
                 .orElse(locale.getLanguage());
     }
     /**
-	 * <h3 class="en">Configure default locale</h3>
+	 * <h3 class="en-US">Configure default locale</h3>
 	 * <h3 class="zh-CN">设置默认语言</h3>
      *
-     * @param locale    <span class="en">Default locale instance</span>
+     * @param locale    <span class="en-US">Default locale instance</span>
      *                  <span class="zh-CN">默认区域设置实例</span>
      */
     public static void defaultLocale(@Nonnull final Locale locale) {
         DEFAULT_LANGUAGE_CODE = toLanguageCode(locale);
     }
     /**
-     * <h3 class="en">Generate multilingual agent instance</h3>
+     * <h3 class="en-US">Generate multilingual agent instance</h3>
      * <h3 class="zh-CN">生成国际化代理实例对象</h3>
      *
-     * @param groupId       <span class="en">Resource group id</span>
+     * @param groupId       <span class="en-US">Resource group id</span>
      *                      <span class="zh-CN">资源的组ID</span>
-     * @param bundle        <span class="en">Resource bundle</span>
+     * @param bundle        <span class="en-US">Resource bundle</span>
      *                      <span class="zh-CN">资源的标识</span>
      *
-     * @return  <span class="en">Generated instance</span>
+     * @return  <span class="en-US">Generated instance</span>
      *          <span class="zh-CN">生成的实例对象</span>
      */
     public static Agent newAgent(final String groupId, final String bundle) {
         return new Agent(groupId, bundle);
     }
     /**
-     * <h3 class="en">Generate multilingual agent instance</h3>
+     * <h3 class="en-US">Generate multilingual agent instance</h3>
      * <h3 class="zh-CN">生成国际化代理实例对象</h3>
      *
-     * @param clazz     <span class="en">Class instance</span>
+     * @param clazz     <span class="en-US">Class instance</span>
      *                  <span class="zh-CN">类实例对象</span>
      *
-     * @return  <span class="en">Generated instance</span>
+     * @return  <span class="en-US">Generated instance</span>
      *          <span class="zh-CN">生成的实例对象</span>
      */
     public static Agent newAgent(final Class<?> clazz) {
         return new Agent(clazz);
     }
     /**
-	 * <h3 class="en">Remove message resources by given argument languageCode if registered.</h3>
+	 * <h3 class="en-US">Remove message resources by given argument languageCode if registered.</h3>
 	 * <h3 class="zh-CN">根据给定的参数 languageCode 移除已注册的国际化信息资源</h3>
      *
-     * @param languageCode  <span class="en">Resource language code</span>
+     * @param languageCode  <span class="en-US">Resource language code</span>
      *                      <span class="zh-CN">资源语言代码</span>
      */
     public static void removeResource(@Nonnull final String languageCode) {
@@ -147,12 +147,12 @@ public final class MultilingualUtils {
         }
     }
     /**
-	 * <h3 class="en">Remove bundle resources by given argument bundle if registered.</h3>
+	 * <h3 class="en-US">Remove bundle resources by given argument bundle if registered.</h3>
 	 * <h3 class="zh-CN">根据给定的参数 bundle 移除已注册的国际化信息资源</h3>
      *
-     * @param groupId       <span class="en">Resource group id</span>
+     * @param groupId       <span class="en-US">Resource group id</span>
      *                      <span class="zh-CN">资源的组ID</span>
-     * @param bundle        <span class="en">Resource bundle</span>
+     * @param bundle        <span class="en-US">Resource bundle</span>
      *                      <span class="zh-CN">资源的标识</span>
      */
     public static void removeBundle(@Nonnull final String groupId, @Nonnull final String bundle) {
@@ -161,14 +161,14 @@ public final class MultilingualUtils {
         }
     }
     /**
-	 * <h3 class="en">Remove message resources by given argument bundle and languageCode if registered.</h3>
+	 * <h3 class="en-US">Remove message resources by given argument bundle and languageCode if registered.</h3>
 	 * <h3 class="zh-CN">根据给定的参数 bundle 和 languageCode 移除已注册的国际化信息资源</h3>
      *
-     * @param groupId       <span class="en">Resource group id</span>
+     * @param groupId       <span class="en-US">Resource group id</span>
      *                      <span class="zh-CN">资源的组ID</span>
-     * @param bundle        <span class="en">Resource bundle</span>
+     * @param bundle        <span class="en-US">Resource bundle</span>
      *                      <span class="zh-CN">资源的标识</span>
-     * @param languageCode  <span class="en">Resource language code</span>
+     * @param languageCode  <span class="en-US">Resource language code</span>
      *                      <span class="zh-CN">资源语言代码</span>
      */
     public static void removeResource(@Nonnull final String groupId, @Nonnull final String bundle,
@@ -181,17 +181,17 @@ public final class MultilingualUtils {
         }
     }
     /**
-	 * <h3 class="en">Register i18n message resource</h3>
+	 * <h3 class="en-US">Register i18n message resource</h3>
 	 * <h3 class="zh-CN">注册国际化信息资源</h3>
      *
-     * @param identifyKey   <span class="en">Resource identified key</span>
+     * @param identifyKey   <span class="en-US">Resource identified key</span>
      *                      <span class="zh-CN">资源唯一识别码</span>
-     * @param languageCode  <span class="en">Resource language code</span>
+     * @param languageCode  <span class="en-US">Resource language code</span>
      *                      <span class="zh-CN">资源语言代码</span>
-     * @param properties    <span class="en">Resource information properties instance</span>
+     * @param properties    <span class="en-US">Resource information properties instance</span>
      *                      <span class="zh-CN">资源信息属性实例对象</span>
      *
-     * @return  <span class="en">Registered result, <code>Boolean.TRUE</code> for success, <code>Boolean.FALSE</code> for failed</span>
+     * @return  <span class="en-US">Registered result, <code>Boolean.TRUE</code> for success, <code>Boolean.FALSE</code> for failed</span>
      *          <span class="zh-CN">注册结果，成功返回 <code>Boolean.TRUE</code>，失败返回 <code>Boolean.FALSE</code></span>
      */
     private static boolean registerResource(@Nonnull final String identifyKey, @Nonnull final String languageCode,
@@ -212,17 +212,17 @@ public final class MultilingualUtils {
         return Boolean.TRUE;
     }
     /**
-	 * <h3 class="en">Read resource files and register</h3>
+	 * <h3 class="en-US">Read resource files and register</h3>
 	 * <h3 class="zh-CN">读取资源文件并注册</h3>
      *
-     * @param identifyKey   <span class="en">Resource identified key</span>
+     * @param identifyKey   <span class="en-US">Resource identified key</span>
      *                      <span class="zh-CN">资源唯一识别码</span>
-     * @param languageCode  <span class="en">Resource language code</span>
+     * @param languageCode  <span class="en-US">Resource language code</span>
      *                      <span class="zh-CN">资源语言代码</span>
-	 * @param dataBytes 	<span class="en">Message resource data bytes</span>
+	 * @param dataBytes 	<span class="en-US">Message resource data bytes</span>
 	 *                      <span class="zh-CN">信息资源文件二进制数组</span>
      *
-     * @return  <span class="en">Registered result, <code>Boolean.TRUE</code> for success, <code>Boolean.FALSE</code> for failed</span>
+     * @return  <span class="en-US">Registered result, <code>Boolean.TRUE</code> for success, <code>Boolean.FALSE</code> for failed</span>
      *          <span class="zh-CN">注册结果，成功返回 <code>Boolean.TRUE</code>，失败返回 <code>Boolean.FALSE</code></span>
      */
     private static boolean registerResource(@Nonnull final String identifyKey, @Nonnull final String languageCode,
@@ -235,19 +235,19 @@ public final class MultilingualUtils {
         }
     }
     /**
-	 * <h3 class="en">Retrieve internationalization information content and formatted by given collections</h3>
+	 * <h3 class="en-US">Retrieve internationalization information content and formatted by given collections</h3>
 	 * <h3 class="zh-CN">读取国际化资源信息详情并使用给定的参数集合格式化资源信息</h3>
      *
-     * @param identifyKey   <span class="en">Resource identified key</span>
+     * @param identifyKey   <span class="en-US">Resource identified key</span>
      *                      <span class="zh-CN">资源唯一识别码</span>
-     * @param messageKey    <span class="en">Message identify key</span>
+     * @param messageKey    <span class="en-US">Message identify key</span>
      *                      <span class="zh-CN">信息识别键值</span>
-     * @param languageCode  <span class="en">Resource language code</span>
+     * @param languageCode  <span class="en-US">Resource language code</span>
      *                      <span class="zh-CN">资源语言代码</span>
-     * @param collections   <span class="en">given parameters of information formatter</span>
+     * @param collections   <span class="en-US">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
      *
-     * @return  <span class="en">Formatted resource information or joined string by character '/' if not found</span>
+     * @return  <span class="en-US">Formatted resource information or joined string by character '/' if not found</span>
      *          <span class="zh-CN">格式化的资源信息，如果未找到则返回使用'/'拼接的字符串</span>
      */
     private static String findMessage(final String identifyKey, final String messageKey, final String languageCode,
@@ -263,10 +263,10 @@ public final class MultilingualUtils {
         return messageKey;
     }
     /**
-	 * <h3 class="en">Retrieve resource identify key by given class</h3>
+	 * <h3 class="en-US">Retrieve resource identify key by given class</h3>
 	 * <h3 class="zh-CN">根据给定的类查找资源唯一识别码</h3>
      *
-     * @param clazz     <span class="en">Class instance</span>
+     * @param clazz     <span class="en-US">Class instance</span>
      *                  <span class="zh-CN">类实例对象</span>
      */
     private static String identifyKey(final Class<?> clazz) {
@@ -358,64 +358,64 @@ public final class MultilingualUtils {
         return dataBytes;
     }
     /**
-     * <h2 class="en">Multilingual Agent</h2>
+     * <h2 class="en-US">Multilingual Agent</h2>
      * <h2 class="zh-CN">国际化代理</h2>
      */
     public static final class Agent {
         /**
-         * <span class="en">Resource identified key</span>
+         * <span class="en-US">Resource identified key</span>
          * <span class="zh-CN">资源唯一识别码</span>
          */
         private final String identifyKey;
         /**
-         * <h3 class="en">Constructor method for MultilingualUtils.Agent</h3>
+         * <h3 class="en-US">Constructor method for MultilingualUtils.Agent</h3>
          * <h3 class="zh-CN">国际化代理的构造方法</h3>
          *
-         * @param groupId   <span class="en">Resource group id</span>
+         * @param groupId   <span class="en-US">Resource group id</span>
          *                  <span class="zh-CN">资源的组ID</span>
-         * @param bundle    <span class="en">Resource bundle</span>
+         * @param bundle    <span class="en-US">Resource bundle</span>
          *                  <span class="zh-CN">资源的标识</span>
          */
         private Agent(final String groupId, final String bundle) {
             this.identifyKey = groupId + ":" + bundle;
         }
         /**
-         * <h3 class="en">Constructor method for MultilingualUtils.Agent</h3>
+         * <h3 class="en-US">Constructor method for MultilingualUtils.Agent</h3>
          * <h3 class="zh-CN">国际化代理的构造方法</h3>
          *
-         * @param clazz     <span class="en">Class instance</span>
+         * @param clazz     <span class="en-US">Class instance</span>
          *                  <span class="zh-CN">类实例对象</span>
          */
         private Agent(final Class<?> clazz) {
             this.identifyKey = MultilingualUtils.identifyKey(clazz);
         }
         /**
-         * <h3 class="en">Retrieve internationalization information content and formatted by given collections</h3>
+         * <h3 class="en-US">Retrieve internationalization information content and formatted by given collections</h3>
          * <h3 class="zh-CN">读取国际化资源信息详情并使用给定的参数集合格式化资源信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          *
-         * @return  <span class="en">Formatted resource information or joined string by character '/' if not found</span>
+         * @return  <span class="en-US">Formatted resource information or joined string by character '/' if not found</span>
          *          <span class="zh-CN">格式化的资源信息，如果未找到则返回使用'/'拼接的字符串</span>
          */
         public String findMessage(final String messageKey, final Object... collections) {
             return MultilingualUtils.findMessage(this.identifyKey, messageKey, DEFAULT_LANGUAGE_CODE, collections);
         }
         /**
-         * <h3 class="en">Retrieve internationalization information content and formatted by given collections</h3>
+         * <h3 class="en-US">Retrieve internationalization information content and formatted by given collections</h3>
          * <h3 class="zh-CN">读取国际化资源信息详情并使用给定的参数集合格式化资源信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param locale        <span class="en">locale instance</span>
+         * @param locale        <span class="en-US">locale instance</span>
          *                      <span class="zh-CN">区域设置实例</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          *
-         * @return  <span class="en">Formatted resource information or joined string by character '/' if not found</span>
+         * @return  <span class="en-US">Formatted resource information or joined string by character '/' if not found</span>
          *          <span class="zh-CN">格式化的资源信息，如果未找到则返回使用'/'拼接的字符串</span>
          */
         public String findMessage(final String messageKey, final Locale locale, final Object... collections) {

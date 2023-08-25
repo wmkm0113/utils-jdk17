@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
- * <h2 class="en">Logger Utilities</h2>
- * <span class="en">
+ * <h2 class="en-US">Logger Utilities</h2>
+ * <span class="en-US">
  *     <span>Current utilities implements features:</span>
  *     <ul>Using programming to initialize Log4j</ul>
  *     <ul>Using programming to initialize Log4j and configure target package with custom level</ul>
@@ -34,42 +34,42 @@ import java.util.*;
  */
 public final class LoggerUtils {
 	/**
-	 * <h3 class="en">Private constructor for LoggerUtils</h3>
+	 * <h3 class="en-US">Private constructor for LoggerUtils</h3>
 	 * <h3 class="zh-CN">日志工具集的私有构造方法</h3>
 	 */
     private LoggerUtils() {
     }
     /**
-	 * <h3 class="en">Configure root logger using given level</h3>
+	 * <h3 class="en-US">Configure root logger using given level</h3>
 	 * <h3 class="zh-CN">使用给定的日志等级设置根日志</h3>
      *
-     * @param rootLevel     <span class="en">Log level</span>
+     * @param rootLevel     <span class="en-US">Log level</span>
      *                      <span class="zh-CN">日志等级</span>
      */
     public static void initLoggerConfigure(final Level rootLevel) {
         initLoggerConfigure(rootLevel, new PackageLogger[0]);
     }
     /**
-	 * <h3 class="en">Configure root logger using given level and configure given package name to custom level</h3>
+	 * <h3 class="en-US">Configure root logger using given level and configure given package name to custom level</h3>
 	 * <h3 class="zh-CN">使用给定的日志等级设置根日志，同时设置给定的包名为对应的日志等级</h3>
      *
-     * @param rootLevel         <span class="en">Log level</span>
+     * @param rootLevel         <span class="en-US">Log level</span>
      *                          <span class="zh-CN">日志等级</span>
-     * @param packageLoggers    <span class="en">Package logger configure array</span>
+     * @param packageLoggers    <span class="en-US">Package logger configure array</span>
      *                          <span class="zh-CN">包日志设置数组</span>
      */
     public static void initLoggerConfigure(final Level rootLevel, final PackageLogger... packageLoggers) {
         initLoggerConfigure(Globals.DEFAULT_VALUE_STRING, rootLevel, packageLoggers);
     }
     /**
-	 * <h3 class="en">Configure root logger using given level, save logger to target file path and configure given package name to custom level</h3>
+	 * <h3 class="en-US">Configure root logger using given level, save logger to target file path and configure given package name to custom level</h3>
 	 * <h3 class="zh-CN">使用给定的日志等级设置根日志，将日志文件写入到指定的目录，同时设置给定的包名为对应的日志等级</h3>
      *
-     * @param basePath          <span class="en">Log file base path</span>
+     * @param basePath          <span class="en-US">Log file base path</span>
      *                          <span class="zh-CN">文件日志的保存目录</span>
-     * @param rootLevel         <span class="en">Log level</span>
+     * @param rootLevel         <span class="en-US">Log level</span>
      *                          <span class="zh-CN">日志等级</span>
-     * @param packageLoggers    <span class="en">Package logger configure array</span>
+     * @param packageLoggers    <span class="en-US">Package logger configure array</span>
      *                          <span class="zh-CN">包日志设置数组</span>
      */
     public static void initLoggerConfigure(final String basePath, final Level rootLevel,
@@ -82,35 +82,35 @@ public final class LoggerUtils {
                 });
     }
     /**
-	 * <h3 class="en">Generate PackageLogger instance using given package name and log level</h3>
+	 * <h3 class="en-US">Generate PackageLogger instance using given package name and log level</h3>
 	 * <h3 class="zh-CN">使用给定的包名和日志等级生成PackageLogger实例对象</h3>
      *
-     * @param packageName   <span class="en">Package name</span>
+     * @param packageName   <span class="en-US">Package name</span>
      *                      <span class="zh-CN">包名</span>
-     * @param loggerLevel   <span class="en">Log level</span>
+     * @param loggerLevel   <span class="en-US">Log level</span>
      *                      <span class="zh-CN">日志等级</span>
      *
-     * @return  <span class="en">Generated PackageLogger instance</span>
+     * @return  <span class="en-US">Generated PackageLogger instance</span>
      *          <span class="zh-CN">生成的PackageLogger实例对象</span>
      */
     public static PackageLogger newLogger(final String packageName, final Level loggerLevel) {
         return new PackageLogger(packageName, loggerLevel);
     }
     /**
-     * <h3 class="en">Retrieve i18n logger instance</h3>
+     * <h3 class="en-US">Retrieve i18n logger instance</h3>
      * <h3 class="zh-CN">获取国际化支持的日志实例对象</h3>
      *
-     * @param clazz <span class="en">Logger identify class</span>
+     * @param clazz <span class="en-US">Logger identify class</span>
      *              <span class="zh-CN">日志识别类</span>
      *
-     * @return  <span class="en">Generated logger instance</span>
+     * @return  <span class="en-US">Generated logger instance</span>
      *          <span class="zh-CN">生成的日志实例对象</span>
      */
     public static Logger getLogger(final Class<?> clazz) {
         return new Logger(clazz);
     }
     /**
-     * <h2 class="en">Package logger define</h2>
+     * <h2 class="en-US">Package logger define</h2>
      * <h2 class="zh-CN">包日志定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -118,22 +118,22 @@ public final class LoggerUtils {
      */
     public static final class PackageLogger {
         /**
-         * <span class="en">Package name</span>
+         * <span class="en-US">Package name</span>
          * <span class="zh-CN">包名</span>
          */
         private final String packageName;
         /**
-         * <span class="en">Log level</span>
+         * <span class="en-US">Log level</span>
          * <span class="zh-CN">日志等级</span>
          */
         private final Level loggerLevel;
         /**
-         * <h3 class="en">Private constructor for PackageLogger</h3>
+         * <h3 class="en-US">Private constructor for PackageLogger</h3>
          * <h3 class="zh-CN">包日志定义的私有构造方法</h3>
          *
-         * @param packageName   <span class="en">Package name</span>
+         * @param packageName   <span class="en-US">Package name</span>
          *                      <span class="zh-CN">包名</span>
-         * @param loggerLevel   <span class="en">Log level</span>
+         * @param loggerLevel   <span class="en-US">Log level</span>
          *                      <span class="zh-CN">日志等级</span>
          */
         private PackageLogger(final String packageName, final Level loggerLevel) {
@@ -141,20 +141,20 @@ public final class LoggerUtils {
             this.loggerLevel = loggerLevel;
         }
         /**
-         * <h3 class="en">Getter method for package name</h3>
+         * <h3 class="en-US">Getter method for package name</h3>
          * <h3 class="zh-CN">包名的Getter方法</h3>
          *
-         * @return  <span class="en">Package name</span>
+         * @return  <span class="en-US">Package name</span>
          *          <span class="zh-CN">包名</span>
          */
         public String getPackageName() {
             return packageName;
         }
         /**
-         * <h3 class="en">Getter method for log level</h3>
+         * <h3 class="en-US">Getter method for log level</h3>
          * <h3 class="zh-CN">日志等级的Getter方法</h3>
          *
-         * @return  <span class="en">Log level</span>
+         * @return  <span class="en-US">Log level</span>
          *          <span class="zh-CN">日志等级</span>
          */
         public Level getLoggerLevel() {
@@ -162,7 +162,7 @@ public final class LoggerUtils {
         }
     }
     /**
-     * <h2 class="en">Logger define for support i18n</h2>
+     * <h2 class="en-US">Logger define for support i18n</h2>
      * <h2 class="zh-CN">有国际化支持的日志定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -170,16 +170,16 @@ public final class LoggerUtils {
      */
     public static final class Logger {
         /**
-         * <span class="en">Logger instance</span>
+         * <span class="en-US">Logger instance</span>
          * <span class="zh-CN">日志实例</span>
          */
         private final org.slf4j.Logger logger;
         private final MultilingualUtils.Agent multiAgent;
         /**
-         * <h3 class="en">Constructor for MultilingualLogger</h3>
+         * <h3 class="en-US">Constructor for MultilingualLogger</h3>
          * <h3 class="zh-CN">有国际化支持的日志的构造方法</h3>
          *
-         * @param clazz <span class="en">Logger identify class</span>
+         * @param clazz <span class="en-US">Logger identify class</span>
          *              <span class="zh-CN">日志识别类</span>
          */
         Logger(final Class<?> clazz) {
@@ -187,55 +187,55 @@ public final class LoggerUtils {
             this.multiAgent = MultilingualUtils.newAgent(clazz);
         }
         /**
-         * <h3 class="en">Logger level is trace enabled</h3>
+         * <h3 class="en-US">Logger level is trace enabled</h3>
          * <h3 class="zh-CN">日志级别开启Trace</h3>
          */
         public boolean isTraceEnabled() {
             return this.logger.isTraceEnabled();
         }
         /**
-         * <h3 class="en">Output trace message</h3>
+         * <h3 class="en-US">Output trace message</h3>
          * <h3 class="zh-CN">输出Trace信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
          */
         public void trace(final String messageKey) {
             this.trace(messageKey, new Object[0]);
         }
         /**
-         * <h3 class="en">Output trace message</h3>
+         * <h3 class="en-US">Output trace message</h3>
          * <h3 class="zh-CN">输出Trace信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void trace(final String messageKey, final Object... collections) {
             this.trace(messageKey, null, collections);
         }
         /**
-         * <h3 class="en">Output trace message</h3>
+         * <h3 class="en-US">Output trace message</h3>
          * <h3 class="zh-CN">输出Trace信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
          */
         public void trace(final String messageKey, Throwable throwable) {
             this.trace(messageKey, throwable, new Object[0]);
         }
         /**
-         * <h3 class="en">Output trace message</h3>
+         * <h3 class="en-US">Output trace message</h3>
          * <h3 class="zh-CN">输出Trace信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void trace(final String messageKey, Throwable throwable, final Object... collections) {
@@ -250,55 +250,55 @@ public final class LoggerUtils {
             }
         }
         /**
-         * <h3 class="en">Logger level is debug enabled</h3>
+         * <h3 class="en-US">Logger level is debug enabled</h3>
          * <h3 class="zh-CN">日志级别开启Debug</h3>
          */
         public boolean isDebugEnabled() {
             return this.logger.isDebugEnabled();
         }
         /**
-         * <h3 class="en">Output debug message</h3>
+         * <h3 class="en-US">Output debug message</h3>
          * <h3 class="zh-CN">输出Debug信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
          */
         public void debug(final String messageKey) {
             this.debug(messageKey, new Object[0]);
         }
         /**
-         * <h3 class="en">Output debug message</h3>
+         * <h3 class="en-US">Output debug message</h3>
          * <h3 class="zh-CN">输出Debug信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void debug(final String messageKey, final Object... collections) {
             this.debug(messageKey, null, collections);
         }
         /**
-         * <h3 class="en">Output debug message</h3>
+         * <h3 class="en-US">Output debug message</h3>
          * <h3 class="zh-CN">输出Debug信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
          */
         public void debug(final String messageKey, Throwable throwable) {
             this.debug(messageKey, throwable, new Object[0]);
         }
         /**
-         * <h3 class="en">Output debug message</h3>
+         * <h3 class="en-US">Output debug message</h3>
          * <h3 class="zh-CN">输出Debug信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void debug(final String messageKey, Throwable throwable, final Object... collections) {
@@ -313,55 +313,55 @@ public final class LoggerUtils {
             }
         }
         /**
-         * <h3 class="en">Logger level is info enabled</h3>
+         * <h3 class="en-US">Logger level is info enabled</h3>
          * <h3 class="zh-CN">日志级别开启Info</h3>
          */
         public boolean isInfoEnabled() {
             return this.logger.isInfoEnabled();
         }
         /**
-         * <h3 class="en">Output info message</h3>
+         * <h3 class="en-US">Output info message</h3>
          * <h3 class="zh-CN">输出Info信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
          */
         public void info(final String messageKey) {
             this.info(messageKey, new Object[0]);
         }
         /**
-         * <h3 class="en">Output info message</h3>
+         * <h3 class="en-US">Output info message</h3>
          * <h3 class="zh-CN">输出Info信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void info(final String messageKey, final Object... collections) {
             this.info(messageKey, null, collections);
         }
         /**
-         * <h3 class="en">Output info message</h3>
+         * <h3 class="en-US">Output info message</h3>
          * <h3 class="zh-CN">输出Info信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
          */
         public void info(final String messageKey, Throwable throwable) {
             this.info(messageKey, throwable, new Object[0]);
         }
         /**
-         * <h3 class="en">Output info message</h3>
+         * <h3 class="en-US">Output info message</h3>
          * <h3 class="zh-CN">输出Info信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void info(final String messageKey, Throwable throwable, final Object... collections) {
@@ -376,55 +376,55 @@ public final class LoggerUtils {
             }
         }
         /**
-         * <h3 class="en">Logger level is warn enabled</h3>
+         * <h3 class="en-US">Logger level is warn enabled</h3>
          * <h3 class="zh-CN">日志级别开启Warn</h3>
          */
         public boolean isWarnEnabled() {
             return this.logger.isWarnEnabled();
         }
         /**
-         * <h3 class="en">Output trace message</h3>
+         * <h3 class="en-US">Output trace message</h3>
          * <h3 class="zh-CN">输出Warn信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
          */
         public void warn(final String messageKey) {
             this.warn(messageKey, new Object[0]);
         }
         /**
-         * <h3 class="en">Output warn message</h3>
+         * <h3 class="en-US">Output warn message</h3>
          * <h3 class="zh-CN">输出Warn信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void warn(final String messageKey, final Object... collections) {
             this.warn(messageKey, null, collections);
         }
         /**
-         * <h3 class="en">Output warn message</h3>
+         * <h3 class="en-US">Output warn message</h3>
          * <h3 class="zh-CN">输出Warn信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
          */
         public void warn(final String messageKey, Throwable throwable) {
             this.warn(messageKey, throwable, new Object[0]);
         }
         /**
-         * <h3 class="en">Output warn message</h3>
+         * <h3 class="en-US">Output warn message</h3>
          * <h3 class="zh-CN">输出Warn信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void warn(final String messageKey, Throwable throwable, final Object... collections) {
@@ -439,55 +439,55 @@ public final class LoggerUtils {
             }
         }
         /**
-         * <h3 class="en">Logger level is error enabled</h3>
+         * <h3 class="en-US">Logger level is error enabled</h3>
          * <h3 class="zh-CN">日志级别开启Error</h3>
          */
         public boolean isErrorEnabled() {
             return this.logger.isErrorEnabled();
         }
         /**
-         * <h3 class="en">Output trace message</h3>
+         * <h3 class="en-US">Output trace message</h3>
          * <h3 class="zh-CN">输出Error信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
          */
         public void error(final String messageKey) {
             this.error(messageKey, new Object[0]);
         }
         /**
-         * <h3 class="en">Output error message</h3>
+         * <h3 class="en-US">Output error message</h3>
          * <h3 class="zh-CN">输出Error信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void error(final String messageKey, final Object... collections) {
             this.error(messageKey, null, collections);
         }
         /**
-         * <h3 class="en">Output error message</h3>
+         * <h3 class="en-US">Output error message</h3>
          * <h3 class="zh-CN">输出Error信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
          */
         public void error(final String messageKey, Throwable throwable) {
             this.error(messageKey, throwable, new Object[0]);
         }
         /**
-         * <h3 class="en">Output error message</h3>
+         * <h3 class="en-US">Output error message</h3>
          * <h3 class="zh-CN">输出Error信息</h3>
          *
-         * @param messageKey    <span class="en">Message identify key</span>
+         * @param messageKey    <span class="en-US">Message identify key</span>
          *                      <span class="zh-CN">信息识别键值</span>
-         * @param throwable     <span class="en">Throwable exception instance</span>
+         * @param throwable     <span class="en-US">Throwable exception instance</span>
          *                      <span class="zh-CN">抛出的异常实例对象</span>
-         * @param collections   <span class="en">given parameters of information formatter</span>
+         * @param collections   <span class="en-US">given parameters of information formatter</span>
          *                      <span class="zh-CN">用于资源信息格式化的参数</span>
          */
         public void error(final String messageKey, Throwable throwable, final Object... collections) {
@@ -503,13 +503,13 @@ public final class LoggerUtils {
         }
     }
     /**
-     * <h3 class="en">Generate Configuration instance by given LogConfig instance</h3>
+     * <h3 class="en-US">Generate Configuration instance by given LogConfig instance</h3>
      * <h3 class="zh-CN">使用给定的日志配置定义生成Configuration实例对象</h3>
      *
-     * @param logConfig     <span class="en">LogConfig instance</span>
+     * @param logConfig     <span class="en-US">LogConfig instance</span>
      *                      <span class="zh-CN">日志配置定义实例对象</span>
      *
-     * @return  <span class="en">Generated Configuration instance</span>
+     * @return  <span class="en-US">Generated Configuration instance</span>
      *          <span class="zh-CN">生成的Configuration实例对象</span>
      */
     private static Configuration generateConfiguration(final LogConfig logConfig) {
@@ -576,17 +576,17 @@ public final class LoggerUtils {
         return configurationBuilder.build();
     }
     /**
-     * <h3 class="en">Generate LogConfig instance by given parameters</h3>
+     * <h3 class="en-US">Generate LogConfig instance by given parameters</h3>
      * <h3 class="zh-CN">使用给定的参数信息生成日志配置定义实例对象</h3>
      *
-     * @param basePath          <span class="en">Log file base path</span>
+     * @param basePath          <span class="en-US">Log file base path</span>
      *                          <span class="zh-CN">文件日志的保存目录</span>
-     * @param rootLevel         <span class="en">Log level</span>
+     * @param rootLevel         <span class="en-US">Log level</span>
      *                          <span class="zh-CN">日志等级</span>
-     * @param packageLoggers    <span class="en">Package logger configure array</span>
+     * @param packageLoggers    <span class="en-US">Package logger configure array</span>
      *                          <span class="zh-CN">包日志设置数组</span>
      *
-     * @return  <span class="en">Generated LogConfig instance</span>
+     * @return  <span class="en-US">Generated LogConfig instance</span>
      *          <span class="zh-CN">生成的日志配置定义实例对象</span>
      */
     private static LogConfig generateConfig(final String basePath, final Level rootLevel,
@@ -636,12 +636,12 @@ public final class LoggerUtils {
         return logConfig;
     }
     /**
-     * <h3 class="en">Initialize component configure</h3>
+     * <h3 class="en-US">Initialize component configure</h3>
      * <h3 class="zh-CN">初始化组件配置</h3>
      *
-     * @param parentBuilder         <span class="en">Parent builder instance</span>
+     * @param parentBuilder         <span class="en-US">Parent builder instance</span>
      *                              <span class="zh-CN">上级构建器实例对象</span>
-     * @param componentConfigure    <span class="en">Component configure</span>
+     * @param componentConfigure    <span class="en-US">Component configure</span>
      *                              <span class="zh-CN">组件配置定义</span>
      */
     private static void initComponentConfig(final ComponentBuilder<?> parentBuilder,
@@ -664,10 +664,10 @@ public final class LoggerUtils {
         parentBuilder.addComponent(componentBuilder);
     }
     /**
-     * <h3 class="en">Generate LayoutComponentBuilder by given pattern layout configure</h3>
+     * <h3 class="en-US">Generate LayoutComponentBuilder by given pattern layout configure</h3>
      * <h3 class="zh-CN">根据给定的输出格式配置信息生成输出格式组件构建器</h3>
      *
-     * @param patternLayoutConfigure    <span class="en">Pattern layout configure</span>
+     * @param patternLayoutConfigure    <span class="en-US">Pattern layout configure</span>
      *                                  <span class="zh-CN">日志输出格式配置定义</span>
      */
     private static LayoutComponentBuilder layoutBuilder(final PatternLayoutConfigure patternLayoutConfigure) {
@@ -687,7 +687,7 @@ public final class LoggerUtils {
         return layoutComponentBuilder;
     }
     /**
-     * <h2 class="en">Log configure define</h2>
+     * <h2 class="en-US">Log configure define</h2>
      * <h2 class="zh-CN">日志配置定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -695,100 +695,100 @@ public final class LoggerUtils {
      */
     private static final class LogConfig {
         /**
-         * <span class="en">Log print pattern layout configure</span>
+         * <span class="en-US">Log print pattern layout configure</span>
          * <span class="zh-CN">日志输出的格式设置</span>
          */
         private final PatternLayoutConfigure patternLayoutConfigure;
         /**
-         * <span class="en">Logger appender configure</span>
+         * <span class="en-US">Logger appender configure</span>
          * <span class="zh-CN">日志输出目标设置</span>
          */
         private List<AppenderConfigure> appenderConfigures;
         /**
-         * <span class="en">Custom logger configure</span>
+         * <span class="en-US">Custom logger configure</span>
          * <span class="zh-CN">自定义日志设置</span>
          */
         private List<LoggerConfigure> loggerConfigures;
         /**
-         * <span class="en">Root logger configure</span>
+         * <span class="en-US">Root logger configure</span>
          * <span class="zh-CN">根日志设置</span>
          */
         private LoggerConfigure rootLoggerConfigure;
         /**
-         * <h3 class="en">Private constructor for LogConfig</h3>
+         * <h3 class="en-US">Private constructor for LogConfig</h3>
          * <h3 class="zh-CN">日志配置定义的私有构造方法</h3>
          *
-         * @param patternLayoutConfigure    <span class="en">Log print pattern layout configure</span>
+         * @param patternLayoutConfigure    <span class="en-US">Log print pattern layout configure</span>
          *                                  <span class="zh-CN">日志输出的格式设置</span>
          */
         private LogConfig(PatternLayoutConfigure patternLayoutConfigure) {
             this.patternLayoutConfigure = patternLayoutConfigure;
         }
         /**
-         * <h3 class="en">Getter method for Log print pattern layout configure</h3>
+         * <h3 class="en-US">Getter method for Log print pattern layout configure</h3>
          * <h3 class="zh-CN">日志输出的格式设置的Getter方法</h3>
          *
-         * @return  <span class="en">Log print pattern layout configure</span>
+         * @return  <span class="en-US">Log print pattern layout configure</span>
          *          <span class="zh-CN">日志输出的格式设置</span>
          */
         public PatternLayoutConfigure getPatternLayoutConfigure() {
             return patternLayoutConfigure;
         }
         /**
-         * <h3 class="en">Getter method for Logger appender configure</h3>
+         * <h3 class="en-US">Getter method for Logger appender configure</h3>
          * <h3 class="zh-CN">日志输出目标设置的Getter方法</h3>
          *
-         * @return  <span class="en">Logger appender configure</span>
+         * @return  <span class="en-US">Logger appender configure</span>
          *          <span class="zh-CN">日志输出目标设置</span>
          */
         public List<AppenderConfigure> getAppenderConfigures() {
             return appenderConfigures;
         }
         /**
-         * <h3 class="en">Setter method for Logger appender configure</h3>
+         * <h3 class="en-US">Setter method for Logger appender configure</h3>
          * <h3 class="zh-CN">日志输出目标设置的Setter方法</h3>
          *
-         * @param appenderConfigures    <span class="en">Logger appender configure</span>
+         * @param appenderConfigures    <span class="en-US">Logger appender configure</span>
          *                              <span class="zh-CN">日志输出目标设置</span>
          */
         public void setAppenderConfigures(List<AppenderConfigure> appenderConfigures) {
             this.appenderConfigures = appenderConfigures;
         }
         /**
-         * <h3 class="en">Getter method for Custom logger configure</h3>
+         * <h3 class="en-US">Getter method for Custom logger configure</h3>
          * <h3 class="zh-CN">自定义日志设置的Getter方法</h3>
          *
-         * @return  <span class="en">Custom logger configure</span>
+         * @return  <span class="en-US">Custom logger configure</span>
          *          <span class="zh-CN">自定义日志设置</span>
          */
         public List<LoggerConfigure> getLoggerConfigures() {
             return loggerConfigures;
         }
         /**
-         * <h3 class="en">Setter method for Custom logger configure</h3>
+         * <h3 class="en-US">Setter method for Custom logger configure</h3>
          * <h3 class="zh-CN">自定义日志设置的Setter方法</h3>
          *
-         * @param loggerConfigures  <span class="en">Custom logger configure</span>
+         * @param loggerConfigures  <span class="en-US">Custom logger configure</span>
          *                          <span class="zh-CN">自定义日志设置</span>
          */
         public void setLoggerConfigures(List<LoggerConfigure> loggerConfigures) {
             this.loggerConfigures = loggerConfigures;
         }
         /**
-         * <h3 class="en">Getter method for Root logger configure</h3>
+         * <h3 class="en-US">Getter method for Root logger configure</h3>
          * <h3 class="zh-CN">根日志设置的Getter方法</h3>
          *
-         * @return  <span class="en">Root logger configure</span>
+         * @return  <span class="en-US">Root logger configure</span>
          *          <span class="zh-CN">根日志设置</span>
          */
         public LoggerConfigure getRootLoggerConfigure() {
             return rootLoggerConfigure;
         }
         /**
-         * <h3 class="en">Setter method for Root logger configure</h3>
+         * <h3 class="en-US">Setter method for Root logger configure</h3>
          * <h3 class="zh-CN">根日志设置的Setter方法</h3>
          *
-         * @param rootLoggerConfigure   <span class="en">Root logger configure</span>
+         * @param rootLoggerConfigure   <span class="en-US">Root logger configure</span>
          *                              <span class="zh-CN">根日志设置</span>
          */
         public void setRootLoggerConfigure(LoggerConfigure rootLoggerConfigure) {
@@ -796,7 +796,7 @@ public final class LoggerUtils {
         }
     }
     /**
-     * <h2 class="en">Pattern layout configure define</h2>
+     * <h2 class="en-US">Pattern layout configure define</h2>
      * <h2 class="zh-CN">日志输出格式配置定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -804,56 +804,56 @@ public final class LoggerUtils {
      */
     private static final class PatternLayoutConfigure {
         /**
-         * <span class="en">Attribute configure map</span>
+         * <span class="en-US">Attribute configure map</span>
          * <span class="zh-CN">参数设置映射</span>
          */
         private Map<String, Object> attributesMap;
         /**
-         * <span class="en">Logger component list</span>
+         * <span class="en-US">Logger component list</span>
          * <span class="zh-CN">日志组件列表</span>
          */
         private List<ComponentConfigure> loggerComponents;
         /**
-         * <h3 class="en">Private constructor for PatternLayoutConfigure</h3>
+         * <h3 class="en-US">Private constructor for PatternLayoutConfigure</h3>
          * <h3 class="zh-CN">日志输出格式配置定义的私有构造方法</h3>
          */
         private PatternLayoutConfigure() {
         }
         /**
-         * <h3 class="en">Getter method for Attribute configure map</h3>
+         * <h3 class="en-US">Getter method for Attribute configure map</h3>
          * <h3 class="zh-CN">参数设置映射的Getter方法</h3>
          *
-         * @return  <span class="en">Attribute configure map</span>
+         * @return  <span class="en-US">Attribute configure map</span>
          *          <span class="zh-CN">参数设置映射</span>
          */
         public Map<String, Object> getAttributesMap() {
             return attributesMap;
         }
         /**
-         * <h3 class="en">Setter method for Attribute configure map</h3>
+         * <h3 class="en-US">Setter method for Attribute configure map</h3>
          * <h3 class="zh-CN">参数设置映射的Setter方法</h3>
          *
-         * @param attributesMap     <span class="en">Attribute configure map</span>
+         * @param attributesMap     <span class="en-US">Attribute configure map</span>
          *                          <span class="zh-CN">参数设置映射</span>
          */
         public void setAttributesMap(Map<String, Object> attributesMap) {
             this.attributesMap = attributesMap;
         }
         /**
-         * <h3 class="en">Getter method for Logger component list</h3>
+         * <h3 class="en-US">Getter method for Logger component list</h3>
          * <h3 class="zh-CN">日志组件列表的Getter方法</h3>
          *
-         * @return  <span class="en">Logger component list</span>
+         * @return  <span class="en-US">Logger component list</span>
          *          <span class="zh-CN">日志组件列表</span>
          */
         public List<ComponentConfigure> getLoggerComponents() {
             return loggerComponents;
         }
         /**
-         * <h3 class="en">Setter method for Logger component list</h3>
+         * <h3 class="en-US">Setter method for Logger component list</h3>
          * <h3 class="zh-CN">日志组件列表的Setter方法</h3>
          *
-         * @param loggerComponents  <span class="en">Logger component list</span>
+         * @param loggerComponents  <span class="en-US">Logger component list</span>
          *                          <span class="zh-CN">日志组件列表</span>
          */
         public void setLoggerComponents(List<ComponentConfigure> loggerComponents) {
@@ -861,7 +861,7 @@ public final class LoggerUtils {
         }
     }
     /**
-     * <h2 class="en">Appender configure define</h2>
+     * <h2 class="en-US">Appender configure define</h2>
      * <h2 class="zh-CN">日志输出目标配置定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -869,37 +869,37 @@ public final class LoggerUtils {
      */
     private static final class AppenderConfigure {
         /**
-         * <span class="en">Appender name</span>
+         * <span class="en-US">Appender name</span>
          * <span class="zh-CN">日志输出目标名称</span>
          */
         private final String appenderName;
         /**
-         * <span class="en">Appender plugin name</span>
+         * <span class="en-US">Appender plugin name</span>
          * <span class="zh-CN">日志输出目标插件名</span>
          */
         private final String appenderPlugin;
         /**
-         * <span class="en">Appender attributes map</span>
+         * <span class="en-US">Appender attributes map</span>
          * <span class="zh-CN">日志输出目标属性映射</span>
          */
         private Map<String, Object> appenderAttributes;
         /**
-         * <span class="en">Appender component list</span>
+         * <span class="en-US">Appender component list</span>
          * <span class="zh-CN">日志输出目标组件列表</span>
          */
         private List<ComponentConfigure> appenderComponents;
         /**
-         * <span class="en">Appender pattern layout configure</span>
+         * <span class="en-US">Appender pattern layout configure</span>
          * <span class="zh-CN">日志输出目标格式定义</span>
          */
         private PatternLayoutConfigure patternLayoutConfigure;
         /**
-         * <h3 class="en">Private constructor for AppenderConfigure</h3>
+         * <h3 class="en-US">Private constructor for AppenderConfigure</h3>
          * <h3 class="zh-CN">日志输出目标配置定义的私有构造方法</h3>
          *
-         * @param appenderName      <span class="en">Appender name</span>
+         * @param appenderName      <span class="en-US">Appender name</span>
          *                          <span class="zh-CN">日志输出目标名称</span>
-         * @param appenderPlugin    <span class="en">Appender plugin name</span>
+         * @param appenderPlugin    <span class="en-US">Appender plugin name</span>
          *                          <span class="zh-CN">日志输出目标插件名</span>
          */
         private AppenderConfigure(final String appenderName, final String appenderPlugin) {
@@ -907,81 +907,81 @@ public final class LoggerUtils {
             this.appenderPlugin = appenderPlugin;
         }
         /**
-         * <h3 class="en">Getter method for appender name</h3>
+         * <h3 class="en-US">Getter method for appender name</h3>
          * <h3 class="zh-CN">日志输出目标名称的Getter方法</h3>
          *
-         * @return  <span class="en">Appender name</span>
+         * @return  <span class="en-US">Appender name</span>
          *          <span class="zh-CN">日志输出目标名称</span>
          */
         public String getAppenderName() {
             return appenderName;
         }
         /**
-         * <h3 class="en">Getter method for appender plugin name</h3>
+         * <h3 class="en-US">Getter method for appender plugin name</h3>
          * <h3 class="zh-CN">日志输出目标插件名称的Getter方法</h3>
          *
-         * @return  <span class="en">Appender plugin name</span>
+         * @return  <span class="en-US">Appender plugin name</span>
          *          <span class="zh-CN">日志输出目标插件名称</span>
          */
         public String getAppenderPlugin() {
             return appenderPlugin;
         }
         /**
-         * <h3 class="en">Getter method for appender attributes map</h3>
+         * <h3 class="en-US">Getter method for appender attributes map</h3>
          * <h3 class="zh-CN">日志输出目标属性映射的Getter方法</h3>
          *
-         * @return  <span class="en">Appender attributes map</span>
+         * @return  <span class="en-US">Appender attributes map</span>
          *          <span class="zh-CN">日志输出目标属性映射</span>
          */
         public Map<String, Object> getAppenderAttributes() {
             return appenderAttributes;
         }
         /**
-         * <h3 class="en">Setter method for appender attributes map</h3>
+         * <h3 class="en-US">Setter method for appender attributes map</h3>
          * <h3 class="zh-CN">日志输出目标属性映射的Setter方法</h3>
          *
-         * @param appenderAttributes    <span class="en">Appender attributes map</span>
+         * @param appenderAttributes    <span class="en-US">Appender attributes map</span>
          *                              <span class="zh-CN">日志输出目标属性映射</span>
          */
         public void setAppenderAttributes(Map<String, Object> appenderAttributes) {
             this.appenderAttributes = appenderAttributes;
         }
         /**
-         * <h3 class="en">Getter method for appender component list</h3>
+         * <h3 class="en-US">Getter method for appender component list</h3>
          * <h3 class="zh-CN">日志输出目标组件列表的Getter方法</h3>
          *
-         * @return  <span class="en">Appender component list</span>
+         * @return  <span class="en-US">Appender component list</span>
          *          <span class="zh-CN">日志输出目标组件列表</span>
          */
         public List<ComponentConfigure> getAppenderComponents() {
             return appenderComponents;
         }
         /**
-         * <h3 class="en">Setter method for appender component list</h3>
+         * <h3 class="en-US">Setter method for appender component list</h3>
          * <h3 class="zh-CN">日志输出目标组件列表的Setter方法</h3>
          *
          * @param appenderComponents the appender components
-         * <span class="en">Appender component list</span>
+         * <span class="en-US">Appender component list</span>
          * <span class="zh-CN">日志输出目标组件列表</span>
          */
         public void setAppenderComponents(List<ComponentConfigure> appenderComponents) {
             this.appenderComponents = appenderComponents;
         }
         /**
-         * <h3 class="en">Getter method for appender pattern layout configure</h3>
+         * <h3 class="en-US">Getter method for appender pattern layout configure</h3>
          * <h3 class="zh-CN">日志输出目标格式定义的Getter方法</h3>
          *
-         * @return  <span class="en">Appender pattern layout configure</span>
+         * @return  <span class="en-US">Appender pattern layout configure</span>
          *          <span class="zh-CN">日志输出目标格式定义</span>
          */
         public PatternLayoutConfigure getPatternLayoutConfigure() {
             return patternLayoutConfigure;
         }
         /**
-         * <h3 class="en">Setter method for appender pattern layout configure</h3>
+         * <h3 class="en-US">Setter method for appender pattern layout configure</h3>
          * <h3 class="zh-CN">日志输出目标格式定义的Setter方法</h3>
          *
-         * @param patternLayoutConfigure    <span class="en">Appender pattern layout configure</span>
+         * @param patternLayoutConfigure    <span class="en-US">Appender pattern layout configure</span>
          *                                  <span class="zh-CN">日志输出目标格式定义</span>
          */
         public void setPatternLayoutConfigure(PatternLayoutConfigure patternLayoutConfigure) {
@@ -990,7 +990,7 @@ public final class LoggerUtils {
     }
 
     /**
-     * <h2 class="en">Logger configure define</h2>
+     * <h2 class="en-US">Logger configure define</h2>
      * <h2 class="zh-CN">日志配置定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -998,25 +998,25 @@ public final class LoggerUtils {
      */
     private static final class LoggerConfigure {
         /**
-         * <span class="en">Package name</span>
+         * <span class="en-US">Package name</span>
          * <span class="zh-CN">包名</span>
          */
         private final String packageName;
         /**
-         * <span class="en">Log level</span>
+         * <span class="en-US">Log level</span>
          * <span class="zh-CN">日志等级</span>
          */
         private final Level loggerLevel;
         /**
-         * <span class="en">Log appender name list</span>
+         * <span class="en-US">Log appender name list</span>
          * <span class="zh-CN">日志输出目标名称列表</span>
          */
         private List<String> appenderNames;
         /**
-         * <h3 class="en">Private constructor for LoggerConfigure</h3>
+         * <h3 class="en-US">Private constructor for LoggerConfigure</h3>
          * <h3 class="zh-CN">日志配置定义的私有构造方法</h3>
          *
-         * @param packageLogger     <span class="en">Package logger define</span>
+         * @param packageLogger     <span class="en-US">Package logger define</span>
          *                          <span class="zh-CN">包日志定义</span>
          */
         private LoggerConfigure(final PackageLogger packageLogger) {
@@ -1024,40 +1024,40 @@ public final class LoggerUtils {
             this.loggerLevel = packageLogger.getLoggerLevel();
         }
         /**
-         * <h3 class="en">Getter method for package name</h3>
+         * <h3 class="en-US">Getter method for package name</h3>
          * <h3 class="zh-CN">包名的Getter方法</h3>
          *
-         * @return  <span class="en">Package name</span>
+         * @return  <span class="en-US">Package name</span>
          *          <span class="zh-CN">包名</span>
          */
         public String getPackageName() {
             return packageName;
         }
         /**
-         * <h3 class="en">Getter method for log level</h3>
+         * <h3 class="en-US">Getter method for log level</h3>
          * <h3 class="zh-CN">日志等级的Getter方法</h3>
          *
-         * @return  <span class="en">Log level</span>
+         * @return  <span class="en-US">Log level</span>
          *          <span class="zh-CN">日志等级</span>
          */
         public Level getLoggerLevel() {
             return loggerLevel;
         }
         /**
-         * <h3 class="en">Getter method for log appender name list</h3>
+         * <h3 class="en-US">Getter method for log appender name list</h3>
          * <h3 class="zh-CN">日志输出目标名称列表的Getter方法</h3>
          *
-         * @return  <span class="en">Log appender name list</span>
+         * @return  <span class="en-US">Log appender name list</span>
          *          <span class="zh-CN">日志输出目标名称列表</span>
          */
         public List<String> getAppenderNames() {
             return appenderNames;
         }
         /**
-         * <h3 class="en">Setter method for log appender name list</h3>
+         * <h3 class="en-US">Setter method for log appender name list</h3>
          * <h3 class="zh-CN">日志输出目标名称列表的Setter方法</h3>
          *
-         * @param appenderNames     <span class="en">Log appender name list</span>
+         * @param appenderNames     <span class="en-US">Log appender name list</span>
          *                          <span class="zh-CN">日志输出目标名称列表</span>
          */
         public void setAppenderNames(List<String> appenderNames) {
@@ -1065,7 +1065,7 @@ public final class LoggerUtils {
         }
     }
     /**
-     * <h2 class="en">Component configure define</h2>
+     * <h2 class="en-US">Component configure define</h2>
      * <h2 class="zh-CN">组件配置定义</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -1073,25 +1073,25 @@ public final class LoggerUtils {
      */
     private static final class ComponentConfigure {
         /**
-         * <span class="en">Component plugin name</span>
+         * <span class="en-US">Component plugin name</span>
          * <span class="zh-CN">组件插件名称</span>
          */
         private final String componentPlugin;
         /**
-         * <span class="en">Component attributes map</span>
+         * <span class="en-US">Component attributes map</span>
          * <span class="zh-CN">组件属性映射</span>
          */
         private Map<String, Object> componentAttributes;
         /**
-         * <span class="en">Child component configure list</span>
+         * <span class="en-US">Child component configure list</span>
          * <span class="zh-CN">子组件配置信息列表</span>
          */
         private List<ComponentConfigure> childComponents;
         /**
-         * <h3 class="en">Private constructor for ComponentConfigure</h3>
+         * <h3 class="en-US">Private constructor for ComponentConfigure</h3>
          * <h3 class="zh-CN">组件配置定义的私有构造方法</h3>
          *
-         * @param componentPlugin   <span class="en">Component plugin name</span>
+         * @param componentPlugin   <span class="en-US">Component plugin name</span>
          *                          <span class="zh-CN">组件插件名称</span>
          */
         private ComponentConfigure(final String componentPlugin) {
@@ -1100,50 +1100,50 @@ public final class LoggerUtils {
             this.childComponents = new ArrayList<>();
         }
         /**
-         * <h3 class="en">Getter method for component plugin name</h3>
+         * <h3 class="en-US">Getter method for component plugin name</h3>
          * <h3 class="zh-CN">组件插件名称的Getter方法</h3>
          *
-         * @return  <span class="en">Component plugin name</span>
+         * @return  <span class="en-US">Component plugin name</span>
          *          <span class="zh-CN">组件插件名称</span>
          */
         public String getComponentPlugin() {
             return componentPlugin;
         }
         /**
-         * <h3 class="en">Getter method for component attributes map</h3>
+         * <h3 class="en-US">Getter method for component attributes map</h3>
          * <h3 class="zh-CN">组件属性映射的Getter方法</h3>
          *
-         * @return  <span class="en">Component attributes map</span>
+         * @return  <span class="en-US">Component attributes map</span>
          *          <span class="zh-CN">组件属性映射</span>
          */
         public Map<String, Object> getComponentAttributes() {
             return componentAttributes;
         }
         /**
-         * <h3 class="en">Setter method for component attributes map</h3>
+         * <h3 class="en-US">Setter method for component attributes map</h3>
          * <h3 class="zh-CN">组件属性映射的Setter方法</h3>
          *
-         * @param componentAttributes   <span class="en">Component attributes map</span>
+         * @param componentAttributes   <span class="en-US">Component attributes map</span>
          *                              <span class="zh-CN">组件属性映射</span>
          */
         public void setComponentAttributes(Map<String, Object> componentAttributes) {
             this.componentAttributes = componentAttributes;
         }
         /**
-         * <h3 class="en">Getter method for child component configure list</h3>
+         * <h3 class="en-US">Getter method for child component configure list</h3>
          * <h3 class="zh-CN">子组件配置信息列表的Getter方法</h3>
          *
-         * @return  <span class="en">Child component configure list</span>
+         * @return  <span class="en-US">Child component configure list</span>
          *          <span class="zh-CN">子组件配置信息列表</span>
          */
         public List<ComponentConfigure> getChildComponents() {
             return childComponents;
         }
         /**
-         * <h3 class="en">Setter method for child component configure list</h3>
+         * <h3 class="en-US">Setter method for child component configure list</h3>
          * <h3 class="zh-CN">子组件配置信息列表的Setter方法</h3>
          *
-         * @param childComponents   <span class="en">Child component configure list</span>
+         * @param childComponents   <span class="en-US">Child component configure list</span>
          *                          <span class="zh-CN">子组件配置信息列表</span>
          */
         public void setChildComponents(List<ComponentConfigure> childComponents) {

@@ -32,7 +32,7 @@ import org.nervousync.beans.image.MarkOptions;
 import org.nervousync.commons.Globals;
 
 /**
- * <h2 class="en">Image Utilities</h2>
+ * <h2 class="en-US">Image Utilities</h2>
  * <h2 class="zh-CN">图片工具集</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -40,24 +40,24 @@ import org.nervousync.commons.Globals;
  */
 public final class ImageUtils {
     /**
-     * <span class="en">Logger instance</span>
+     * <span class="en-US">Logger instance</span>
      * <span class="zh-CN">日志实例</span>
      */
 	private static final LoggerUtils.Logger LOGGER = LoggerUtils.getLogger(ImageUtils.class);
 	/**
-	 * <h3 class="en">Private constructor for ImageUtils</h3>
+	 * <h3 class="en-US">Private constructor for ImageUtils</h3>
 	 * <h3 class="zh-CN">图片工具集的私有构造方法</h3>
 	 */
 	private ImageUtils() {
 	}
 	/**
-	 * <h3 class="en">Retrieve image width value</h3>
+	 * <h3 class="en-US">Retrieve image width value</h3>
 	 * <h3 class="zh-CN">获取图片宽度</h3>
 	 *
-	 * @param imagePath		<span class="en">Image file path</span>
+	 * @param imagePath		<span class="en-US">Image file path</span>
 	 *                      <span class="zh-CN">图片地址</span>
 	 *
-	 * @return 	<span class="en">Image width value</span>
+	 * @return 	<span class="en-US">Image width value</span>
 	 * 			<span class="zh-CN">图片宽度值</span>
 	 */
 	public static int imageWidth(final String imagePath) {
@@ -75,13 +75,13 @@ public final class ImageUtils {
 		return Globals.DEFAULT_VALUE_INT;
 	}
 	/**
-	 * <h3 class="en">Retrieve image height value</h3>
+	 * <h3 class="en-US">Retrieve image height value</h3>
 	 * <h3 class="zh-CN">获取图片高度</h3>
 	 *
-	 * @param imagePath		<span class="en">Image file path</span>
+	 * @param imagePath		<span class="en-US">Image file path</span>
 	 *                      <span class="zh-CN">图片地址</span>
 	 *
-	 * @return 	<span class="en">Image height value</span>
+	 * @return 	<span class="en-US">Image height value</span>
 	 * 			<span class="zh-CN">图片高度值</span>
 	 */
 	public static int imageHeight(final String imagePath) {
@@ -99,13 +99,13 @@ public final class ImageUtils {
 		return Globals.DEFAULT_VALUE_INT;
 	}
 	/**
-	 * <h3 class="en">Retrieve image ratio value</h3>
+	 * <h3 class="en-US">Retrieve image ratio value</h3>
 	 * <h3 class="zh-CN">获取图片宽高比</h3>
 	 *
-	 * @param imagePath		<span class="en">Image file path</span>
+	 * @param imagePath		<span class="en-US">Image file path</span>
 	 *                      <span class="zh-CN">图片地址</span>
 	 *
-	 * @return 	<span class="en">Image ratio value</span>
+	 * @return 	<span class="en-US">Image ratio value</span>
 	 * 			<span class="zh-CN">图片宽高比</span>
 	 */
 	public static double imageRatio(final String imagePath) {
@@ -119,17 +119,17 @@ public final class ImageUtils {
 		return imageWidth / imageHeight;
 	}
 	/**
-	 * <h3 class="en">Cut original image file and save to target path by given cut options</h3>
+	 * <h3 class="en-US">Cut original image file and save to target path by given cut options</h3>
 	 * <h3 class="zh-CN">根据给定的切割参数对原始图片进行切割并存储到目标地址</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
-	 * @param cutOptions	<span class="en">cut options</span>
+	 * @param cutOptions	<span class="en-US">cut options</span>
 	 *                      <span class="zh-CN">切割参数</span>
 	 *
-	 * @return 	<span class="en">Cut process result</span>
+	 * @return 	<span class="en-US">Cut process result</span>
 	 * 			<span class="zh-CN">切割处理结果</span>
 	 */
 	public static boolean cutImage(final String origPath, final String targetPath, final CutOptions cutOptions) {
@@ -168,36 +168,36 @@ public final class ImageUtils {
 		return Boolean.FALSE;
 	}
 	/**
-	 * <h3 class="en">Resize original image file and save to target path by given ratio value</h3>
+	 * <h3 class="en-US">Resize original image file and save to target path by given ratio value</h3>
 	 * <h3 class="zh-CN">根据给定的缩放比例对原始图片进行放大/缩小并存储到目标地址</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
-	 * @param ratio			<span class="en">ratio value</span>
+	 * @param ratio			<span class="en-US">ratio value</span>
 	 *                      <span class="zh-CN">缩放比例</span>
 	 *
-	 * @return 	<span class="en">Resize process result</span>
+	 * @return 	<span class="en-US">Resize process result</span>
 	 * 			<span class="zh-CN">修改尺寸处理结果</span>
 	 */
 	public static boolean resizeByRatio(final String origPath, final String targetPath, final double ratio) {
 		return ImageUtils.resizeByRatio(origPath, targetPath, ratio, null);
 	}
 	/**
-	 * <h3 class="en">Resize original image file and save to target path by given ratio value, and add mark to target image if configured</h3>
+	 * <h3 class="en-US">Resize original image file and save to target path by given ratio value, and add mark to target image if configured</h3>
 	 * <h3 class="zh-CN">根据给定的缩放比例对原始图片进行放大/缩小并存储到目标地址，并添加水印到目标图片（如果设置了水印选项）</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
-	 * @param ratio			<span class="en">ratio value</span>
+	 * @param ratio			<span class="en-US">ratio value</span>
 	 *                      <span class="zh-CN">缩放比例</span>
-	 * @param markOptions	<span class="en">Mark options</span>
+	 * @param markOptions	<span class="en-US">Mark options</span>
 	 *                      <span class="zh-CN">水印选项</span>
 	 *
-	 * @return 	<span class="en">Resize process result</span>
+	 * @return 	<span class="en-US">Resize process result</span>
 	 * 			<span class="zh-CN">修改尺寸处理结果</span>
 	 */
 	public static boolean resizeByRatio(final String origPath, final String targetPath, final double ratio,
@@ -225,19 +225,19 @@ public final class ImageUtils {
 		return Boolean.FALSE;
 	}
 	/**
-	 * <h3 class="en">Resize original image file to the given width and height, save to target path</h3>
+	 * <h3 class="en-US">Resize original image file to the given width and height, save to target path</h3>
 	 * <h3 class="zh-CN">将原始图片调整到指定的宽度、高度，并存储到目标地址</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
-	 * @param targetWidth	<span class="en">target width	(if -1 width will auto set by height ratio)</span>
+	 * @param targetWidth	<span class="en-US">target width	(if -1 width will auto set by height ratio)</span>
 	 *                      <span class="zh-CN">图片调整后的宽度，如果值为-1则自动根据图片宽高比进行调整</span>
-	 * @param targetHeight	<span class="en">target height	(if -1 height will auto set by width ratio)</span>
+	 * @param targetHeight	<span class="en-US">target height	(if -1 height will auto set by width ratio)</span>
 	 *                      <span class="zh-CN">图片调整后的高度，如果值为-1则自动根据图片宽高比进行调整</span>
 	 *
-	 * @return 	<span class="en">Resize process result</span>
+	 * @return 	<span class="en-US">Resize process result</span>
 	 * 			<span class="zh-CN">修改尺寸处理结果</span>
 	 */
 	public static boolean resizeTo(final String origPath, final String targetPath,
@@ -245,21 +245,21 @@ public final class ImageUtils {
 		return ImageUtils.resizeTo(origPath, targetPath, targetWidth, targetHeight, null);
 	}
 	/**
-	 * <h3 class="en">Resize original image file to the given width and height, save to target path, and add mark to target image if configured</h3>
+	 * <h3 class="en-US">Resize original image file to the given width and height, save to target path, and add mark to target image if configured</h3>
 	 * <h3 class="zh-CN">将原始图片调整到指定的宽度、高度，并存储到目标地址，并添加水印到目标图片（如果设置了水印选项）</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
-	 * @param targetWidth	<span class="en">target width	(if -1 width will auto set by height ratio)</span>
+	 * @param targetWidth	<span class="en-US">target width	(if -1 width will auto set by height ratio)</span>
 	 *                      <span class="zh-CN">图片调整后的宽度，如果值为-1则自动根据图片宽高比进行调整</span>
-	 * @param targetHeight	<span class="en">target height	(if -1 height will auto set by width ratio)</span>
+	 * @param targetHeight	<span class="en-US">target height	(if -1 height will auto set by width ratio)</span>
 	 *                      <span class="zh-CN">图片调整后的高度，如果值为-1则自动根据图片宽高比进行调整</span>
-	 * @param markOptions	<span class="en">Mark options</span>
+	 * @param markOptions	<span class="en-US">Mark options</span>
 	 *                      <span class="zh-CN">水印选项</span>
 	 *
-	 * @return 	<span class="en">Resize process result</span>
+	 * @return 	<span class="en-US">Resize process result</span>
 	 * 			<span class="zh-CN">修改尺寸处理结果</span>
 	 */
 	public static boolean resizeTo(final String origPath, final String targetPath,
@@ -300,17 +300,17 @@ public final class ImageUtils {
 		return Boolean.FALSE;
 	}
 	/**
-	 * <h3 class="en">Add mark to original image and save result image to target path</h3>
+	 * <h3 class="en-US">Add mark to original image and save result image to target path</h3>
 	 * <h3 class="zh-CN">添加水印到原始图片，并将添加好水印的图片保存到目标地址</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
-	 * @param markOptions	<span class="en">Mark options</span>
+	 * @param markOptions	<span class="en-US">Mark options</span>
 	 *                      <span class="zh-CN">水印选项</span>
 	 *
-	 * @return 	<span class="en">Mark process result</span>
+	 * @return 	<span class="en-US">Mark process result</span>
 	 * 			<span class="zh-CN">添加水印处理结果</span>
 	 */
 	public static boolean markImage(final String origPath, final String targetPath, final MarkOptions markOptions) {
@@ -330,15 +330,15 @@ public final class ImageUtils {
 		return Boolean.FALSE;
 	}
 	/**
-	 * <h3 class="en">Calculate dHash hamming between original image and target image</h3>
-	 * <h3 class="en">计算原始图片和目标图片间差异值哈希的汉明距离</h3>
+	 * <h3 class="en-US">Calculate dHash hamming between original image and target image</h3>
+	 * <h3 class="en-US">计算原始图片和目标图片间差异值哈希的汉明距离</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
 	 *
-	 * @return 	<span class="en">Calculated hamming result</span>
+	 * @return 	<span class="en-US">Calculated hamming result</span>
 	 * 			<span class="zh-CN">计算的汉明距离</span>
 	 */
 	public static int dHashHamming(final String origPath, final String targetPath) {
@@ -351,15 +351,15 @@ public final class ImageUtils {
 		return diff;
 	}
 	/**
-	 * <h3 class="en">Calculate pHash hamming between original image and target image</h3>
-	 * <h3 class="en">计算原始图片和目标图片间感知哈希的汉明距离</h3>
+	 * <h3 class="en-US">Calculate pHash hamming between original image and target image</h3>
+	 * <h3 class="en-US">计算原始图片和目标图片间感知哈希的汉明距离</h3>
 	 *
-	 * @param origPath 		<span class="en">original image file path</span>
+	 * @param origPath 		<span class="en-US">original image file path</span>
 	 *                      <span class="zh-CN">原始图片地址</span>
-	 * @param targetPath 	<span class="en">target image file path</span>
+	 * @param targetPath 	<span class="en-US">target image file path</span>
 	 *                      <span class="zh-CN">目标图片地址</span>
 	 *
-	 * @return 	<span class="en">Calculated hamming result</span>
+	 * @return 	<span class="en-US">Calculated hamming result</span>
 	 * 			<span class="zh-CN">计算的汉明距离</span>
 	 */
 	public static int pHashHamming(final String origPath, final String targetPath) {
@@ -372,13 +372,13 @@ public final class ImageUtils {
 		return diff;
 	}
 	/**
-	 * <h3 class="en">Calculate dHash of given image file</h3>
-	 * <h3 class="en">计算给定图片的差异值哈希</h3>
+	 * <h3 class="en-US">Calculate dHash of given image file</h3>
+	 * <h3 class="en-US">计算给定图片的差异值哈希</h3>
 	 *
-	 * @param filePath 	<span class="en">Image file path</span>
+	 * @param filePath 	<span class="en-US">Image file path</span>
 	 *                  <span class="zh-CN">图片文件地址</span>
 	 *
-	 * @return 	<span class="en">dHash string</span>
+	 * @return 	<span class="en-US">dHash string</span>
 	 * 			<span class="zh-CN">差异值哈希字符串</span>
 	 */
 	public static String dHash(final String filePath) {
@@ -393,13 +393,13 @@ public final class ImageUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Calculate dHash of given image file</h3>
-	 * <h3 class="en">计算给定图片的差异值哈希</h3>
+	 * <h3 class="en-US">Calculate dHash of given image file</h3>
+	 * <h3 class="en-US">计算给定图片的差异值哈希</h3>
 	 *
-	 * @param file 	<span class="en">Image file instance</span>
+	 * @param file 	<span class="en-US">Image file instance</span>
 	 *              <span class="zh-CN">图片文件实例对象</span>
 	 *
-	 * @return 	<span class="en">dHash string</span>
+	 * @return 	<span class="en-US">dHash string</span>
 	 * 			<span class="zh-CN">差异值哈希字符串</span>
 	 */
 	public static String dHash(final File file) {
@@ -414,13 +414,13 @@ public final class ImageUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Calculate dHash of given image file</h3>
-	 * <h3 class="en">计算给定图片的差异值哈希</h3>
+	 * <h3 class="en-US">Calculate dHash of given image file</h3>
+	 * <h3 class="en-US">计算给定图片的差异值哈希</h3>
 	 *
-	 * @param bufferedImage 	<span class="en">Buffered image</span>
+	 * @param bufferedImage 	<span class="en-US">Buffered image</span>
 	 *                          <span class="zh-CN">缓冲图片实例对象</span>
 	 *
-	 * @return 	<span class="en">dHash string</span>
+	 * @return 	<span class="en-US">dHash string</span>
 	 * 			<span class="zh-CN">差异值哈希字符串</span>
 	 */
 	public static String dHash(final BufferedImage bufferedImage) {
@@ -441,13 +441,13 @@ public final class ImageUtils {
 		return dHash.toString();
 	}
 	/**
-	 * <h3 class="en">Calculate pHash of given image file</h3>
-	 * <h3 class="en">计算给定图片的感知哈希</h3>
+	 * <h3 class="en-US">Calculate pHash of given image file</h3>
+	 * <h3 class="en-US">计算给定图片的感知哈希</h3>
 	 *
-	 * @param filePath 	<span class="en">Image file path</span>
+	 * @param filePath 	<span class="en-US">Image file path</span>
 	 *                  <span class="zh-CN">图片文件地址</span>
 	 *
-	 * @return 	<span class="en">pHash string</span>
+	 * @return 	<span class="en-US">pHash string</span>
 	 * 			<span class="zh-CN">感知哈希字符串</span>
 	 */
 	public static String pHash(final String filePath) {
@@ -462,13 +462,13 @@ public final class ImageUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Calculate pHash of given image file</h3>
-	 * <h3 class="en">计算给定图片的感知哈希</h3>
+	 * <h3 class="en-US">Calculate pHash of given image file</h3>
+	 * <h3 class="en-US">计算给定图片的感知哈希</h3>
 	 *
-	 * @param file 	<span class="en">Image file instance</span>
+	 * @param file 	<span class="en-US">Image file instance</span>
 	 *              <span class="zh-CN">图片文件实例对象</span>
 	 *
-	 * @return 	<span class="en">pHash string</span>
+	 * @return 	<span class="en-US">pHash string</span>
 	 * 			<span class="zh-CN">感知哈希字符串</span>
 	 */
 	public static String pHash(final File file) {
@@ -483,13 +483,13 @@ public final class ImageUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Calculate pHash of given image file</h3>
-	 * <h3 class="en">计算给定图片的感知哈希</h3>
+	 * <h3 class="en-US">Calculate pHash of given image file</h3>
+	 * <h3 class="en-US">计算给定图片的感知哈希</h3>
 	 *
-	 * @param bufferedImage 	<span class="en">Buffered image</span>
+	 * @param bufferedImage 	<span class="en-US">Buffered image</span>
 	 *                          <span class="zh-CN">缓冲图片实例对象</span>
 	 *
-	 * @return 	<span class="en">pHash string</span>
+	 * @return 	<span class="en-US">pHash string</span>
 	 * 			<span class="zh-CN">感知哈希字符串</span>
 	 */
 	public static String pHash(final BufferedImage bufferedImage) {
@@ -518,16 +518,16 @@ public final class ImageUtils {
 		return pHash.toString();
 	}
 	/**
-	 * <h3 class="en">Add text/image watermark to the target image</h3>
-	 * <h3 class="en">添加文字/图片水印到目标图片</h3>
+	 * <h3 class="en-US">Add text/image watermark to the target image</h3>
+	 * <h3 class="en-US">添加文字/图片水印到目标图片</h3>
 	 *
-	 * @param graphics 		<span class="en">target image Graphics2D object</span>
+	 * @param graphics 		<span class="en-US">target image Graphics2D object</span>
 	 *                      <span class="zh-CN">目标图片的Graphics2D实例对象</span>
-	 * @param width			<span class="en">image width</span>
+	 * @param width			<span class="en-US">image width</span>
 	 *                      <span class="zh-CN">图片宽度</span>
-	 * @param height		<span class="en">image height</span>
+	 * @param height		<span class="en-US">image height</span>
 	 *                      <span class="zh-CN">图片高度</span>
-	 * @param markOptions	<span class="en">Mark options</span>
+	 * @param markOptions	<span class="en-US">Mark options</span>
 	 *                      <span class="zh-CN">水印选项</span>
 	 */
 	private static void markImage(final Graphics2D graphics, final int width, final int height,
@@ -566,16 +566,16 @@ public final class ImageUtils {
 				});
 	}
 	/**
-	 * <h3 class="en">Process image by given parameters</h3>
-	 * <h3 class="en">根据给定的参数处理图片</h3>
+	 * <h3 class="en-US">Process image by given parameters</h3>
+	 * <h3 class="en-US">根据给定的参数处理图片</h3>
 	 *
-	 * @param srcImage 		<span class="en">Buffered image</span>
+	 * @param srcImage 		<span class="en-US">Buffered image</span>
 	 *                      <span class="zh-CN">缓冲图片实例对象</span>
-	 * @param targetWidth	<span class="en">target width</span>
+	 * @param targetWidth	<span class="en-US">target width</span>
 	 *                      <span class="zh-CN">图片调整后的宽度</span>
-	 * @param targetHeight	<span class="en">target height</span>
+	 * @param targetHeight	<span class="en-US">target height</span>
 	 *                      <span class="zh-CN">图片调整后的高度</span>
-	 * @param markOptions	<span class="en">Mark options</span>
+	 * @param markOptions	<span class="en-US">Mark options</span>
 	 *                      <span class="zh-CN">水印选项</span>
 	 *
 	 * @return		<code>true</code>success	<code>false</code>failed
@@ -595,13 +595,13 @@ public final class ImageUtils {
 		return srcImage;
 	}
 	/**
-	 * <h3 class="en">Convert bufferedImage to gray matrix</h3>
-	 * <h3 class="en">转换缓冲图片实例对象为灰度二维数组</h3>
+	 * <h3 class="en-US">Convert bufferedImage to gray matrix</h3>
+	 * <h3 class="en-US">转换缓冲图片实例对象为灰度二维数组</h3>
 	 *
-	 * @param bufferedImage <span class="en">Buffered image</span>
+	 * @param bufferedImage <span class="en-US">Buffered image</span>
 	 *                      <span class="zh-CN">缓冲图片实例对象</span>
 	 *
-	 * @return 	<span class="en">gray matrix</span>
+	 * @return 	<span class="en-US">gray matrix</span>
 	 * 			<span class="zh-CN">灰度二维数组</span>
 	 */
 	private static double[][] grayMatrix(final BufferedImage bufferedImage) {
@@ -622,13 +622,13 @@ public final class ImageUtils {
 		return grayMatrix;
 	}
 	/**
-	 * <h3 class="en">Process Discrete Cosine Transform to bufferedImage</h3>
-	 * <h3 class="en">对给定的缓冲图片实例对象做离散余弦变换</h3>
+	 * <h3 class="en-US">Process Discrete Cosine Transform to bufferedImage</h3>
+	 * <h3 class="en-US">对给定的缓冲图片实例对象做离散余弦变换</h3>
 	 *
-	 * @param bufferedImage <span class="en">Buffered image</span>
+	 * @param bufferedImage <span class="en-US">Buffered image</span>
 	 *                      <span class="zh-CN">缓冲图片实例对象</span>
 	 *
-	 * @return 	<span class="en">Process result</span>
+	 * @return 	<span class="en-US">Process result</span>
 	 * 			<span class="zh-CN">处理结果</span>
 	 */
 	private static double[][] applyDCT(final BufferedImage bufferedImage) {

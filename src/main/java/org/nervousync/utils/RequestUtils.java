@@ -50,8 +50,8 @@ import javax.naming.ldap.LdapName;
 import javax.net.ssl.*;
 
 /**
- * <h2 class="en">Http Request utilities</h2>
- * <span class="en">
+ * <h2 class="en-US">Http Request utilities</h2>
+ * <span class="en-US">
  *     <span>Current utilities implements features:</span>
  *     <ul>Parse http method string to HttpMethodOption</ul>
  *     <ul>Resolve domain name to IP address</ul>
@@ -76,64 +76,64 @@ import javax.net.ssl.*;
  */
 public final class RequestUtils {
     /**
-     * <span class="en">Logger instance</span>
+     * <span class="en-US">Logger instance</span>
      * <span class="zh-CN">日志实例</span>
      */
     private static final LoggerUtils.Logger LOGGER = LoggerUtils.getLogger(RequestUtils.class);
     /**
-     * <span class="en">Attribute name for HTTP-to-HTTPS redirect</span>
+     * <span class="en-US">Attribute name for HTTP-to-HTTPS redirect</span>
      * <span class="zh-CN">HTTP-to-HTTPS跳转的属性名</span>
      */
     private static final String STOWED_REQUEST_ATTRIBS = "ssl.redirect.attrib.stowed";
     /**
-     * <span class="en">HTTP Method: GET</span>
+     * <span class="en-US">HTTP Method: GET</span>
      * <span class="zh-CN">HTTP请求方法：GET</span>
      */
     public static final String HTTP_METHOD_GET = "GET";
     /**
-     * <span class="en">HTTP Method: POST</span>
+     * <span class="en-US">HTTP Method: POST</span>
      * <span class="zh-CN">HTTP请求方法：POST</span>
      */
     public static final String HTTP_METHOD_POST = "POST";
     /**
-     * <span class="en">HTTP Method: PUT</span>
+     * <span class="en-US">HTTP Method: PUT</span>
      * <span class="zh-CN">HTTP请求方法：PUT</span>
      */
     public static final String HTTP_METHOD_PUT = "PUT";
     /**
-     * <span class="en">HTTP Method: TRACE</span>
+     * <span class="en-US">HTTP Method: TRACE</span>
      * <span class="zh-CN">HTTP请求方法：TRACE</span>
      */
     public static final String HTTP_METHOD_TRACE = "TRACE";
     /**
-     * <span class="en">HTTP Method: HEAD</span>
+     * <span class="en-US">HTTP Method: HEAD</span>
      * <span class="zh-CN">HTTP请求方法：HEAD</span>
      */
     public static final String HTTP_METHOD_HEAD = "HEAD";
     /**
-     * <span class="en">HTTP Method: DELETE</span>
+     * <span class="en-US">HTTP Method: DELETE</span>
      * <span class="zh-CN">HTTP请求方法：DELETE</span>
      */
     public static final String HTTP_METHOD_DELETE = "DELETE";
     /**
-     * <span class="en">HTTP Method: OPTIONS</span>
+     * <span class="en-US">HTTP Method: OPTIONS</span>
      * <span class="zh-CN">HTTP请求方法：OPTIONS</span>
      */
     public static final String HTTP_METHOD_OPTIONS = "OPTIONS";
 	/**
-	 * <h3 class="en">Private constructor for RequestUtils</h3>
+	 * <h3 class="en-US">Private constructor for RequestUtils</h3>
 	 * <h3 class="zh-CN">Http请求工具集的私有构造方法</h3>
 	 */
     private RequestUtils() {
     }
     /**
-     * <h3 class="en">Parse HTTP method string to HTTP method option Enumerations</h3>
+     * <h3 class="en-US">Parse HTTP method string to HTTP method option Enumerations</h3>
      * <h3 class="zh-CN">解析HTTP请求方法字符串为HTTP请求方法枚举</h3>
      *
-     * @param method    <span class="en">HTTP method string</span>
+     * @param method    <span class="en-US">HTTP method string</span>
      *                  <span class="zh-CN">HTTP请求方法字符串</span>
      *
-     * @return  <span class="en">HTTP method option Enumerations</span>
+     * @return  <span class="en-US">HTTP method option Enumerations</span>
      *          <span class="zh-CN">HTTP请求方法枚举</span>
      */
     public static HttpMethodOption httpMethodOption(final String method) {
@@ -153,13 +153,13 @@ public final class RequestUtils {
         };
     }
     /**
-     * <h3 class="en">Parse method annotation to HTTP method option Enumerations</h3>
+     * <h3 class="en-US">Parse method annotation to HTTP method option Enumerations</h3>
      * <h3 class="zh-CN">解析方法上的注解为HTTP请求方法枚举</h3>
      *
-     * @param method    <span class="en">method instance</span>
+     * @param method    <span class="en-US">method instance</span>
      *                  <span class="zh-CN">方法实例对象</span>
      *
-     * @return  <span class="en">HTTP method option Enumerations</span>
+     * @return  <span class="en-US">HTTP method option Enumerations</span>
      *          <span class="zh-CN">HTTP请求方法枚举</span>
      */
     public static HttpMethodOption httpMethodOption(final Method method) {
@@ -187,13 +187,13 @@ public final class RequestUtils {
         return HttpMethodOption.UNKNOWN;
     }
     /**
-     * <h3 class="en">Resolve given domain name and return ip address string</h3>
+     * <h3 class="en-US">Resolve given domain name and return ip address string</h3>
      * <h3 class="zh-CN">解析给定的域名并返回IP地址字符串</h3>
      *
-     * @param domainName    <span class="en">Will resolve for Domain name</span>
+     * @param domainName    <span class="en-US">Will resolve for Domain name</span>
      *                      <span class="zh-CN">将要解析的域名</span>
      *
-     * @return  <span class="en">All IP address string, concat using character ","</span>
+     * @return  <span class="en-US">All IP address string, concat using character ","</span>
      *          <span class="zh-CN">所有IP地址字符串，使用字符","连接</span>
      */
     public static String resolveDomain(final String domainName) {
@@ -214,13 +214,13 @@ public final class RequestUtils {
         return Globals.DEFAULT_VALUE_STRING;
     }
     /**
-     * <h3 class="en">Read server certificate by given url address</h3>
+     * <h3 class="en-US">Read server certificate by given url address</h3>
      * <h3 class="zh-CN">根据给定的url地址获取服务器证书</h3>
      *
-     * @param urlAddress    <span class="en">url address</span>
+     * @param urlAddress    <span class="en-US">url address</span>
      *                      <span class="zh-CN">url地址</span>
      *
-     * @return  <span class="en">Read x509 certificate, if an error occurs return <code>null</code></span>
+     * @return  <span class="en-US">Read x509 certificate, if an error occurs return <code>null</code></span>
      *          <span class="zh-CN">读取的x509证书，如果出现异常则返回<code>null</code></span>
      */
     public static Certificate serverCertificate(final String urlAddress) {
@@ -255,13 +255,13 @@ public final class RequestUtils {
         return null;
     }
     /**
-     * <h3 class="en">Read content length from given request url address</h3>
+     * <h3 class="en-US">Read content length from given request url address</h3>
      * <h3 class="zh-CN">从给定的URL请求地址获取响应数据长度</h3>
      *
-     * @param requestUrl    <span class="en">Request url address</span>
+     * @param requestUrl    <span class="en-US">Request url address</span>
      *                      <span class="zh-CN">URL请求地址</span>
      *
-     * @return  <span class="en">content length, or -1 if an error occurs when send request</span>
+     * @return  <span class="en-US">content length, or -1 if an error occurs when send request</span>
      *          <span class="zh-CN">响应数据长度，如果请求失败则返回-1</span>
      */
     public static int contentLength(final String requestUrl) {
@@ -272,17 +272,17 @@ public final class RequestUtils {
                 .orElse(Globals.DEFAULT_VALUE_INT);
     }
     /**
-     * <h3 class="en">Send request and parse response data to given target class instance</h3>
+     * <h3 class="en-US">Send request and parse response data to given target class instance</h3>
      * <h3 class="zh-CN">发送请求并解析返回数据为给定的目标类型</h3>
      *
-     * @param <T>           <span class="en">target type class</span>
+     * @param <T>           <span class="en-US">target type class</span>
      *                      <span class="zh-CN">目标类型</span>
-     * @param requestInfo   <span class="en">Request info</span>
+     * @param requestInfo   <span class="en-US">Request info</span>
      *                      <span class="zh-CN">请求信息</span>
-     * @param targetClass   <span class="en">target type class</span>
+     * @param targetClass   <span class="en-US">target type class</span>
      *                      <span class="zh-CN">目标类型</span>
      *
-     * @return  <span class="en">Parsed target type class instance or <code>null</code> if an error occurs</span>
+     * @return  <span class="en-US">Parsed target type class instance or <code>null</code> if an error occurs</span>
      *          <span class="zh-CN">解析的目标类型实例对象，如果请求失败则返回<code>null</code></span>
      */
     public static <T> T sendRequest(final RequestInfo requestInfo, final Class<T> targetClass) {
@@ -436,58 +436,58 @@ public final class RequestUtils {
         }
     }
     /**
-     * <h3 class="en">Generate query string from given request instance</h3>
+     * <h3 class="en-US">Generate query string from given request instance</h3>
      * <h3 class="zh-CN">从给定的请求实例对象中解析并生成查询字符串</h3>
      *
-     * @param request   <span class="en">Request instance</span>
+     * @param request   <span class="en-US">Request instance</span>
      *                  <span class="zh-CN">请求实例对象</span>
      *
-     * @return  <span class="en">Generated query string</span>
+     * @return  <span class="en-US">Generated query string</span>
      *          <span class="zh-CN">生成的查询字符串</span>
      */
     public static String createQueryString(final HttpServletRequest request) {
         return createQueryStringFromMap(request.getParameterMap(), "&").toString();
     }
     /**
-     * <h3 class="en">Generate parameter map from query string</h3>
+     * <h3 class="en-US">Generate parameter map from query string</h3>
      * <h3 class="zh-CN">从给定的查询字符串生成参数映射表</h3>
      *
-     * @param queryString   <span class="en">query string</span>
+     * @param queryString   <span class="en-US">query string</span>
      *                      <span class="zh-CN">查询字符串</span>
      *
-     * @return  <span class="en">Generated parameter map</span>
+     * @return  <span class="en-US">Generated parameter map</span>
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static Map<String, String[]> parseQueryString(final String queryString) {
         return parseQueryString(queryString, Boolean.TRUE, Boolean.FALSE);
     }
     /**
-     * <h3 class="en">Generate parameter map from query string</h3>
+     * <h3 class="en-US">Generate parameter map from query string</h3>
      * <h3 class="zh-CN">从给定的查询字符串生成参数映射表</h3>
      *
-     * @param queryString   <span class="en">query string</span>
+     * @param queryString   <span class="en-US">query string</span>
      *                      <span class="zh-CN">查询字符串</span>
-     * @param parseMatrix   <span class="en">parse matrix parameter</span>
+     * @param parseMatrix   <span class="en-US">parse matrix parameter</span>
      *                      <span class="zh-CN">解析矩阵参数</span>
      *
-     * @return  <span class="en">Generated parameter map</span>
+     * @return  <span class="en-US">Generated parameter map</span>
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static Map<String, String[]> parseQueryString(final String queryString, final boolean parseMatrix) {
         return parseQueryString(queryString, Boolean.TRUE, parseMatrix);
     }
     /**
-     * <h3 class="en">Generate parameter map from query string</h3>
+     * <h3 class="en-US">Generate parameter map from query string</h3>
      * <h3 class="zh-CN">从给定的查询字符串生成参数映射表</h3>
      *
-     * @param queryString   <span class="en">query string</span>
+     * @param queryString   <span class="en-US">query string</span>
      *                      <span class="zh-CN">查询字符串</span>
-     * @param decodeValues  <span class="en">Decode parameter value</span>
+     * @param decodeValues  <span class="en-US">Decode parameter value</span>
      *                      <span class="zh-CN">解码参数值</span>
-     * @param parseMatrix   <span class="en">parse matrix parameter</span>
+     * @param parseMatrix   <span class="en-US">parse matrix parameter</span>
      *                      <span class="zh-CN">解析矩阵参数</span>
      *
-     * @return  <span class="en">Generated parameter map</span>
+     * @return  <span class="en-US">Generated parameter map</span>
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static Map<String, String[]> parseQueryString(final String queryString, final boolean decodeValues,
@@ -538,28 +538,28 @@ public final class RequestUtils {
         return parameterMap;
     }
     /**
-     * <h3 class="en">Generate parameter map from uri string</h3>
+     * <h3 class="en-US">Generate parameter map from uri string</h3>
      * <h3 class="zh-CN">从给定的查询字符串生成参数映射表</h3>
      *
-     * @param uri   <span class="en">uri string</span>
+     * @param uri   <span class="en-US">uri string</span>
      *              <span class="zh-CN">uri字符串</span>
      *
-     * @return  <span class="en">Generated parameter map</span>
+     * @return  <span class="en-US">Generated parameter map</span>
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static Map<String, String[]> parseParametersFromUri(final String uri) {
         return parseParametersFromUri(uri, Boolean.FALSE);
     }
     /**
-     * <h3 class="en">Generate parameter map from uri string</h3>
+     * <h3 class="en-US">Generate parameter map from uri string</h3>
      * <h3 class="zh-CN">从给定的查询字符串生成参数映射表</h3>
      *
-     * @param uri           <span class="en">uri string</span>
+     * @param uri           <span class="en-US">uri string</span>
      *                      <span class="zh-CN">uri字符串</span>
-     * @param parseMatrix   <span class="en">parse matrix parameter</span>
+     * @param parseMatrix   <span class="en-US">parse matrix parameter</span>
      *                      <span class="zh-CN">解析矩阵参数</span>
      *
-     * @return  <span class="en">Generated parameter map</span>
+     * @return  <span class="en-US">Generated parameter map</span>
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static Map<String, String[]> parseParametersFromUri(final String uri, final boolean parseMatrix) {
@@ -573,13 +573,13 @@ public final class RequestUtils {
         return parseQueryString(uri.substring(qSignPos + 1), parseMatrix);
     }
     /**
-     * <h3 class="en">Retrieve request address from uri string</h3>
+     * <h3 class="en-US">Retrieve request address from uri string</h3>
      * <h3 class="zh-CN">从uri字符串中解析请求地址</h3>
      *
-     * @param uri           <span class="en">uri string</span>
+     * @param uri           <span class="en-US">uri string</span>
      *                      <span class="zh-CN">uri字符串</span>
      *
-     * @return  <span class="en">Generated parameter map</span>
+     * @return  <span class="en-US">Generated parameter map</span>
      *          <span class="zh-CN">生成的参数映射表</span>
      */
     public static String getBaseFromUri(final String uri) {
@@ -593,32 +593,32 @@ public final class RequestUtils {
         return uri.substring(0, qSignPos);
     }
     /**
-     * <h3 class="en">Generate query string from given parameter map</h3>
+     * <h3 class="en-US">Generate query string from given parameter map</h3>
      * <h3 class="zh-CN">从给定的参数映射表中解析并生成查询字符串</h3>
      *
-     * @param m         <span class="en">parameter map</span>
+     * @param m         <span class="en-US">parameter map</span>
      *                  <span class="zh-CN">参数映射表中</span>
-     * @param ampersand <span class="en">Concat string</span>
+     * @param ampersand <span class="en-US">Concat string</span>
      *                  <span class="zh-CN">参数连接字符</span>
      *
-     * @return  <span class="en">Generated query string</span>
+     * @return  <span class="en-US">Generated query string</span>
      *          <span class="zh-CN">生成的查询字符串</span>
      */
     public static StringBuilder createQueryStringFromMap(final Map<String, String[]> m, final String ampersand) {
         return createQueryStringFromMap(m, ampersand, true);
     }
     /**
-     * <h3 class="en">Generate query string from given parameter map</h3>
+     * <h3 class="en-US">Generate query string from given parameter map</h3>
      * <h3 class="zh-CN">从给定的参数映射表中解析并生成查询字符串</h3>
      *
-     * @param m         <span class="en">parameter map</span>
+     * @param m         <span class="en-US">parameter map</span>
      *                  <span class="zh-CN">参数映射表中</span>
-     * @param ampersand <span class="en">Concat string</span>
+     * @param ampersand <span class="en-US">Concat string</span>
      *                  <span class="zh-CN">参数连接字符</span>
-     * @param encode    <span class="en">Encode parameter value</span>
+     * @param encode    <span class="en-US">Encode parameter value</span>
      *                  <span class="zh-CN">编码参数值</span>
      *
-     * @return  <span class="en">Generated query string</span>
+     * @return  <span class="en-US">Generated query string</span>
      *          <span class="zh-CN">生成的查询字符串</span>
      */
     public static StringBuilder createQueryStringFromMap(final Map<String, String[]> m, final String ampersand,
@@ -652,15 +652,15 @@ public final class RequestUtils {
         return result;
     }
     /**
-     * <h3 class="en">Append generated query string to given uri string</h3>
+     * <h3 class="en-US">Append generated query string to given uri string</h3>
      * <h3 class="zh-CN">追加生成的查询字符串到给定的uri字符串后</h3>
      *
-     * @param uri           <span class="en">uri string</span>
+     * @param uri           <span class="en-US">uri string</span>
      *                      <span class="zh-CN">uri字符串</span>
-     * @param params        <span class="en">parameter map</span>
+     * @param params        <span class="en-US">parameter map</span>
      *                      <span class="zh-CN">参数映射表中</span>
      *
-     * @return  <span class="en">Appended uri string</span>
+     * @return  <span class="en-US">Appended uri string</span>
      *          <span class="zh-CN">追加后的uri字符串</span>
      */
     public static String appendParams(final String uri, final Map<String, String[]> params) {
@@ -668,10 +668,10 @@ public final class RequestUtils {
         return uri + delimiter + createQueryStringFromMap(params, "&");
     }
     /**
-     * <h3 class="en">Save request attribute values to session</h3>
+     * <h3 class="en-US">Save request attribute values to session</h3>
      * <h3 class="zh-CN">将给定的请求参数信息保存到session中</h3>
      *
-     * @param request   <span class="en">Request instance</span>
+     * @param request   <span class="en-US">Request instance</span>
      *                  <span class="zh-CN">请求实例对象</span>
      */
     public static void stowRequestAttributes(@Nonnull final HttpServletRequest request) {
@@ -680,10 +680,10 @@ public final class RequestUtils {
         }
     }
     /**
-     * <h3 class="en">Read request attribute values from session and save to request</h3>
+     * <h3 class="en-US">Read request attribute values from session and save to request</h3>
      * <h3 class="zh-CN">从session中读取保存的参数信息并保存到请求中</h3>
      *
-     * @param request   <span class="en">Request instance</span>
+     * @param request   <span class="en-US">Request instance</span>
      *                  <span class="zh-CN">请求实例对象</span>
      */
     public static void reclaimRequestAttributes(@Nonnull final HttpServletRequest request) {
@@ -697,10 +697,10 @@ public final class RequestUtils {
                 });
     }
     /**
-     * <h3 class="en">Retrieve full request address from request instance</h3>
+     * <h3 class="en-US">Retrieve full request address from request instance</h3>
      * <h3 class="zh-CN">从请求实例对象中获取完整的请求地址</h3>
      *
-     * @param request   <span class="en">Request instance</span>
+     * @param request   <span class="en-US">Request instance</span>
      *                  <span class="zh-CN">请求实例对象</span>
      */
     public static String getAppURL(final HttpServletRequest request) {
@@ -722,32 +722,32 @@ public final class RequestUtils {
         return requestUrl.toString();
     }
     /**
-     * <h3 class="en">Check roles iterator is authenticated by request instance</h3>
+     * <h3 class="en-US">Check roles iterator is authenticated by request instance</h3>
      * <h3 class="zh-CN">检查请求实例对象中是否有给定的角色代码授权</h3>
      *
-     * @param rolesIterator <span class="en">Role codes iterator instance</span>
+     * @param rolesIterator <span class="en-US">Role codes iterator instance</span>
      *                      <span class="zh-CN">角色代码遍历器</span>
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
      *
-     * @return  <span class="en">Check result</span>
+     * @return  <span class="en-US">Check result</span>
      *          <span class="zh-CN">检查结果</span>
      */
     public static boolean isUserInRole(final Iterator<Object> rolesIterator, final HttpServletRequest request) {
         return isUserInRole(rolesIterator, null, request);
     }
     /**
-     * <h3 class="en">Check roles iterator is authenticated by request instance</h3>
+     * <h3 class="en-US">Check roles iterator is authenticated by request instance</h3>
      * <h3 class="zh-CN">检查请求实例对象中是否有给定的角色代码授权</h3>
      *
-     * @param rolesIterator <span class="en">Role codes iterator instance</span>
+     * @param rolesIterator <span class="en-US">Role codes iterator instance</span>
      *                      <span class="zh-CN">角色代码遍历器</span>
-     * @param property      <span class="en">Property field name</span>
+     * @param property      <span class="en-US">Property field name</span>
      *                      <span class="zh-CN">属性名</span>
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
      *
-     * @return  <span class="en">Check result</span>
+     * @return  <span class="en-US">Check result</span>
      *          <span class="zh-CN">检查结果</span>
      */
     public static boolean isUserInRole(final Iterator<Object> rolesIterator, final String property,
@@ -778,13 +778,13 @@ public final class RequestUtils {
         return Boolean.FALSE;
     }
     /**
-     * <h3 class="en">Retrieve client IP address from given request instance</h3>
+     * <h3 class="en-US">Retrieve client IP address from given request instance</h3>
      * <h3 class="zh-CN">从请求实例对象中获取客户端IP地址</h3>
      *
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
      *
-     * @return  <span class="en">Client IP address</span>
+     * @return  <span class="en-US">Client IP address</span>
      *          <span class="zh-CN">客户端IP地址</span>
      */
     public static String getClientIP(final HttpServletRequest request) {
@@ -822,13 +822,13 @@ public final class RequestUtils {
         }
     }
     /**
-     * <h3 class="en">Retrieve request uri string from request instance</h3>
+     * <h3 class="en-US">Retrieve request uri string from request instance</h3>
      * <h3 class="zh-CN">从请求实例对象中获取uri字符串</h3>
      *
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
      *
-     * @return  <span class="en">uri string or empty string if request instance is <code>null</code></span>
+     * @return  <span class="en-US">uri string or empty string if request instance is <code>null</code></span>
      *          <span class="zh-CN">uri字符串，如果请求实例对象为<code>null</code>则返回空字符串</span>
      */
     public static String getRequestURI(final HttpServletRequest request) {
@@ -840,13 +840,13 @@ public final class RequestUtils {
         return requestUrl;
     }
     /**
-     * <h3 class="en">Retrieve request path exclude context path</h3>
+     * <h3 class="en-US">Retrieve request path exclude context path</h3>
      * <h3 class="zh-CN">获取不包含上下文地址的请求路径</h3>
      *
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
      *
-     * @return  <span class="en">request path or empty string if request instance is <code>null</code></span>
+     * @return  <span class="en-US">request path or empty string if request instance is <code>null</code></span>
      *          <span class="zh-CN">请求地址，如果请求实例对象为<code>null</code>则返回空字符串</span>
      */
     public static String getRequestPath(final HttpServletRequest request) {
@@ -865,15 +865,15 @@ public final class RequestUtils {
         return getRequestUrl(request, Boolean.TRUE);
     }
     /**
-     * <h3 class="en">Retrieve request url address</h3>
+     * <h3 class="en-US">Retrieve request url address</h3>
      * <h3 class="zh-CN">获取请求的url地址</h3>
      *
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
-     * @param includeDomain <span class="en">Include domain name</span>
+     * @param includeDomain <span class="en-US">Include domain name</span>
      *                      <span class="zh-CN">包含域名</span>
      *
-     * @return  <span class="en">Retrieved url address or empty string if request instance is <code>null</code></span>
+     * @return  <span class="en-US">Retrieved url address or empty string if request instance is <code>null</code></span>
      *          <span class="zh-CN">获取的的url地址，如果请求实例对象为<code>null</code>则返回空字符串</span>
      */
     public static String getRequestUrl(final HttpServletRequest request, final boolean includeDomain) {
@@ -896,17 +896,17 @@ public final class RequestUtils {
         return requestUrl.toString();
     }
     /**
-     * <h3 class="en">Process url rewrite</h3>
+     * <h3 class="en-US">Process url rewrite</h3>
      * <h3 class="zh-CN">处理URL重写</h3>
      *
-     * @param request       <span class="en">Request instance</span>
+     * @param request       <span class="en-US">Request instance</span>
      *                      <span class="zh-CN">请求实例对象</span>
-     * @param regex         <span class="en">Rewrite regex string</span>
+     * @param regex         <span class="en-US">Rewrite regex string</span>
      *                      <span class="zh-CN">重写的正则表达式</span>
-     * @param toPath        <span class="en">Rewrite url template</span>
+     * @param toPath        <span class="en-US">Rewrite url template</span>
      *                      <span class="zh-CN">重写url的模板</span>
      *
-     * @return  <span class="en">Rewrite url address or null if original <code>null</code> address not matched</span>
+     * @return  <span class="en-US">Rewrite url address or null if original <code>null</code> address not matched</span>
      *          <span class="zh-CN">重写后的url地址，如果原始地址未匹配正则表达式，则返回<code>null</code></span>
      */
     public static String processRewrite(final HttpServletRequest request, final String regex, final String toPath) {
@@ -920,15 +920,15 @@ public final class RequestUtils {
         return rewriteUrl;
     }
     /**
-     * <h3 class="en">Verify x509 certificate contains given domain name</h3>
+     * <h3 class="en-US">Verify x509 certificate contains given domain name</h3>
      * <h3 class="zh-CN">验证x509证书中包含给定的域名</h3>
      *
-     * @param x509Certificate   <span class="en">x509 certificate</span>
+     * @param x509Certificate   <span class="en-US">x509 certificate</span>
      *                          <span class="zh-CN">x509证书</span>
-     * @param domainName        <span class="en">Will check for Domain name</span>
+     * @param domainName        <span class="en-US">Will check for Domain name</span>
      *                          <span class="zh-CN">将要检查的域名</span>
      *
-     * @return  <span class="en">Check result</span>
+     * @return  <span class="en-US">Check result</span>
      *          <span class="zh-CN">检查结果</span>
      */
     private static boolean verifyCertificate(final X509Certificate x509Certificate, final String domainName) {
@@ -972,15 +972,15 @@ public final class RequestUtils {
         }
     }
     /**
-     * <h3 class="en">Match domain name</h3>
+     * <h3 class="en-US">Match domain name</h3>
      * <h3 class="zh-CN">验证泛域名</h3>
      *
-     * @param matchDomain       <span class="en">generic domain name</span>
+     * @param matchDomain       <span class="en-US">generic domain name</span>
      *                          <span class="zh-CN">泛域名</span>
-     * @param domainName        <span class="en">Will check for Domain name</span>
+     * @param domainName        <span class="en-US">Will check for Domain name</span>
      *                          <span class="zh-CN">将要检查的域名</span>
      *
-     * @return  <span class="en">Check result</span>
+     * @return  <span class="en-US">Check result</span>
      *          <span class="zh-CN">检查结果</span>
      */
     private static boolean matchDomain(final String matchDomain, final String domainName) {
@@ -989,12 +989,12 @@ public final class RequestUtils {
                 : domainName.equalsIgnoreCase(matchDomain);
     }
     /**
-     * <h3 class="en">Parse matrix string and merge value to given parameter map</h3>
+     * <h3 class="en-US">Parse matrix string and merge value to given parameter map</h3>
      * <h3 class="zh-CN">解析矩阵参数值，合并到给定的参数映射表中</h3>
      *
-     * @param parameterMap  <span class="en">parameter map</span>
+     * @param parameterMap  <span class="en-US">parameter map</span>
      *                      <span class="zh-CN">参数映射表</span>
-     * @param matrixString  <span class="en">matrix string</span>
+     * @param matrixString  <span class="en-US">matrix string</span>
      *                      <span class="zh-CN">矩阵参数值</span>
      */
     private static void parseMatrixString(final Map<String, String[]> parameterMap, final String matrixString) {
@@ -1010,15 +1010,15 @@ public final class RequestUtils {
         }
     }
     /**
-     * <h3 class="en">Generate value of request header "Cookie"</h3>
+     * <h3 class="en-US">Generate value of request header "Cookie"</h3>
      * <h3 class="zh-CN">生成请求头"Cookie"的值</h3>
      *
-     * @param requestUrl    <span class="en">Request url</span>
+     * @param requestUrl    <span class="en-US">Request url</span>
      *                      <span class="zh-CN">请求地址</span>
-     * @param cookieList    <span class="en">Cookie information list</span>
+     * @param cookieList    <span class="en-US">Cookie information list</span>
      *                      <span class="zh-CN">Cookie信息列表</span>
      *
-     * @return  <span class="en">Generated value string</span>
+     * @return  <span class="en-US">Generated value string</span>
      *          <span class="zh-CN">生成的结果字符串</span>
      */
     private static String generateCookie(final String requestUrl, final List<CookieEntity> cookieList) {
@@ -1066,15 +1066,15 @@ public final class RequestUtils {
         return stringBuilder.substring(2);
     }
     /**
-     * <h3 class="en">Generate entity of http request</h3>
+     * <h3 class="en-US">Generate entity of http request</h3>
      * <h3 class="zh-CN">生成Http请求的请求体</h3>
      *
-     * @param parameters    <span class="en">parameter map</span>
+     * @param parameters    <span class="en-US">parameter map</span>
      *                      <span class="zh-CN">参数映射表</span>
-     * @param uploadFileMap <span class="en">upload file map</span>
+     * @param uploadFileMap <span class="en-US">upload file map</span>
      *                      <span class="zh-CN">上传文件映射表</span>
      *
-     * @return  <span class="en">Generated HttpEntity instance</span>
+     * @return  <span class="en-US">Generated HttpEntity instance</span>
      *          <span class="zh-CN">生成的HttpEntity实例对象</span>
      */
     private static HttpEntity generateEntity(Map<String, String[]> parameters, Map<String, File> uploadFileMap) {
@@ -1100,7 +1100,7 @@ public final class RequestUtils {
         return httpEntity;
     }
     /**
-     * <h2 class="en">Response Content Handler</h2>
+     * <h2 class="en-US">Response Content Handler</h2>
      * <h2 class="zh-CN">响应体拦截处理器</h2>
      *
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -1108,7 +1108,7 @@ public final class RequestUtils {
      */
     private static final class ResponseContentHandler implements HttpResponse.BodyHandler<Supplier<ResponseInfo>> {
         /**
-         * <h3 class="en">Constructor for ResponseContentHandler</h3>
+         * <h3 class="en-US">Constructor for ResponseContentHandler</h3>
          * <h3 class="zh-CN">响应体拦截处理器的构造方法</h3>
          */
         ResponseContentHandler() {

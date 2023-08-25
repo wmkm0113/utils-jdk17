@@ -55,7 +55,7 @@ import org.nervousync.enumerations.snmp.auth.SNMPAuthProtocol;
 import org.nervousync.exceptions.snmp.ProcessorConfigException;
 
 /**
- * <h2 class="en">SNMP utilities</h2>
+ * <h2 class="en-US">SNMP utilities</h2>
  * <h2 class="zh-CN">SNMP工具集</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -63,61 +63,61 @@ import org.nervousync.exceptions.snmp.ProcessorConfigException;
  */
 public final class SNMPUtils {
     /**
-     * <span class="en">Singleton instance</span>
+     * <span class="en-US">Singleton instance</span>
      * <span class="zh-CN">单一实例对象</span>
      */
 	private static volatile SNMPUtils INSTANCE = null;
     /**
-     * <span class="en">Logger instance</span>
+     * <span class="en-US">Logger instance</span>
      * <span class="zh-CN">日志实例</span>
      */
 	private static final LoggerUtils.Logger LOGGER = LoggerUtils.getLogger(SNMPUtils.class);
     /**
-     * <span class="en">Prefix string of UDP protocol</span>
+     * <span class="en-US">Prefix string of UDP protocol</span>
      * <span class="zh-CN">UDP协议前缀</span>
      */
 	private static final String PROTOCOL_UDP = "udp:";
     /**
-     * <span class="en">Prefix string of TCP protocol</span>
+     * <span class="en-US">Prefix string of TCP protocol</span>
      * <span class="zh-CN">TCP协议前缀</span>
      */
 	private static final String PROTOCOL_TCP = "tcp:";
     /**
-     * <span class="en">Schedule process period time (Unit: milliseconds)</span>
+     * <span class="en-US">Schedule process period time (Unit: milliseconds)</span>
      * <span class="zh-CN">调度处理的间隔时间（单位：毫秒）</span>
      */
 	private final long period;
     /**
-     * <span class="en">Registered target host list</span>
+     * <span class="en-US">Registered target host list</span>
      * <span class="zh-CN">注册的目标主机列表</span>
      */
 	private final List<TargetHost> existsHosts;
     /**
-     * <span class="en">Schedule processor</span>
+     * <span class="en-US">Schedule processor</span>
      * <span class="zh-CN">调度处理器</span>
      */
 	private final ScheduledExecutorService scheduledExecutorService;
     /**
-     * <span class="en">UDP agent</span>
+     * <span class="en-US">UDP agent</span>
      * <span class="zh-CN">UDP客户端</span>
      */
 	private Snmp udpAgent;
     /**
-     * <span class="en">TCP agent</span>
+     * <span class="en-US">TCP agent</span>
      * <span class="zh-CN">TCP客户端</span>
      */
 	private Snmp tcpAgent;
 	/**
-	 * <h3 class="en">Private constructor for SNMPUtils</h3>
+	 * <h3 class="en-US">Private constructor for SNMPUtils</h3>
 	 * <h3 class="zh-CN">SNMP工具集的私有构造方法</h3>
 	 *
-	 * @param serverCount 	<span class="en">Maximum size of registered server list</span>
+	 * @param serverCount 	<span class="en-US">Maximum size of registered server list</span>
 	 *                      <span class="zh-CN">允许注册目标主机的最大值</span>
-	 * @param period 		<span class="en">Schedule process period time (Unit: milliseconds)</span>
+	 * @param period 		<span class="en-US">Schedule process period time (Unit: milliseconds)</span>
 	 *                      <span class="zh-CN">调度处理的间隔时间（单位：毫秒）</span>
 	 *
 	 * @throws IOException
-	 * <span class="en">If an error occurs when generate agent</span>
+	 * <span class="en-US">If an error occurs when generate agent</span>
 	 * <span class="zh-CN">当创建客户端时出现异常</span>
 	 */
 	private SNMPUtils(final int serverCount, final long period) throws IOException {
@@ -130,13 +130,13 @@ public final class SNMPUtils {
 		this.tcpAgent.listen();
 	}
 	/**
-	 * <h3 class="en">Initialize SNMP Utilities</h3>
+	 * <h3 class="en-US">Initialize SNMP Utilities</h3>
 	 * <h3 class="zh-CN">初始化SNMP工具集</h3>
 	 *
-	 * @param serverCount 	<span class="en">Maximum size of registered server list</span>
+	 * @param serverCount 	<span class="en-US">Maximum size of registered server list</span>
 	 *                      <span class="zh-CN">允许注册目标主机的最大值</span>
 	 *
-	 * @return 	<span class="en">Initialize result</span>
+	 * @return 	<span class="en-US">Initialize result</span>
 	 * 			<span class="zh-CN">初始化结果</span>
 	 */
 	public static boolean initialize(final int serverCount) {
@@ -144,15 +144,15 @@ public final class SNMPUtils {
 	}
 
 	/**
-	 * <h3 class="en">Initialize SNMP Utilities</h3>
+	 * <h3 class="en-US">Initialize SNMP Utilities</h3>
 	 * <h3 class="zh-CN">初始化SNMP工具集</h3>
 	 *
-	 * @param serverCount 	<span class="en">Maximum size of registered server list</span>
+	 * @param serverCount 	<span class="en-US">Maximum size of registered server list</span>
 	 *                      <span class="zh-CN">允许注册目标主机的最大值</span>
-	 * @param period 		<span class="en">Schedule process period time (Unit: milliseconds)</span>
+	 * @param period 		<span class="en-US">Schedule process period time (Unit: milliseconds)</span>
 	 *                      <span class="zh-CN">调度处理的间隔时间（单位：毫秒）</span>
 	 *
-	 * @return 	<span class="en">Initialize result</span>
+	 * @return 	<span class="en-US">Initialize result</span>
 	 * 			<span class="zh-CN">初始化结果</span>
 	 */
 	public static boolean initialize(final int serverCount, final long period) {
@@ -175,29 +175,29 @@ public final class SNMPUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Static method for retrieve singleton instance of SNMP utilities</h3>
+	 * <h3 class="en-US">Static method for retrieve singleton instance of SNMP utilities</h3>
 	 * <h3 class="zh-CN">静态方法用于获取SNMP工具集单例实例对象</h3>
 	 *
-	 * @return 	<span class="en">Singleton instance</span>
+	 * @return 	<span class="en-US">Singleton instance</span>
 	 * 			<span class="zh-CN">单例实例对象</span>
 	 */
 	public static SNMPUtils getInstance() {
 		return SNMPUtils.INSTANCE;
 	}
 	/**
-	 * <h3 class="en">Add monitor target host</h3>
+	 * <h3 class="en-US">Add monitor target host</h3>
 	 * <h3 class="zh-CN">添加要监控的目标主机</h3>
 	 *
-	 * @param identifiedKey    <span class="en">Identify key of target host</span>
+	 * @param identifiedKey    <span class="en-US">Identify key of target host</span>
 	 *                         <span class="zh-CN">目标主机的唯一标识字符串</span>
-	 * @param targetHost       <span class="en">Target host instance</span>
+	 * @param targetHost       <span class="en-US">Target host instance</span>
 	 *                         <span class="zh-CN">目标主机实例对象</span>
-	 * @param pduArray         <span class="en">PDU instance array</span>
+	 * @param pduArray         <span class="en-US">PDU instance array</span>
 	 *                         <span class="zh-CN">协议数据单元实例对象数组</span>
-	 * @param snmpDataOperator <span class="en">SNMP data operator instance</span>
+	 * @param snmpDataOperator <span class="en-US">SNMP data operator instance</span>
 	 *                         <span class="zh-CN">SNMP数据操作器实例对象</span>
 	 *
-	 * @return 	<span class="en">Add result</span>
+	 * @return 	<span class="en-US">Add result</span>
 	 * 			<span class="zh-CN">添加结果</span>
 	 */
 	public boolean addMonitor(final String identifiedKey, final TargetHost targetHost,
@@ -221,11 +221,11 @@ public final class SNMPUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Destroy agent and schedule processor</h3>
+	 * <h3 class="en-US">Destroy agent and schedule processor</h3>
 	 * <h3 class="zh-CN">静态方法用于获取SNMP工具集单例实例对象</h3>
 	 *
 	 * @throws IOException
-	 * <span class="en">If an error occurs when close agent</span>
+	 * <span class="en-US">If an error occurs when close agent</span>
 	 * <span class="zh-CN">当关闭客户端时出现异常</span>
 	 */
 	public static void destroy() throws IOException {
@@ -241,17 +241,17 @@ public final class SNMPUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Retrieve data from target host</h3>
+	 * <h3 class="en-US">Retrieve data from target host</h3>
 	 * <h3 class="zh-CN">从目标主机读取数据</h3>
 	 *
-	 * @param protocol 		<span class="en">IP Protocol</span>
+	 * @param protocol 		<span class="en-US">IP Protocol</span>
 	 *                      <span class="zh-CN">IP协议</span>
-	 * @param target 		<span class="en">Target host instance</span>
+	 * @param target 		<span class="en-US">Target host instance</span>
 	 *                      <span class="zh-CN">目标主机实例对象</span>
-	 * @param pdu 			<span class="en">PDU instance</span>
+	 * @param pdu 			<span class="en-US">PDU instance</span>
 	 *                      <span class="zh-CN">协议数据单元实例对象</span>
 	 *
-	 * @return 	<span class="en">Read data list</span>
+	 * @return 	<span class="en-US">Read data list</span>
 	 * 			<span class="zh-CN">读取数据列表</span>
 	 */
 	private List<VariableBinding> retrieveData(final IPProtocol protocol, final Target<Address> target, final PDU pdu) {
@@ -280,7 +280,7 @@ public final class SNMPUtils {
 		return new ArrayList<>();
 	}
 	/**
-	 * <h2 class="en">SNMP processor</h2>
+	 * <h2 class="en-US">SNMP processor</h2>
 	 * <h2 class="zh-CN">SNMP处理器线程</h2>
 	 *
 	 * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
@@ -288,41 +288,41 @@ public final class SNMPUtils {
 	 */
 	private static final class SNMPProcessor implements Runnable {
 		/**
-		 * <span class="en">Identify key of target host</span>
+		 * <span class="en-US">Identify key of target host</span>
 		 * <span class="zh-CN">目标主机的唯一标识字符串</span>
 		 */
 		private final String identifiedKey;
 		/**
-		 * <span class="en">IP Protocol</span>
+		 * <span class="en-US">IP Protocol</span>
 		 * <span class="zh-CN">IP协议</span>
 		 */
 		private final IPProtocol protocol;
 		/**
-		 * <span class="en">Target host instance</span>
+		 * <span class="en-US">Target host instance</span>
 		 * <span class="zh-CN">目标主机实例对象</span>
 		 */
 		private final Target<Address> target;
 		/**
-		 * <span class="en">PDU instance array</span>
+		 * <span class="en-US">PDU instance array</span>
 		 * <span class="zh-CN">协议数据单元实例对象数组</span>
 		 */
 		private final PDU[] pduArray;
 		/**
-		 * <span class="en">SNMP data operator instance</span>
+		 * <span class="en-US">SNMP data operator instance</span>
 		 * <span class="zh-CN">SNMP数据操作器实例对象</span>
 		 */
 		private final SNMPDataOperator snmpDataOperator;
 		/**
-		 * <h3 class="en">Private constructor for SNMPProcessor</h3>
+		 * <h3 class="en-US">Private constructor for SNMPProcessor</h3>
 		 * <h3 class="zh-CN">SNMP处理器线程的私有构造方法</h3>
 		 *
-		 * @param identifiedKey    <span class="en">Identify key of target host</span>
+		 * @param identifiedKey    <span class="en-US">Identify key of target host</span>
 		 *                         <span class="zh-CN">目标主机的唯一标识字符串</span>
-		 * @param targetHost       <span class="en">Target host instance</span>
+		 * @param targetHost       <span class="en-US">Target host instance</span>
 		 *                         <span class="zh-CN">目标主机实例对象</span>
-		 * @param pduArray         <span class="en">PDU instance array</span>
+		 * @param pduArray         <span class="en-US">PDU instance array</span>
 		 *                         <span class="zh-CN">协议数据单元实例对象数组</span>
-		 * @param snmpDataOperator <span class="en">SNMP data operator instance</span>
+		 * @param snmpDataOperator <span class="en-US">SNMP data operator instance</span>
 		 *                         <span class="zh-CN">SNMP数据操作器实例对象</span>
 		 *
 		 * @throws ProcessorConfigException the processor config exception
@@ -354,12 +354,12 @@ public final class SNMPUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Retrieve authenticate protocol OID instance</h3>
+	 * <h3 class="en-US">Retrieve authenticate protocol OID instance</h3>
 	 * <h3 class="zh-CN">SNMP处理器线程的私有构造方法</h3>
 	 *
-	 * @param snmpAuthProtocol 	<span class="en">SNMP Authentication Protocol</span>
+	 * @param snmpAuthProtocol 	<span class="en-US">SNMP Authentication Protocol</span>
 	 *                          <span class="zh-CN">SNMP身份验证协议</span>
-	 * @return 	<span class="en">OID instance</span>
+	 * @return 	<span class="en-US">OID instance</span>
 	 * 			<span class="zh-CN">OID实例对象</span>
 	 */
 	private OID retrieveAuthProtocol(final SNMPAuthProtocol snmpAuthProtocol) {
@@ -369,13 +369,13 @@ public final class SNMPUtils {
 		};
 	}
 	/**
-	 * <h3 class="en">Convert TargetHost instance to Target instance</h3>
+	 * <h3 class="en-US">Convert TargetHost instance to Target instance</h3>
 	 * <h3 class="zh-CN">SNMP处理器线程的私有构造方法</h3>
 	 *
-	 * @param targetHost 	<span class="en">SNMP Target Host instance</span>
+	 * @param targetHost 	<span class="en-US">SNMP Target Host instance</span>
 	 *                      <span class="zh-CN">SNMP目标主机实例对象</span>
 	 *
-	 * @return 	<span class="en">Converted Target instance</span>
+	 * @return 	<span class="en-US">Converted Target instance</span>
 	 * 			<span class="zh-CN">转换后的Target实例对象</span>
 	 */
 	private Target<Address> generateTarget(final TargetHost targetHost) {

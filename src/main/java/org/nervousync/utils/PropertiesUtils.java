@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <h2 class="en">Properties utilities</h2>
- * <span class="en">
+ * <h2 class="en-US">Properties utilities</h2>
+ * <span class="en-US">
  *     <span>Current utilities implements features:</span>
  *     <ul>Read properties from string/file path/URL instance/input stream</ul>
  *     <ul>Modify properties file</ul>
@@ -48,24 +48,24 @@ import java.util.Properties;
  */
 public final class PropertiesUtils {
     /**
-     * <span class="en">Logger instance</span>
+     * <span class="en-US">Logger instance</span>
      * <span class="zh-CN">日志实例</span>
      */
 	private final static LoggerUtils.Logger LOGGER = LoggerUtils.getLogger(PropertiesUtils.class);
 	/**
-	 * <h3 class="en">Private constructor for PropertiesUtils</h3>
+	 * <h3 class="en-US">Private constructor for PropertiesUtils</h3>
 	 * <h3 class="zh-CN">属性文件工具集的私有构造方法</h3>
 	 */
     private PropertiesUtils() {
     }
 	/**
-	 * <h3 class="en">Read properties from string</h3>
+	 * <h3 class="en-US">Read properties from string</h3>
 	 * <h3 class="zh-CN">从字符串读取属性文件</h3>
 	 *
-	 * @param content 	<span class="en">Properties information string</span>
+	 * @param content 	<span class="en-US">Properties information string</span>
 	 *                  <span class="zh-CN">属性信息字符串</span>
 	 *
-	 * @return 	<span class="en">Properties instance</span>
+	 * @return 	<span class="en-US">Properties instance</span>
 	 * 			<span class="zh-CN">属性信息实例对象</span>
 	 */
 	public static Properties readProperties(final String content) {
@@ -85,13 +85,13 @@ public final class PropertiesUtils {
 		return properties;
 	}
 	/**
-	 * <h3 class="en">Read properties from file path</h3>
+	 * <h3 class="en-US">Read properties from file path</h3>
 	 * <h3 class="zh-CN">从指定路径读取属性文件</h3>
 	 *
-	 * @param propertiesFilePath 	<span class="en">Properties file path</span>
+	 * @param propertiesFilePath 	<span class="en-US">Properties file path</span>
 	 *                              <span class="zh-CN">属性文件路径</span>
 	 *
-	 * @return 	<span class="en">Properties instance</span>
+	 * @return 	<span class="en-US">Properties instance</span>
 	 * 			<span class="zh-CN">属性信息实例对象</span>
 	 */
 	public static Properties loadProperties(final String propertiesFilePath) {
@@ -104,13 +104,13 @@ public final class PropertiesUtils {
 	}
 
 	/**
-	 * <h3 class="en">Read properties from URL instance</h3>
+	 * <h3 class="en-US">Read properties from URL instance</h3>
 	 * <h3 class="zh-CN">从网络路径读取属性文件</h3>
 	 *
-	 * @param url 	<span class="en">URL instance</span>
+	 * @param url 	<span class="en-US">URL instance</span>
 	 *              <span class="zh-CN">网络路径</span>
 	 *
-	 * @return 	<span class="en">Properties instance</span>
+	 * @return 	<span class="en-US">Properties instance</span>
 	 * 			<span class="zh-CN">属性信息实例对象</span>
 	 */
 	public static Properties loadProperties(final URL url) {
@@ -131,17 +131,17 @@ public final class PropertiesUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Read properties from input stream.</h3>
-	 * <span class="en">Attention: users need to call the close method for input stream manually.</span>
+	 * <h3 class="en-US">Read properties from input stream.</h3>
+	 * <span class="en-US">Attention: users need to call the close method for input stream manually.</span>
 	 * <h3 class="zh-CN">从输入流中读取属性文件。</h3>
 	 * <span class="zh-CN">注意：用户必须手动调用输入流的 close 方法。</span>
 	 *
-	 * @param inputStream 	<span class="en">Input stream instance</span>
+	 * @param inputStream 	<span class="en-US">Input stream instance</span>
 	 *              		<span class="zh-CN">输入流实例对象</span>
-	 * @param isXML         <span class="en">Data is XML format</span>
+	 * @param isXML         <span class="en-US">Data is XML format</span>
 	 *              		<span class="zh-CN">数据是XML格式</span>
 	 *
-	 * @return 	<span class="en">Properties instance</span>
+	 * @return 	<span class="en-US">Properties instance</span>
 	 * 			<span class="zh-CN">属性信息实例对象</span>
 	 */
 	public static Properties loadProperties(final InputStream inputStream, final boolean isXML) {
@@ -163,17 +163,17 @@ public final class PropertiesUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Modify properties file</h3>
+	 * <h3 class="en-US">Modify properties file</h3>
 	 * <h3 class="zh-CN">修改属性文件</h3>
 	 *
-	 * @param propertiesFilePath 	<span class="en">Properties file path</span>
+	 * @param propertiesFilePath 	<span class="en-US">Properties file path</span>
 	 *                              <span class="zh-CN">属性文件路径</span>
-	 * @param modifyMap             <span class="en">Modify data key-value map</span>
+	 * @param modifyMap             <span class="en-US">Modify data key-value map</span>
 	 *                              <span class="zh-CN">要修改的键值对数据表</span>
-	 * @param comment               <span class="en">Comment string</span>
+	 * @param comment               <span class="en-US">Comment string</span>
 	 *                              <span class="zh-CN">备注字符串</span>
 	 *
-	 * @return 	<span class="en">Process result</span>
+	 * @return 	<span class="en-US">Process result</span>
 	 * 			<span class="zh-CN">处理结果</span>
 	 */
 	public static boolean modifyProperties(final String propertiesFilePath, final Map<String, String> modifyMap,
@@ -191,12 +191,12 @@ public final class PropertiesUtils {
 		}
 	}
 	/**
-	 * <h3 class="en">Modify properties file</h3>
+	 * <h3 class="en-US">Modify properties file</h3>
 	 * <h3 class="zh-CN">修改属性文件</h3>
 	 *
-	 * @param properties    <span class="en">Properties instance</span>
+	 * @param properties    <span class="en-US">Properties instance</span>
 	 *                      <span class="zh-CN">属性信息实例对象</span>
-	 * @param modifyMap 	<span class="en">Modify data key-value map</span>
+	 * @param modifyMap 	<span class="en-US">Modify data key-value map</span>
 	 *                      <span class="zh-CN">要修改的键值对数据表</span>
 	 */
 	public static void modifyProperties(final Properties properties, final Map<String, String> modifyMap) {
@@ -204,17 +204,17 @@ public final class PropertiesUtils {
 				properties.setProperty(key, StringUtils.isEmpty(value) ? Globals.DEFAULT_VALUE_STRING : value));
 	}
 	/**
-	 * <h3 class="en">Storage properties instance to target file path</h3>
+	 * <h3 class="en-US">Storage properties instance to target file path</h3>
 	 * <h3 class="zh-CN">将属性文件保存到目标地址</h3>
 	 *
-	 * @param properties    		<span class="en">Properties instance</span>
+	 * @param properties    		<span class="en-US">Properties instance</span>
 	 *                      		<span class="zh-CN">属性信息实例对象</span>
-	 * @param propertiesFilePath 	<span class="en">Properties file path</span>
+	 * @param propertiesFilePath 	<span class="en-US">Properties file path</span>
 	 *                              <span class="zh-CN">属性文件路径</span>
-	 * @param comment               <span class="en">Comment string</span>
+	 * @param comment               <span class="en-US">Comment string</span>
 	 *                              <span class="zh-CN">备注字符串</span>
 	 *
-	 * @return 	<span class="en">Process result</span>
+	 * @return 	<span class="en-US">Process result</span>
 	 * 			<span class="zh-CN">处理结果</span>
 	 */
 	private static boolean storeProperties(final Properties properties, final String propertiesFilePath,

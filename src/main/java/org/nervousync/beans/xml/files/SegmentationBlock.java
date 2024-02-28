@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -17,8 +17,8 @@
 package org.nervousync.beans.xml.files;
 
 import jakarta.xml.bind.annotation.*;
-import org.nervousync.commons.adapter.xml.CDataAdapter;
-import org.nervousync.beans.converter.impl.basic.DateTimeAdapter;
+import org.nervousync.beans.transfer.cdata.CDataAdapter;
+import org.nervousync.beans.transfer.basic.DateTimeAdapter;
 import org.nervousync.beans.core.BeanObject;
 import org.nervousync.utils.ConvertUtils;
 import org.nervousync.utils.SecurityUtils;
@@ -45,7 +45,7 @@ public final class SegmentationBlock extends BeanObject {
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
+    @Serial
 	private static final long serialVersionUID = 2993229461743423521L;
 	/**
 	 * <span class="en-US">Block begin position</span>

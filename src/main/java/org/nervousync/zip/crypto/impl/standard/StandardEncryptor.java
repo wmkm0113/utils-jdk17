@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -42,7 +42,7 @@ public final class StandardEncryptor implements Encryptor {
 	 */
 	public StandardEncryptor(char[] password, int crc) throws ZipException {
 		if (password == null || password.length == 0) {
-			throw new ZipException(0x0000001B0006L, "Utils", "Invalid_Password_Zip_Error");
+			throw new ZipException(0x0000001B0006L, "Invalid_Password_Zip_Error");
 		}
 		
 		this.standardCryptoEngine = new StandardCryptoEngine();
@@ -61,7 +61,7 @@ public final class StandardEncryptor implements Encryptor {
 	@Override
 	public void encryptData(byte[] buff, int start, int len) throws ZipException {
 		if (len < 0) {
-			throw new ZipException(0x000000FF0001L, "Utils", "Parameter_Invalid_Error");
+			throw new ZipException(0x000000FF0001L, "Parameter_Invalid_Error");
 		}
 		
 		try {
@@ -69,7 +69,7 @@ public final class StandardEncryptor implements Encryptor {
 				buff[i] = encryptByte(buff[i]);
 			}
 		} catch (Exception e) {
-			throw new ZipException(0x0000001B000CL, "Utils", "Encrypt_Crypto_Zip_Error", e);
+			throw new ZipException(0x0000001B000CL, "Encrypt_Crypto_Zip_Error", e);
 		}
 	}
 
@@ -84,7 +84,7 @@ public final class StandardEncryptor implements Encryptor {
 
 	private void init(char[] password, int crc) throws ZipException {
 		if (password == null || password.length == 0) {
-			throw new ZipException(0x0000001B0006L, "Utils", "Invalid_Password_Zip_Error");
+			throw new ZipException(0x0000001B0006L, "Invalid_Password_Zip_Error");
 		}
 		
 		this.standardCryptoEngine.initKeys(password);

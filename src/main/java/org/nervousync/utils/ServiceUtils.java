@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,14 +19,19 @@ package org.nervousync.utils;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.client.*;
-import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.core.Form;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebServiceClient;
 import jakarta.xml.ws.handler.HandlerResolver;
-import org.nervousync.annotations.restful.DataConverter;
-import org.nervousync.beans.converter.Adapter;
+import org.nervousync.annotations.beans.DataTransfer;
+import org.nervousync.beans.config.TransferConfig;
 import org.nervousync.commons.Globals;
 import org.nervousync.enumerations.web.HttpMethodOption;
+import org.nervousync.exceptions.beans.network.NetworkInfoException;
+import org.nervousync.exceptions.utils.DataInvalidException;
 
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ServiceException;
@@ -53,7 +58,7 @@ import java.util.*;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $ $Date: Jan 13, 2020 15:52:33 $
+ * @version $Revision: 1.2.0 $ $Date: Jan 13, 2020 15:52:33 $
  */
 public final class ServiceUtils {
     /**
@@ -75,26 +80,50 @@ public final class ServiceUtils {
      *
      * @param <T>              <span class="en-US">End point interface</span>
      *                         <span class="zh-CN">Web服务的接口</span>
+     * @param serviceLocation  <span class="en-US">Web service location</span>
+     *                         <span class="zh-CN">Web服务地址</span>
+     * @param serviceInterface <span class="en-US">End point interface</span>
+     *                         <span class="zh-CN">Web服务的接口</span>
+     * @return <span class="en-US">Generated client instance</span>
+     * <span class="zh-CN">生成的客户端实例对象</span>
+     * @throws MalformedURLException <span class="en-US">if no protocol is specified, or an unknown protocol is found, or spec is null.</span>
+     *                               <span class="zh-CN">如果没有指定协议，或者发现未知协议，或者spec为空。</span>
+     */
+    public static <T> T SOAPClient(final String serviceLocation, final Class<T> serviceInterface)
+            throws MalformedURLException {
+        return SOAPClient(serviceLocation, serviceInterface, null);
+    }
+
+    /**
+     * <h3 class="en-US">Generate SOAP Client instance</h3>
+     * <h3 class="zh-CN">生成SOAP请求客户端</h3>
+     *
+     * @param <T>              <span class="en-US">End point interface</span>
+     *                         <span class="zh-CN">Web服务的接口</span>
+     * @param serviceLocation  <span class="en-US">Web service location</span>
+     *                         <span class="zh-CN">Web服务地址</span>
      * @param serviceInterface <span class="en-US">End point interface</span>
      *                         <span class="zh-CN">Web服务的接口</span>
      * @param handlerResolver  <span class="en-US">Custom handler resolver instance</span>
      *                         <span class="zh-CN">自定义的处理器实例对象</span>
      * @return <span class="en-US">Generated client instance</span>
      * <span class="zh-CN">生成的客户端实例对象</span>
-     * @throws MalformedURLException <span class="en-US">if no protocol is specified, or an unknown protocol is found, or spec is null.</span>
-     *                               <span class="zh-CN">如果没有指定协议，或者发现未知协议，或者spec为空。</span>
+     * @throws MalformedURLException <span class="en-US">if no service location, protocol is specified, or an unknown protocol is found, or spec is null.</span>
+     *                               <span class="zh-CN">如果没有指定服务地址、协议，或者发现未知协议，或者spec为空。</span>
      */
-    public static <T> T SOAPClient(final Class<T> serviceInterface, final HandlerResolver handlerResolver)
+    public static <T> T SOAPClient(final String serviceLocation, final Class<T> serviceInterface,
+                                   final HandlerResolver handlerResolver)
             throws MalformedURLException {
-        if (!serviceInterface.isAnnotationPresent(WebServiceClient.class)) {
-            return null;
+        if (StringUtils.isEmpty(serviceLocation)
+                || !serviceInterface.isAnnotationPresent(WebServiceClient.class)) {
+            throw new MalformedURLException("Service location is empty or Annotation not found");
         }
 
         WebServiceClient serviceClient = serviceInterface.getAnnotation(WebServiceClient.class);
 
         String namespaceURI = serviceClient.targetNamespace();
         String serviceName = serviceClient.name();
-        URL wsdlLocation = new URL(serviceClient.wsdlLocation());
+        URL wsdlLocation = new URL(serviceLocation + Globals.DEFAULT_RESOURCE_SEPARATOR + serviceClient.wsdlLocation());
 
         if (namespaceURI.isEmpty()) {
             String packageName = serviceInterface.getPackage().getName();
@@ -131,8 +160,11 @@ public final class ServiceUtils {
      *                         <span class="zh-CN">Web服务的接口</span>
      * @return <span class="en-US">Generated client instance</span>
      * <span class="zh-CN">生成的客户端实例对象</span>
+     * @throws MalformedURLException <span class="en-US">if no service location.</span>
+     *                               <span class="zh-CN">如果没有指定服务地址。</span>
      */
-    public static <T> T RestfulClient(final String targetAddress, final Class<T> serviceInterface) {
+    public static <T> T RestfulClient(final String targetAddress, final Class<T> serviceInterface)
+            throws MalformedURLException {
         return RestfulClient(targetAddress, serviceInterface, null);
     }
 
@@ -150,11 +182,13 @@ public final class ServiceUtils {
      *                         <span class="zh-CN">请求头部信息映射</span>
      * @return <span class="en-US">Generated client instance</span>
      * <span class="zh-CN">生成的客户端实例对象</span>
+     * @throws MalformedURLException <span class="en-US">if no service location.</span>
+     *                               <span class="zh-CN">如果没有指定服务地址。</span>
      */
     public static <T> T RestfulClient(final String targetAddress, final Class<T> serviceInterface,
-                                      final Map<String, String> headerMap) {
+                                      final Map<String, String> headerMap) throws MalformedURLException {
         if (StringUtils.isEmpty(targetAddress)) {
-            return null;
+            throw new MalformedURLException("Service location is empty");
         }
         String servicePath = targetAddress.toLowerCase().startsWith("http")
                 ? targetAddress
@@ -163,75 +197,6 @@ public final class ServiceUtils {
             servicePath += serviceInterface.getAnnotation(Path.class).value();
         }
         return ObjectUtils.newInstance(serviceInterface, new RestfulInterceptor(servicePath, headerMap));
-    }
-
-    /**
-     * <h3 class="en-US">Find annotation and generate data convert adapter</h3>
-     * <h3 class="zh-CN">寻找注解并生成数据转换适配器</h3>
-     *
-     * @param annotations <span class="en-US">Annotation instance array</span>
-     *                    <span class="zh-CN">注解实例对象数组</span>
-     * @return <span class="en-US">Generated data convert adapter</span>
-     * <span class="zh-CN">生成的数据转换适配器实例对象</span>
-     */
-    private static Adapter<String, Object> newConverter(final Annotation[] annotations) {
-        Adapter<String, Object> adapter = null;
-        for (Annotation annotation : annotations) {
-            if (annotation.annotationType().equals(DataConverter.class)) {
-                adapter = newConverter((DataConverter) annotation);
-            }
-            if (adapter != null) {
-                break;
-            }
-        }
-        return adapter;
-    }
-
-    /**
-     * <h3 class="en-US">Find annotation and generate data convert adapter</h3>
-     * <h3 class="zh-CN">寻找注解并生成数据转换适配器</h3>
-     *
-     * @param dataConverter <span class="en-US">DataConverter annotation instance</span>
-     *                      <span class="zh-CN">数据转换器注解实例对象</span>
-     * @return <span class="en-US">Generated data convert adapter</span>
-     * <span class="zh-CN">生成的数据转换适配器实例对象</span>
-     */
-    @SuppressWarnings("unchecked")
-    private static Adapter<String, Object> newConverter(final DataConverter dataConverter) {
-        return Optional.ofNullable(dataConverter)
-                .map(DataConverter::value)
-                .filter(converterClass ->
-                        Adapter.class.isAssignableFrom(converterClass) && !Adapter.class.equals(converterClass))
-                .map(converterClass -> (Adapter<String, Object>) ObjectUtils.newInstance(converterClass))
-                .orElse(null);
-    }
-
-    /**
-     * <h3 class="en-US">Marshal data using given adapter</h3>
-     * <h3 class="zh-CN">使用给定适配器编组数据</h3>
-     *
-     * @param adapter <span class="en-US">Data convert adapter</span>
-     *                <span class="zh-CN">数据转换适配器实例对象</span>
-     * @param value   <span class="en-US">Data instance will convert</span>
-     *                <span class="zh-CN">将被转换的数据实例对象</span>
-     * @return <span class="en-US">Converted result or empty string if value is <code>null</code> or an error occurs when process marshal</span>
-     * <span class="zh-CN">数据转换结果，如果输入数据为<code>null</code>或转换时出现异常，则返回长度为0的空字符串</span>
-     */
-    private static String marshal(final Adapter<String, Object> adapter, final Object value) {
-        if (value == null) {
-            return Globals.DEFAULT_VALUE_STRING;
-        }
-        if (adapter == null) {
-            return value.toString();
-        }
-        try {
-            return adapter.marshal(value);
-        } catch (Exception e) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.error("Utils", "Convert_Object_Error", e);
-            }
-            return Globals.DEFAULT_VALUE_STRING;
-        }
     }
 
     /**
@@ -262,347 +227,361 @@ public final class ServiceUtils {
      * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
      * @version $Revision: 1.0.0 $ $Date: Jan 13, 2020 16:28:15 $
      */
-    private record RestfulInterceptor(String requestPath, Map<String, String> headerMap) implements InvocationHandler {
-        /**
-         * <h3 class="en-US">Constructor for RestfulInterceptor</h3>
-         * <h3 class="zh-CN">Restful服务拦截器的构造方法</h3>
-         *
-         * @param requestPath <span class="en-US">Request path</span>
-         *                    <span class="zh-CN">请求地址</span>
-         * @param headerMap   <span class="en-US">Request header information map</span>
-         *                    <span class="zh-CN">请求头部信息映射</span>
-         */
-        private RestfulInterceptor(final String requestPath, final Map<String, String> headerMap) {
-            this.requestPath = requestPath;
-            this.headerMap = new HashMap<>();
-            if (headerMap != null) {
-                this.headerMap.putAll(headerMap);
-            }
-        }
-
-        /**
-         * (Non-Javadoc)
-         *
-         * @see InvocationHandler#invoke(Object, Method, Object[])
-         */
-        @Override
-        public Object invoke(final Object o, final Method method, final Object[] objects) throws Throwable {
-            HttpMethodOption methodOption = RequestUtils.httpMethodOption(method);
-            if (HttpMethodOption.UNKNOWN.equals(methodOption) || !method.isAnnotationPresent(Path.class)) {
-                throw new Exception("Unknown method! ");
-            }
-
-            String methodName = method.getAnnotation(Path.class).value();
-            if (methodName.isEmpty()) {
-                methodName = method.getName();
-            } else if (methodName.startsWith("/")) {
-                methodName = methodName.substring(1);
-            }
-
-            String servicePath = this.requestPath + "/" + methodName;
-
-            Annotation[][] annotations = method.getParameterAnnotations();
-            Class<?>[] parameterClasses = method.getParameterTypes();
-
-            if (objects.length != parameterClasses.length) {
-                throw new Exception("Mismatch arguments");
-            }
-
-            Map<String, String> formParameters = new HashMap<>();
-            Map<String, String> queryParameters = new HashMap<>();
-            Map<String, String[]> matrixParameters = new HashMap<>();
-
-            String[] mediaTypes = method.isAnnotationPresent(Consumes.class)
-                    ? method.getAnnotation(Consumes.class).value()
-                    : new String[0];
-
-            for (int i = 0; i < objects.length; i++) {
-                Object paramObj = objects[i];
-                if (paramObj == null) {
-                    continue;
+        private record RestfulInterceptor(String requestPath, Map<String, String> headerMap) implements InvocationHandler {
+            /**
+             * <h3 class="en-US">Constructor for RestfulInterceptor</h3>
+             * <h3 class="zh-CN">Restful服务拦截器的构造方法</h3>
+             *
+             * @param requestPath <span class="en-US">Request path</span>
+             *                    <span class="zh-CN">请求地址</span>
+             * @param headerMap   <span class="en-US">Request header information map</span>
+             *                    <span class="zh-CN">请求头部信息映射</span>
+             */
+            private RestfulInterceptor(final String requestPath, final Map<String, String> headerMap) {
+                this.requestPath = requestPath;
+                this.headerMap = new HashMap<>();
+                if (headerMap != null) {
+                    this.headerMap.putAll(headerMap);
                 }
-                Adapter<String, Object> dataConverter = newConverter(annotations[i]);
-                if (Arrays.stream(annotations[i])
-                        .anyMatch(annotation -> annotation.annotationType().equals(BeanParam.class))) {
-                    BeanParameter beanParameter = new BeanParameter(paramObj, mediaTypes, dataConverter);
-                    this.headerMap.putAll(beanParameter.getHeaders());
-                    for (Map.Entry<String, String> entry : beanParameter.getPaths().entrySet()) {
-                        if (StringUtils.isEmpty(entry.getKey()) || entry.getValue() == null) {
-                            throw new ServiceException("Unknown parameter name or path parameter value is null! ");
-                        }
-                        String pathKey = "{" + entry.getKey() + "}";
-                        if (servicePath.indexOf(pathKey) > 0) {
-                            servicePath = StringUtils.replace(servicePath, pathKey,
-                                    URLEncoder.encode(entry.getValue(), Globals.DEFAULT_ENCODING));
-                        }
-                    }
-                    formParameters.putAll(beanParameter.getFormParameters());
-                    queryParameters.putAll(beanParameter.getQueryParameters());
-                    matrixParameters.putAll(beanParameter.getMatrixParameters());
-                } else if (Arrays.stream(annotations[i])
-                        .anyMatch(annotation -> annotation.annotationType().equals(MatrixParam.class))) {
-                    Arrays.stream(annotations[i])
-                            .filter(annotation -> annotation.annotationType().equals(MatrixParam.class))
-                            .findFirst()
-                            .map(annotation -> ((MatrixParam) annotation).value())
-                            .ifPresent(paramName -> {
-                                if (paramObj.getClass().isArray()) {
-                                    Arrays.asList((Object[]) paramObj).forEach(itemValue -> {
-                                        String paramValue = marshal(dataConverter, itemValue);
-                                        matrixParameters.put(paramName,
-                                                appendValue(matrixParameters.getOrDefault(paramName, new String[0]),
-                                                        paramValue));
-                                    });
-                                } else if (List.class.isAssignableFrom(paramObj.getClass())) {
-                                    ((List<?>) paramObj).forEach(itemValue -> {
-                                        String paramValue = marshal(dataConverter, itemValue);
-                                        matrixParameters.put(paramName,
-                                                appendValue(matrixParameters.getOrDefault(paramName, new String[0]),
-                                                        paramValue));
-                                    });
-                                } else {
-                                    String paramValue = marshal(dataConverter, paramObj);
-                                    matrixParameters.put(paramName,
-                                            appendValue(matrixParameters.getOrDefault(paramName, new String[0]),
-                                                    paramValue));
-                                }
-                            });
-                } else {
-                    String paramValue = marshal(dataConverter, paramObj);
-                    if (Arrays.stream(annotations[i])
-                            .anyMatch(annotation -> annotation.annotationType().equals(QueryParam.class))) {
-                        String paramName =
-                                Arrays.stream(annotations[i]).filter(annotation ->
-                                                annotation.annotationType().equals(QueryParam.class))
-                                        .findFirst()
-                                        .map(annotation -> ((QueryParam) annotation).value())
-                                        .orElse(Globals.DEFAULT_VALUE_STRING);
-                        if (StringUtils.notBlank(paramName)) {
-                            queryParameters.put(paramName, paramValue);
-                        }
-                    }
+            }
 
-                    if (Arrays.stream(annotations[i])
-                            .anyMatch(annotation -> annotation.annotationType().equals(FormParam.class))) {
-                        String paramName =
-                                Arrays.stream(annotations[i]).filter(annotation ->
-                                                annotation.annotationType().equals(FormParam.class))
-                                        .findFirst()
-                                        .map(annotation -> ((FormParam) annotation).value())
-                                        .orElse(Globals.DEFAULT_VALUE_STRING);
-                        if (StringUtils.notBlank(paramName)) {
-                            queryParameters.put(paramName, paramValue);
-                        }
-                    }
+            private String servicePath(final Method method) throws NetworkInfoException {
+                if (!method.isAnnotationPresent(Path.class)) {
+                    throw new NetworkInfoException(0x0000001A0004L, "Unknown_Path_Restful_Service_Method");
+                }
 
+                String methodName = method.getAnnotation(Path.class).value();
+                if (methodName.isEmpty()) {
+                    methodName = method.getName();
+                } else if (methodName.startsWith("/")) {
+                    methodName = methodName.substring(1);
+                }
+                return this.requestPath + "/" + methodName;
+            }
+
+            /**
+             * (Non-Javadoc)
+             *
+             * @see InvocationHandler#invoke(Object, Method, Object[])
+             */
+            @Override
+            public Object invoke(final Object o, final Method method, final Object[] objects) throws Throwable {
+                HttpMethodOption methodOption = RequestUtils.httpMethodOption(method);
+                if (HttpMethodOption.UNKNOWN.equals(methodOption)) {
+                    throw new NetworkInfoException(0x0000001A0003L, "Unknown_Http_Method");
+                }
+                String servicePath = this.servicePath(method);
+
+                Annotation[][] annotations = method.getParameterAnnotations();
+                Class<?>[] parameterClasses = method.getParameterTypes();
+
+                if (objects.length != parameterClasses.length) {
+                    throw new Exception("Mismatch arguments");
+                }
+
+                Map<String, String> formParameters = new HashMap<>();
+                Map<String, String> queryParameters = new HashMap<>();
+                Map<String, String[]> matrixParameters = new HashMap<>();
+
+                String[] mediaTypes = method.isAnnotationPresent(Consumes.class)
+                        ? method.getAnnotation(Consumes.class).value()
+                        : new String[0];
+
+                for (int i = 0; i < objects.length; i++) {
+                    Object paramObj = objects[i];
+                    if (paramObj == null) {
+                        continue;
+                    }
+                    TransferConfig<Object, Object> transferConfig =
+                            Arrays.stream(annotations[i])
+                                    .filter(annotation -> annotation.annotationType().equals(DataTransfer.class))
+                                    .findFirst()
+                                    .map(annotation -> {
+                                        try {
+                                            return new TransferConfig<>((DataTransfer) annotation);
+                                        } catch (DataInvalidException e) {
+                                            return null;
+                                        }
+                                    })
+                                    .orElse(new TransferConfig<>(null));
                     if (Arrays.stream(annotations[i])
-                            .anyMatch(annotation -> annotation.annotationType().equals(PathParam.class))) {
-                        String paramName =
-                                Arrays.stream(annotations[i]).filter(annotation ->
-                                                annotation.annotationType().equals(PathParam.class))
-                                        .findFirst()
-                                        .map(annotation -> ((PathParam) annotation).value())
-                                        .orElse(Globals.DEFAULT_VALUE_STRING);
-                        if (StringUtils.notBlank(paramName)) {
-                            if (StringUtils.isEmpty(paramValue)) {
+                            .anyMatch(annotation -> annotation.annotationType().equals(BeanParam.class))) {
+                        BeanParameter beanParameter = new BeanParameter(paramObj, mediaTypes, transferConfig);
+                        this.headerMap.putAll(beanParameter.getHeaders());
+                        for (Map.Entry<String, String> entry : beanParameter.getPaths().entrySet()) {
+                            if (StringUtils.isEmpty(entry.getKey()) || entry.getValue() == null) {
                                 throw new ServiceException("Unknown parameter name or path parameter value is null! ");
                             }
-                            String pathKey = "{" + paramName + "}";
+                            String pathKey = "{" + entry.getKey() + "}";
                             if (servicePath.indexOf(pathKey) > 0) {
                                 servicePath = StringUtils.replace(servicePath, pathKey,
-                                        URLEncoder.encode(paramValue, Globals.DEFAULT_ENCODING));
+                                        URLEncoder.encode(entry.getValue(), Globals.DEFAULT_ENCODING));
+                            }
+                        }
+                        formParameters.putAll(beanParameter.getFormParameters());
+                        queryParameters.putAll(beanParameter.getQueryParameters());
+                        matrixParameters.putAll(beanParameter.getMatrixParameters());
+                    } else if (Arrays.stream(annotations[i])
+                            .anyMatch(annotation -> annotation.annotationType().equals(MatrixParam.class))) {
+                        Arrays.stream(annotations[i])
+                                .filter(annotation -> annotation.annotationType().equals(MatrixParam.class))
+                                .findFirst()
+                                .map(annotation -> ((MatrixParam) annotation).value())
+                                .ifPresent(paramName -> {
+                                    if (paramObj.getClass().isArray()) {
+                                        Arrays.asList((Object[]) paramObj).forEach(itemValue -> {
+                                            String paramValue = (String) transferConfig.convert(itemValue);
+                                            matrixParameters.put(paramName,
+                                                    appendValue(matrixParameters.getOrDefault(paramName, new String[0]),
+                                                            paramValue));
+                                        });
+                                    } else if (List.class.isAssignableFrom(paramObj.getClass())) {
+                                        ((List<?>) paramObj).forEach(itemValue -> {
+                                            String paramValue = (String) transferConfig.convert(itemValue);
+                                            matrixParameters.put(paramName,
+                                                    appendValue(matrixParameters.getOrDefault(paramName, new String[0]),
+                                                            paramValue));
+                                        });
+                                    } else {
+                                        String paramValue = (String) transferConfig.convert(paramObj);
+                                        matrixParameters.put(paramName,
+                                                appendValue(matrixParameters.getOrDefault(paramName, new String[0]),
+                                                        paramValue));
+                                    }
+                                });
+                    } else {
+                        String paramValue = (String) transferConfig.convert(paramObj);
+                        if (Arrays.stream(annotations[i])
+                                .anyMatch(annotation -> annotation.annotationType().equals(QueryParam.class))) {
+                            String paramName =
+                                    Arrays.stream(annotations[i]).filter(annotation ->
+                                                    annotation.annotationType().equals(QueryParam.class))
+                                            .findFirst()
+                                            .map(annotation -> ((QueryParam) annotation).value())
+                                            .orElse(Globals.DEFAULT_VALUE_STRING);
+                            if (StringUtils.notBlank(paramName)) {
+                                queryParameters.put(paramName, paramValue);
+                            }
+                        }
+
+                        if (Arrays.stream(annotations[i])
+                                .anyMatch(annotation -> annotation.annotationType().equals(FormParam.class))) {
+                            String paramName =
+                                    Arrays.stream(annotations[i]).filter(annotation ->
+                                                    annotation.annotationType().equals(FormParam.class))
+                                            .findFirst()
+                                            .map(annotation -> ((FormParam) annotation).value())
+                                            .orElse(Globals.DEFAULT_VALUE_STRING);
+                            if (StringUtils.notBlank(paramName)) {
+                                queryParameters.put(paramName, paramValue);
+                            }
+                        }
+
+                        if (Arrays.stream(annotations[i])
+                                .anyMatch(annotation -> annotation.annotationType().equals(PathParam.class))) {
+                            String paramName =
+                                    Arrays.stream(annotations[i]).filter(annotation ->
+                                                    annotation.annotationType().equals(PathParam.class))
+                                            .findFirst()
+                                            .map(annotation -> ((PathParam) annotation).value())
+                                            .orElse(Globals.DEFAULT_VALUE_STRING);
+                            if (StringUtils.notBlank(paramName)) {
+                                if (StringUtils.isEmpty(paramValue)) {
+                                    throw new ServiceException("Unknown parameter name or path parameter value is null! ");
+                                }
+                                String pathKey = "{" + paramName + "}";
+                                if (servicePath.indexOf(pathKey) > 0) {
+                                    servicePath = StringUtils.replace(servicePath, pathKey,
+                                            URLEncoder.encode(paramValue, Globals.DEFAULT_ENCODING));
+                                }
+                            }
+                        }
+
+                        if (Arrays.stream(annotations[i])
+                                .anyMatch(annotation -> annotation.annotationType().equals(HeaderParam.class))) {
+                            String paramName =
+                                    Arrays.stream(annotations[i]).filter(annotation ->
+                                                    annotation.annotationType().equals(HeaderParam.class))
+                                            .findFirst()
+                                            .map(annotation -> ((HeaderParam) annotation).value())
+                                            .orElse(Globals.DEFAULT_VALUE_STRING);
+                            if (StringUtils.notBlank(paramName)) {
+                                this.headerMap.put(paramName, paramValue);
                             }
                         }
                     }
-
-                    if (Arrays.stream(annotations[i])
-                            .anyMatch(annotation -> annotation.annotationType().equals(HeaderParam.class))) {
-                        String paramName =
-                                Arrays.stream(annotations[i]).filter(annotation ->
-                                                annotation.annotationType().equals(HeaderParam.class))
-                                        .findFirst()
-                                        .map(annotation -> ((HeaderParam) annotation).value())
-                                        .orElse(Globals.DEFAULT_VALUE_STRING);
-                        if (StringUtils.notBlank(paramName)) {
-                            this.headerMap.put(paramName, paramValue);
-                        }
-                    }
                 }
-            }
 
-            Form form = null;
-            if (HttpMethodOption.POST.equals(methodOption)
-                    || HttpMethodOption.PUT.equals(methodOption)
-                    || HttpMethodOption.PATCH.equals(methodOption)) {
-                form = new Form();
-                formParameters.forEach(form::param);
-            }
-
-            try (Client client = ClientBuilder.newClient()) {
-                WebTarget webTarget = client.target(servicePath);
-                queryParameters.forEach(webTarget::queryParam);
-                matrixParameters.forEach(webTarget::matrixParam);
-                String[] acceptTypes = method.isAnnotationPresent(Produces.class)
-                        ? method.getAnnotation(Produces.class).value()
-                        : new String[]{"*/*"};
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Accept data types: {}", String.join(",", acceptTypes));
+                Form form = null;
+                if (HttpMethodOption.POST.equals(methodOption)
+                        || HttpMethodOption.PUT.equals(methodOption)
+                        || HttpMethodOption.PATCH.equals(methodOption)) {
+                    form = new Form();
+                    formParameters.forEach(form::param);
                 }
-                Invocation.Builder builder = webTarget.request(acceptTypes);
-                if (method.isAnnotationPresent(Consumes.class)) {
-                    builder.accept(method.getAnnotation(Consumes.class).value());
-                }
-                this.headerMap.forEach(builder::header);
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Service request path: {}", servicePath);
-                    LOGGER.debug("Request headers: {}",
-                            StringUtils.objectToString(this.headerMap, StringUtils.StringType.JSON, Boolean.TRUE));
-                    LOGGER.debug("Request parameters: {}",
-                            StringUtils.objectToString(queryParameters, StringUtils.StringType.JSON, Boolean.TRUE));
-                    LOGGER.debug("Request matrix parameters: {}",
-                            StringUtils.objectToString(matrixParameters, StringUtils.StringType.JSON, Boolean.TRUE));
-                }
-                return this.execute(methodOption, builder, form, method);
-            }
-        }
 
-        /**
-         * <h3 class="en-US">Send request and initialize response instance</h3>
-         * <h3 class="zh-CN">发送请求并初始化响应实例对象</h3>
-         *
-         * @param methodOption <span class="en-US">HTTP method option Enumerations</span>
-         *                     <span class="zh-CN">HTTP请求方法枚举</span>
-         * @param builder      <span class="en-US">Request builder</span>
-         *                     <span class="zh-CN">请求构建器</span>
-         * @param form         <span class="en-US">Form information instance</span>
-         *                     <span class="zh-CN">表单信息实例对象</span>
-         * @return <span class="en-US">initialized response instance</span>
-         * <span class="zh-CN">初始化的响应实例对象</span>
-         * @throws ServiceException <span class="en-US">If http method not supported</span>
-         *                          <span class="zh-CN">如果HTTP请求方法不支持</span>
-         */
-        private Response initResponse(final HttpMethodOption methodOption, final Invocation.Builder builder,
-                                      final Form form) throws ServiceException {
-            return switch (methodOption) {
-                case GET -> builder.get();
-                case PATCH -> builder.method("PATCH",
-                        Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
-                case PUT -> builder.put(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
-                case POST -> builder.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
-                case DELETE -> builder.delete();
-                case HEAD -> builder.head();
-                default -> throw new ServiceException("Method not supported! ");
-            };
-        }
-
-        /**
-         * <h3 class="en-US">Send request and parse response information</h3>
-         * <h3 class="zh-CN">发送请求并解析响应信息</h3>
-         *
-         * @param methodOption <span class="en-US">HTTP method option Enumerations</span>
-         *                     <span class="zh-CN">HTTP请求方法枚举</span>
-         * @param builder      <span class="en-US">Request builder</span>
-         *                     <span class="zh-CN">请求构建器</span>
-         * @param form         <span class="en-US">Form information instance</span>
-         *                     <span class="zh-CN">表单信息实例对象</span>
-         * @param method       <span class="en-US">Invoke method instance</span>
-         *                     <span class="zh-CN">调用方法的实例对象</span>
-         * @return <span class="en-US">Parsed response information</span>
-         * <span class="zh-CN">解析的响应信息</span>
-         * @throws ServiceException <span class="en-US">If http method not supported, or an error occurs when send request or parse response information</span>
-         *                          <span class="zh-CN">如果HTTP请求方法不支持，发送请求或解析响应信息时出现异常</span>
-         */
-        private Object execute(final HttpMethodOption methodOption, final Invocation.Builder builder,
-                               final Form form, final Method method) throws ServiceException {
-            try (Response response = this.initResponse(methodOption, builder, form)) {
-                boolean operateResult = switch (methodOption) {
-                    case PUT -> (response.getStatus() == HttpServletResponse.SC_CREATED
-                            || response.getStatus() == HttpServletResponse.SC_NO_CONTENT
-                            || response.getStatus() == HttpServletResponse.SC_OK);
-                    case POST -> (response.getStatus() == HttpServletResponse.SC_CREATED
-                            || response.getStatus() == HttpServletResponse.SC_OK);
-                    case PATCH, DELETE -> (response.getStatus() == HttpServletResponse.SC_NO_CONTENT);
-                    default -> (response.getStatus() == HttpServletResponse.SC_OK);
-                };
-
-                if (operateResult) {
-                    if (response.getStatus() == HttpServletResponse.SC_NO_CONTENT) {
-                        return null;
-                    }
-
-                    Class<?> returnType = method.getReturnType();
-                    if (void.class.equals(returnType)) {
-                        return null;
-                    }
-                    String contentType = response.getHeaderString("Content-Type");
-                    String charsetEncoding =
-                            Arrays.stream(StringUtils.tokenizeToStringArray(contentType, ";"))
-                                    .filter(string -> string.trim().toLowerCase().startsWith("charset="))
-                                    .findFirst()
-                                    .map(string -> string.substring("charset=".length()))
-                                    .orElse(Globals.DEFAULT_ENCODING);
-
-                    Class<?> paramClass = ClassUtils.componentType(method.getReturnType());
-
-                    String responseData = response.readEntity(String.class);
-                    if (responseData.endsWith(FileUtils.CRLF)) {
-                        responseData = responseData.substring(0, responseData.length() - FileUtils.CRLF.length());
-                    }
-                    if (responseData.endsWith(Character.toString(FileUtils.CR))) {
-                        responseData = responseData.substring(0, responseData.length() - Character.toString(FileUtils.CR).length());
-                    }
-                    if (responseData.endsWith(Character.toString(FileUtils.LF))) {
-                        responseData = responseData.substring(0, responseData.length() - Character.toString(FileUtils.LF).length());
-                    }
-
-                    if (returnType.isArray()) {
-                        return Optional.ofNullable(StringUtils.stringToList(responseData, charsetEncoding, paramClass))
-                                .map(List::toArray)
-                                .orElse(new ArrayList<>().toArray());
-                    } else if (List.class.isAssignableFrom(returnType)) {
-                        return Optional.ofNullable(StringUtils.stringToList(responseData, charsetEncoding, paramClass))
-                                .orElse(new ArrayList<>());
-                    }
-                    return switch (response.getHeaderString(HttpHeaders.CONTENT_TYPE)) {
-                        case FileUtils.MIME_TYPE_JSON ->
-                                StringUtils.stringToObject(responseData, StringUtils.StringType.JSON, returnType);
-                        case FileUtils.MIME_TYPE_TEXT_XML, FileUtils.MIME_TYPE_XML ->
-                                StringUtils.stringToObject(responseData, StringUtils.StringType.XML, returnType);
-                        case FileUtils.MIME_TYPE_TEXT_YAML, FileUtils.MIME_TYPE_YAML ->
-                                StringUtils.stringToObject(responseData, StringUtils.StringType.YAML, returnType);
-                        default -> responseData;
-                    };
-                } else {
-                    String errorMsg = response.readEntity(String.class);
+                try (Client client = ClientBuilder.newClient()) {
+                    WebTarget webTarget = client.target(servicePath);
+                    queryParameters.forEach(webTarget::queryParam);
+                    matrixParameters.forEach(webTarget::matrixParam);
+                    String[] acceptTypes = method.isAnnotationPresent(Produces.class)
+                            ? method.getAnnotation(Produces.class).value()
+                            : new String[]{"*/*"};
                     if (LOGGER.isDebugEnabled()) {
-                        if (response.getStatus() == HttpServletResponse.SC_BAD_REQUEST) {
-                            errorMsg += "Send request data error!";
-                        } else if (HttpMethodOption.GET.equals(methodOption)
-                                && response.getStatus() == HttpServletResponse.SC_NOT_FOUND) {
-                            errorMsg += "Not found data! ";
-                        } else if (response.getStatus() == HttpServletResponse.SC_UNAUTHORIZED) {
-                            errorMsg += "Unauthenticated error! ";
-                        } else if (response.getStatus() == HttpServletResponse.SC_FORBIDDEN) {
-                            errorMsg += "Request forbidden! ";
-                        } else if (response.getStatus() == HttpServletResponse.SC_BAD_GATEWAY
-                                || response.getStatus() == HttpServletResponse.SC_SERVICE_UNAVAILABLE
-                                || response.getStatus() == HttpServletResponse.SC_GATEWAY_TIMEOUT) {
-                            errorMsg += "Request forbidden! ";
-                        } else {
-                            errorMsg += Globals.DEFAULT_VALUE_STRING;
-                        }
-                        LOGGER.debug("Utils", "Response_Message_Debug", response.getStatus(), errorMsg);
+                        LOGGER.debug("Accept data types: {}", String.join(",", acceptTypes));
                     }
-                    throw new ServiceException(errorMsg);
+                    Invocation.Builder builder = webTarget.request(acceptTypes);
+                    if (method.isAnnotationPresent(Consumes.class)) {
+                        builder.accept(method.getAnnotation(Consumes.class).value());
+                    }
+                    this.headerMap.forEach(builder::header);
+                    if (LOGGER.isDebugEnabled()) {
+                        LOGGER.debug("Service request path: {}", servicePath);
+                        LOGGER.debug("Request headers: {}",
+                                StringUtils.objectToString(this.headerMap, StringUtils.StringType.JSON, Boolean.TRUE));
+                        LOGGER.debug("Request parameters: {}",
+                                StringUtils.objectToString(queryParameters, StringUtils.StringType.JSON, Boolean.TRUE));
+                        LOGGER.debug("Request matrix parameters: {}",
+                                StringUtils.objectToString(matrixParameters, StringUtils.StringType.JSON, Boolean.TRUE));
+                    }
+                    return this.execute(methodOption, builder, form, method);
                 }
-            } catch (Exception e) {
-                if (e instanceof ServiceException) {
-                    throw e;
+            }
+
+            /**
+             * <h3 class="en-US">Send request and initialize response instance</h3>
+             * <h3 class="zh-CN">发送请求并初始化响应实例对象</h3>
+             *
+             * @param methodOption <span class="en-US">HTTP method option Enumerations</span>
+             *                     <span class="zh-CN">HTTP请求方法枚举</span>
+             * @param builder      <span class="en-US">Request builder</span>
+             *                     <span class="zh-CN">请求构建器</span>
+             * @param form         <span class="en-US">Form information instance</span>
+             *                     <span class="zh-CN">表单信息实例对象</span>
+             * @return <span class="en-US">initialized response instance</span>
+             * <span class="zh-CN">初始化的响应实例对象</span>
+             * @throws ServiceException <span class="en-US">If http method not supported</span>
+             *                          <span class="zh-CN">如果HTTP请求方法不支持</span>
+             */
+            private Response initResponse(final HttpMethodOption methodOption, final Invocation.Builder builder,
+                                          final Form form) throws ServiceException {
+                return switch (methodOption) {
+                    case GET -> builder.get();
+                    case PATCH -> builder.method("PATCH",
+                            Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+                    case PUT -> builder.put(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+                    case POST -> builder.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+                    case DELETE -> builder.delete();
+                    case HEAD -> builder.head();
+                    default -> throw new ServiceException("Method not supported! ");
+                };
+            }
+
+            /**
+             * <h3 class="en-US">Send request and parse response information</h3>
+             * <h3 class="zh-CN">发送请求并解析响应信息</h3>
+             *
+             * @param methodOption <span class="en-US">HTTP method option Enumerations</span>
+             *                     <span class="zh-CN">HTTP请求方法枚举</span>
+             * @param builder      <span class="en-US">Request builder</span>
+             *                     <span class="zh-CN">请求构建器</span>
+             * @param form         <span class="en-US">Form information instance</span>
+             *                     <span class="zh-CN">表单信息实例对象</span>
+             * @param method       <span class="en-US">Invoke method instance</span>
+             *                     <span class="zh-CN">调用方法的实例对象</span>
+             * @return <span class="en-US">Parsed response information</span>
+             * <span class="zh-CN">解析的响应信息</span>
+             * @throws ServiceException <span class="en-US">If http method not supported, or an error occurs when send request or parse response information</span>
+             *                          <span class="zh-CN">如果HTTP请求方法不支持，发送请求或解析响应信息时出现异常</span>
+             */
+            private Object execute(final HttpMethodOption methodOption, final Invocation.Builder builder,
+                                   final Form form, final Method method) throws ServiceException {
+                try (Response response = this.initResponse(methodOption, builder, form)) {
+                    boolean operateResult = switch (methodOption) {
+                        case PUT -> (response.getStatus() == HttpServletResponse.SC_CREATED
+                                || response.getStatus() == HttpServletResponse.SC_NO_CONTENT
+                                || response.getStatus() == HttpServletResponse.SC_OK);
+                        case POST -> (response.getStatus() == HttpServletResponse.SC_CREATED
+                                || response.getStatus() == HttpServletResponse.SC_OK);
+                        case PATCH, DELETE -> (response.getStatus() == HttpServletResponse.SC_NO_CONTENT);
+                        default -> (response.getStatus() == HttpServletResponse.SC_OK);
+                    };
+
+                    if (operateResult) {
+                        if (response.getStatus() == HttpServletResponse.SC_NO_CONTENT) {
+                            return null;
+                        }
+
+                        Class<?> returnType = method.getReturnType();
+                        if (void.class.equals(returnType)) {
+                            return null;
+                        }
+                        String contentType = response.getHeaderString("Content-Type");
+                        String charsetEncoding =
+                                Arrays.stream(StringUtils.tokenizeToStringArray(contentType, ";"))
+                                        .filter(string -> string.trim().toLowerCase().startsWith("charset="))
+                                        .findFirst()
+                                        .map(string -> string.substring("charset=".length()))
+                                        .orElse(Globals.DEFAULT_ENCODING);
+
+                        Class<?> paramClass = ClassUtils.componentType(method.getReturnType());
+
+                        String responseData = response.readEntity(String.class);
+                        if (responseData.endsWith(FileUtils.CRLF)) {
+                            responseData = responseData.substring(0, responseData.length() - FileUtils.CRLF.length());
+                        }
+                        if (responseData.endsWith(Character.toString(FileUtils.CR))) {
+                            responseData = responseData.substring(0, responseData.length() - Character.toString(FileUtils.CR).length());
+                        }
+                        if (responseData.endsWith(Character.toString(FileUtils.LF))) {
+                            responseData = responseData.substring(0, responseData.length() - Character.toString(FileUtils.LF).length());
+                        }
+
+                        if (returnType.isArray()) {
+                            return Optional.ofNullable(StringUtils.stringToList(responseData, charsetEncoding, paramClass))
+                                    .map(List::toArray)
+                                    .orElse(new ArrayList<>().toArray());
+                        } else if (List.class.isAssignableFrom(returnType)) {
+                            return Optional.ofNullable(StringUtils.stringToList(responseData, charsetEncoding, paramClass))
+                                    .orElse(new ArrayList<>());
+                        }
+                        return switch (response.getHeaderString(HttpHeaders.CONTENT_TYPE)) {
+                            case FileUtils.MIME_TYPE_JSON -> StringUtils.stringToObject(responseData, StringUtils.StringType.JSON, returnType);
+                            case FileUtils.MIME_TYPE_TEXT_XML, FileUtils.MIME_TYPE_XML -> StringUtils.stringToObject(responseData, StringUtils.StringType.XML, returnType);
+                            case FileUtils.MIME_TYPE_TEXT_YAML, FileUtils.MIME_TYPE_YAML -> StringUtils.stringToObject(responseData, StringUtils.StringType.YAML, returnType);
+                            default -> responseData;
+                        };
+                    } else {
+                        String errorMsg = response.readEntity(String.class);
+                        if (LOGGER.isDebugEnabled()) {
+                            if (response.getStatus() == HttpServletResponse.SC_BAD_REQUEST) {
+                                errorMsg += "Send request data error!";
+                            } else if (HttpMethodOption.GET.equals(methodOption)
+                                    && response.getStatus() == HttpServletResponse.SC_NOT_FOUND) {
+                                errorMsg += "Not found data! ";
+                            } else if (response.getStatus() == HttpServletResponse.SC_UNAUTHORIZED) {
+                                errorMsg += "Unauthenticated error! ";
+                            } else if (response.getStatus() == HttpServletResponse.SC_FORBIDDEN) {
+                                errorMsg += "Request forbidden! ";
+                            } else if (response.getStatus() == HttpServletResponse.SC_BAD_GATEWAY
+                                    || response.getStatus() == HttpServletResponse.SC_SERVICE_UNAVAILABLE
+                                    || response.getStatus() == HttpServletResponse.SC_GATEWAY_TIMEOUT) {
+                                errorMsg += "Request forbidden! ";
+                            } else {
+                                errorMsg += Globals.DEFAULT_VALUE_STRING;
+                            }
+                            LOGGER.debug("Response_Message_Debug", response.getStatus(), errorMsg);
+                        }
+                        throw new ServiceException(errorMsg);
+                    }
+                } catch (Exception e) {
+                    if (e instanceof ServiceException) {
+                        throw e;
+                    }
+                    throw new ServiceException(e);
                 }
-                throw new ServiceException(e);
             }
         }
-    }
 
     /**
      * <h2 class="en-US">JavaBean parameter define</h2>
@@ -642,26 +621,26 @@ public final class ServiceUtils {
          * <h3 class="en-US">Constructor for BeanParameter</h3>
          * <h3 class="zh-CN">BeanParameter的构造方法</h3>
          *
-         * @param beanObject <span class="en-US">JavaBean parameter instance</span>
-         *                   <span class="zh-CN">JavaBean参数信息实例对象</span>
-         * @param mediaTypes <span class="en-US">Request media types array</span>
-         *                   <span class="zh-CN">请求数据类型数组</span>
-         * @param adapter    <span class="en-US">Data convert adapter</span>
-         *                   <span class="zh-CN">数据转换适配器实例对象</span>
+         * @param beanObject     <span class="en-US">JavaBean parameter instance</span>
+         *                       <span class="zh-CN">JavaBean参数信息实例对象</span>
+         * @param mediaTypes     <span class="en-US">Request media types array</span>
+         *                       <span class="zh-CN">请求数据类型数组</span>
+         * @param transferConfig <span class="en-US">Data transfer configure</span>
+         *                       <span class="zh-CN">数据转换配置信息</span>
          */
-        BeanParameter(final Object beanObject, final String[] mediaTypes, final Adapter<String, Object> adapter) {
+        BeanParameter(final Object beanObject, final String[] mediaTypes,
+                      final TransferConfig<Object, Object> transferConfig) {
             ReflectionUtils.getAllDeclaredFields(beanObject.getClass(), Boolean.TRUE).forEach(field -> {
                 Object fieldValue = ReflectionUtils.getFieldValue(field, beanObject);
                 if (field.isAnnotationPresent(BeanParam.class)) {
-                    BeanParameter beanParameter = new BeanParameter(fieldValue, mediaTypes, adapter);
+                    BeanParameter beanParameter = new BeanParameter(fieldValue, mediaTypes, transferConfig);
                     this.formParameters.putAll(beanParameter.getFormParameters());
                     this.queryParameters.putAll(beanParameter.getQueryParameters());
                     this.matrixParameters.putAll(beanParameter.getMatrixParameters());
                     this.headers.putAll(beanParameter.getHeaders());
                     this.paths.putAll(beanParameter.getPaths());
                 } else {
-                    String stringValue = marshal(adapter, fieldValue);
-
+                    String stringValue = (String) transferConfig.convert(fieldValue);
                     if (field.isAnnotationPresent(QueryParam.class)) {
                         this.queryParameters.put(field.getAnnotation(QueryParam.class).value(), stringValue);
                     } else if (field.isAnnotationPresent(FormParam.class)) {

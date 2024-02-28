@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -21,7 +21,7 @@ import org.nervousync.exceptions.zip.ZipException;
 /**
  * Zip file decryptor
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Dec 2, 2017 10:34:24 AM $
+ * @version $Revision: 1.0.0 $ $Date: Dec 2, 2017 10:34:24 AM $
  */
 public interface Decryptor {
 

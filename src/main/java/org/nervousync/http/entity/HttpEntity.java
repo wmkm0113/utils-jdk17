@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -37,7 +37,7 @@ import org.nervousync.commons.Globals;
  * <h2 class="zh-CN">HTTP请求信息定义</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Jan 2, 2018 14:05:04 $
+ * @version $Revision: 1.0.0 $ $Date: Jan 2, 2018 14:05:04 $
  */
 public final class HttpEntity {
 	/**
@@ -107,9 +107,9 @@ public final class HttpEntity {
 				this.boundary = this.generateBoundary();
 			}
 		} catch (FileNotFoundException e) {
-			this.logger.error("Utils", "Upload_File_Not_Found_Error");
+			this.logger.error("Upload_File_Not_Found_Error");
 			if (this.logger.isDebugEnabled()) {
-				this.logger.debug("Utils", "Stack_Message_Error", e);
+				this.logger.debug("Stack_Message_Error", e);
 			}
 		}
 	}
@@ -134,21 +134,23 @@ public final class HttpEntity {
 		String charsetEncoding = StringUtils.notBlank(charset) ? charset : "ISO-8859-1";
 		String contentType;
 		switch (methodOption) {
-			case POST, PUT -> {
-				this.checkType();
-				if (this.multipart) {
-					if (this.mixed) {
-						contentType = Globals.DEFAULT_CONTENT_TYPE_MIXED + ";boundary=" + this.boundary;
-					} else {
-						contentType = Globals.FORM_DATA_CONTENT_TYPE_MULTIPART + ";boundary=" + this.boundary;
-					}
+		case POST: case PUT:
+			this.checkType();
+			if (this.multipart) {
+				if (this.mixed) {
+					contentType = Globals.DEFAULT_CONTENT_TYPE_MIXED + ";boundary=" + this.boundary;
 				} else {
-					contentType = Globals.DEFAULT_CONTENT_TYPE_ENCODED + ";charset=" + charsetEncoding;
+					contentType = Globals.FORM_DATA_CONTENT_TYPE_MULTIPART + ";boundary=" + this.boundary;
 				}
+			} else {
+				contentType = Globals.DEFAULT_CONTENT_TYPE_ENCODED + ";charset=" + charsetEncoding;
 			}
-			case GET, TRACE, HEAD, DELETE, OPTIONS ->
-					contentType = Globals.DEFAULT_CONTENT_TYPE_TEXT + ";charset=" + charsetEncoding;
-			default -> throw new UnsupportedEncodingException("Unknown Request Method");
+			break;
+		case GET: case TRACE: case HEAD: case DELETE: case OPTIONS:
+			contentType = Globals.DEFAULT_CONTENT_TYPE_TEXT + ";charset=" + charsetEncoding;
+			break;
+		default:
+			throw new UnsupportedEncodingException("Unknown Request Method");
 		}
 		
 		return contentType;
@@ -169,7 +171,7 @@ public final class HttpEntity {
 	public void writeData(final String charset, final OutputStream outputStream) throws IOException {
 		if (this.entityList.isEmpty()) {
 			if (this.logger.isDebugEnabled()) {
-				this.logger.debug("Utils", "Entity_List_Empty_Debug");
+				this.logger.debug("Entity_List_Empty_Debug");
 			}
 			return;
 		}
@@ -210,7 +212,7 @@ public final class HttpEntity {
 			}
 			
 			if (this.logger.isDebugEnabled()) {
-				this.logger.debug("Utils", "Write_Request_Data_Debug", stringBuilder);
+				this.logger.debug("Write_Request_Data_Debug", stringBuilder);
 			}
 			outputStream.write(stringBuilder.substring(1).getBytes(charsetEncoding));
 		}
@@ -256,7 +258,7 @@ public final class HttpEntity {
 	 * <h2 class="zh-CN">HTTP请求参数信息定义</h2>
 	 *
 	 * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
-	 * @version $Revision: 1.0 $ $Date: Jul 2, 2018 14:08:33 $
+	 * @version $Revision: 1.0.0 $ $Date: Jul 2, 2018 14:08:33 $
 	 */
 	private static final class EntityInfo {
 		/**

@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -55,15 +55,15 @@ public final class AESEngine {
 	 */
 	public void processBlock(byte[] in, byte[] out) throws ZipException {
 		if (this.workingKeys == null) {
-			throw new ZipException(0x0000001B0002L, "Utils", "Not_Initialized_AES_Engine_Zip_Error");
+			throw new ZipException(0x0000001B0002L, "Not_Initialized_AES_Engine_Zip_Error");
 		}
 
 		if (in.length < 16) {
-			throw new ZipException(0x0000001B0003L, "Utils", "Input_Buffer_Too_Short_Zip_Error");
+			throw new ZipException(0x0000001B0003L, "Input_Buffer_Too_Short_Zip_Error");
 		}
 
 		if (out.length < 16) {
-			throw new ZipException(0x0000001B0011L, "Utils", "Output_Buffer_Too_Short_Zip_Error");
+			throw new ZipException(0x0000001B0011L, "Output_Buffer_Too_Short_Zip_Error");
 		}
 
 		this.stateIn(in);
@@ -202,7 +202,7 @@ public final class AESEngine {
 	private void generateWorkingKeys(byte[] keys) throws ZipException {
 		int kc = keys.length / 4;
 		if (((kc != 4) && (kc != 6) && (kc != 8)) || ((kc * 4) != keys.length)) {
-			throw new ZipException(0x0000001B0004L, "Utils", "Invalid_Key_Length_AES_Zip_Error");
+			throw new ZipException(0x0000001B0004L, "Invalid_Key_Length_AES_Zip_Error");
 		}
 		
 		this.rounds = kc + 6;

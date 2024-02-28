@@ -12,7 +12,7 @@ import java.lang.annotation.*;
  * <span class="en-US">定义输出的数据类型，是否格式化输出的字符串以及输出字符串的编码集</span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $ $Date: Dec 25, 2022 14:27:15 $
+ * @version $Revision: 1.0.0 $ $Date: Apr 15, 2023 14:27:15 $
  */
 @Inherited
 @Documented
@@ -30,7 +30,7 @@ public @interface OutputConfig {
      * @return  <span class="en-US">Enumeration value type of StringUtils.StringType</span>
      *          <span class="zh-CN">StringUtils.StringType枚举类型</span>
      */
-    StringUtils.StringType type() default StringUtils.StringType.SIMPLE;
+    StringUtils.StringType type() default StringUtils.StringType.SERIALIZABLE;
 
     /**
 	 * <h3 class="en-US">Format output string status</h3>

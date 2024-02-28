@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -25,7 +25,7 @@ import jakarta.annotation.Nonnull;
 import org.nervousync.commons.Globals;
 import org.nervousync.exceptions.utils.DataInvalidException;
 import org.nervousync.exceptions.zip.ZipException;
-import org.nervousync.commons.io.NervousyncRandomAccessFile;
+import org.nervousync.commons.io.StandardFile;
 import org.nervousync.utils.FileUtils;
 import org.nervousync.utils.RawUtils;
 import org.nervousync.utils.StringUtils;
@@ -34,7 +34,7 @@ import org.nervousync.utils.StringUtils;
  * The type Split output stream.
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $ $Date: Nov 29, 2017 2:57:01 PM $
+ * @version $Revision: 1.0.0 \r\n * @date: Nov 29, 2017 2:57:01 PM $
  */
 public class SplitOutputStream extends OutputStream {
 
@@ -54,7 +54,7 @@ public class SplitOutputStream extends OutputStream {
         HEADER_SIGNATURES[10] = Globals.AESSIG;
     }
 
-    private NervousyncRandomAccessFile dataOutput;
+    private StandardFile dataOutput;
     private final String fileName;
     private final String filePath;
     private final String currentFullPath;
@@ -94,7 +94,7 @@ public class SplitOutputStream extends OutputStream {
         }
         this.filePath = savePath.substring(0, beginIndex);
         this.fileName = StringUtils.stripFilenameExtension(savePath.substring(beginIndex + 1));
-        this.dataOutput = new NervousyncRandomAccessFile(savePath, Boolean.TRUE);
+        this.dataOutput = new StandardFile(savePath, Boolean.TRUE);
         this.currentFullPath = savePath;
         this.splitLength = splitLength;
         this.currentSplitFileIndex = 0;
@@ -244,7 +244,7 @@ public class SplitOutputStream extends OutputStream {
     }
 
     private void startNextSplitFile() throws IOException {
-        String splitFile = this.splitPath();
+        String splitFile = splitPath();
 
         this.dataOutput.close();
 
@@ -257,23 +257,24 @@ public class SplitOutputStream extends OutputStream {
             throw new IOException("Cannot create split file!");
         }
 
-        this.dataOutput = new NervousyncRandomAccessFile(this.currentFullPath, Boolean.TRUE);
+        this.dataOutput = new StandardFile(this.currentFullPath, Boolean.TRUE);
         this.currentSplitFileIndex++;
     }
 
     private String splitPath() {
-        StringBuilder stringBuilder = new StringBuilder(this.filePath);
+        String folderPath;
+
         if (this.filePath.startsWith(Globals.SAMBA_PROTOCOL)) {
-            stringBuilder.append(Globals.DEFAULT_URL_SEPARATOR);
+            folderPath = this.filePath + Globals.DEFAULT_URL_SEPARATOR;
         } else {
-            stringBuilder.append(Globals.DEFAULT_PAGE_SEPARATOR);
+            folderPath = this.filePath + Globals.DEFAULT_PAGE_SEPARATOR;
         }
-        stringBuilder.append(this.fileName);
-        if (this.currentSplitFileIndex < 0) {
-            stringBuilder.append(".zip.0");
+
+        if (this.currentSplitFileIndex < 9) {
+            return folderPath + fileName + ".zip.0" + (this.currentSplitFileIndex + 1);
+        } else {
+            return folderPath + fileName + ".zip." + (this.currentSplitFileIndex + 1);
         }
-        stringBuilder.append(this.currentSplitFileIndex + 1);
-        return stringBuilder.toString();
     }
 
     private boolean isHeaderData(byte[] buffer) throws IOException {

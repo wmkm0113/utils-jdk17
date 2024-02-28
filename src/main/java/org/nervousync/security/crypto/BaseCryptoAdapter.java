@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -18,7 +18,7 @@ package org.nervousync.security.crypto;
 
 import org.nervousync.commons.Globals;
 import org.nervousync.security.api.SecureAdapter;
-import org.nervousync.security.config.CipherConfig;
+import org.nervousync.security.crypto.config.CipherConfig;
 import org.nervousync.enumerations.crypto.CryptoMode;
 import org.nervousync.exceptions.crypto.CryptoException;
 import org.nervousync.utils.SecurityUtils;
@@ -112,16 +112,21 @@ public abstract class BaseCryptoAdapter extends SecureAdapter {
         try {
             Cipher cipherInstance = Cipher.getInstance(this.cipherConfig.toString(), "BC");
             switch (this.cryptoMode) {
-                case ENCRYPT -> cipherInstance.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
-                case DECRYPT -> cipherInstance.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
-                default -> throw new CryptoException(0x000000150009L, "Utils", "Mode_Invalid_Crypto_Error");
+                case ENCRYPT:
+                    cipherInstance.init(Cipher.ENCRYPT_MODE, key, ivParameterSpec);
+                    break;
+                case DECRYPT:
+                    cipherInstance.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
+                    break;
+                default:
+                    throw new CryptoException(0x000000150009L, "Mode_Invalid_Crypto_Error");
             }
             return cipherInstance;
         } catch (Exception e) {
             if (e instanceof CryptoException) {
                 throw (CryptoException) e;
             }
-            throw new CryptoException(0x00000015000BL, "Utils", "Init_Cipher_Crypto_Error", e);
+            throw new CryptoException(0x00000015000BL, "Init_Cipher_Crypto_Error", e);
         }
     }
 

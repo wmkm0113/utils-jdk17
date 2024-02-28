@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -67,17 +67,17 @@ public final class SHA2DigestAdapterImpl extends BaseDigestAdapter {
     @Override
     protected MessageDigest initDigest(final String algorithm) throws CryptoException {
         if (StringUtils.isEmpty(algorithm)) {
-            throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error");
+            throw new CryptoException(0x00000015000DL, "Unknown_Algorithm_Digits_Error");
         }
-        return switch (algorithm.toUpperCase()) {
-            case "SHA-224" -> new SHA224.Digest();
-            case "SHA-256" -> new SHA256.Digest();
-            case "SHA-384" -> new SHA384.Digest();
-            case "SHA-512" -> new SHA512.Digest();
-            case "SHA-512/224" -> new SHA512.DigestT224();
-            case "SHA-512/256" -> new SHA512.DigestT256();
-            default -> throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error", algorithm);
-        };
+	    return switch (algorithm.toUpperCase()) {
+		    case "SHA-224" -> new SHA224.Digest();
+		    case "SHA-256" -> new SHA256.Digest();
+		    case "SHA-384" -> new SHA384.Digest();
+		    case "SHA-512" -> new SHA512.Digest();
+		    case "SHA-512/224" -> new SHA512.DigestT224();
+		    case "SHA-512/256" -> new SHA512.DigestT256();
+		    default -> throw new CryptoException(0x00000015000DL, "Unknown_Algorithm_Digits_Error", algorithm);
+	    };
     }
     /**
 	 * <h3 class="en-US">Abstract method for initialize Hmac instance</h3>
@@ -94,18 +94,18 @@ public final class SHA2DigestAdapterImpl extends BaseDigestAdapter {
     @Override
     protected Mac initHmac(final String algorithm, final byte[] keyBytes) throws CryptoException {
         if (StringUtils.isEmpty(algorithm) || !algorithm.toUpperCase().endsWith("HMAC")) {
-            throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error", algorithm);
+            throw new CryptoException(0x00000015000DL, "Unknown_Algorithm_Digits_Error", algorithm);
         }
         HMac hmac = switch (algorithm.toUpperCase()) {
-            case "SHA-224/HMAC" -> new HMac(new SHA224Digest());
-            case "SHA-256/HMAC" -> new HMac(new SHA256Digest());
-            case "SHA-384/HMAC" -> new HMac(new SHA384Digest());
-            case "SHA-512/HMAC" -> new HMac(new SHA512Digest());
-            case "SHA-512/224/HMAC" -> new HMac(new SHA512tDigest(224));
-            case "SHA-512/256/HMAC" -> new HMac(new SHA512tDigest(256));
-            default -> throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error", algorithm);
+	        case "SHA-224/HMAC" -> new HMac(new SHA224Digest());
+	        case "SHA-256/HMAC" -> new HMac(new SHA256Digest());
+	        case "SHA-384/HMAC" -> new HMac(new SHA384Digest());
+	        case "SHA-512/HMAC" -> new HMac(new SHA512Digest());
+	        case "SHA-512/224/HMAC" -> new HMac(new SHA512tDigest(224));
+	        case "SHA-512/256/HMAC" -> new HMac(new SHA512tDigest(256));
+	        default -> throw new CryptoException(0x00000015000DL, "Unknown_Algorithm_Digits_Error", algorithm);
         };
-        hmac.init(new KeyParameter(keyBytes));
+	    hmac.init(new KeyParameter(keyBytes));
         return hmac;
     }
 }

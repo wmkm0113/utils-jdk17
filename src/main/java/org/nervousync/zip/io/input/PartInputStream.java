@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -24,7 +24,7 @@ import org.nervousync.commons.Globals;
 import org.nervousync.zip.crypto.Decryptor;
 import org.nervousync.zip.crypto.impl.aes.AESDecryptor;
 import org.nervousync.exceptions.zip.ZipException;
-import org.nervousync.commons.io.NervousyncRandomAccessFile;
+import org.nervousync.commons.io.StandardFile;
 import org.nervousync.zip.ZipFile;
 
 /**
@@ -36,7 +36,7 @@ import org.nervousync.zip.ZipFile;
 public class PartInputStream extends InputStream {
 
 	private final ZipFile zipFile;
-	private NervousyncRandomAccessFile input;
+	private StandardFile input;
 	private int currentIndex;
 	private long readBytes;
 	private final long length;

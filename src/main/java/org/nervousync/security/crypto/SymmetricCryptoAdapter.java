@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -17,7 +17,7 @@
 package org.nervousync.security.crypto;
 
 import org.nervousync.commons.Globals;
-import org.nervousync.security.config.CipherConfig;
+import org.nervousync.security.crypto.config.CipherConfig;
 import org.nervousync.enumerations.crypto.CryptoMode;
 import org.nervousync.exceptions.crypto.CryptoException;
 
@@ -76,11 +76,15 @@ public abstract class SymmetricCryptoAdapter extends BaseCryptoAdapter {
     @Override
     public final void append(final byte[] dataBytes, final int position, final int length) throws CryptoException {
         if (dataBytes.length < (position + length)) {
-            throw new CryptoException(0x000000150001L, "Utils", "Length_Not_Enough_Crypto_Error");
+            throw new CryptoException(0x000000150001L, "Length_Not_Enough_Crypto_Error");
         }
         switch (this.cryptoMode) {
-            case ENCRYPT, DECRYPT -> this.byteArrayOutputStream.write(dataBytes, position, length);
-            default -> throw new CryptoException(0x000000150003L, "Utils", "Mode_Invalid_Crypto_Error");
+            case ENCRYPT:
+            case DECRYPT:
+                this.byteArrayOutputStream.write(dataBytes, position, length);
+                break;
+            default:
+                throw new CryptoException(0x000000150003L, "Mode_Invalid_Crypto_Error");
         }
     }
     /**
@@ -104,20 +108,22 @@ public abstract class SymmetricCryptoAdapter extends BaseCryptoAdapter {
     @Override
     public final byte[] finish(final byte[] dataBytes, final int position, final int length) throws CryptoException {
         switch (this.cryptoMode) {
-            case ENCRYPT, DECRYPT -> {
+            case ENCRYPT:
+            case DECRYPT:
                 try {
                     this.byteArrayOutputStream.write(dataBytes, position, length);
                     return this.cipher.doFinal(this.byteArrayOutputStream.toByteArray(), Globals.INITIALIZE_INT_VALUE,
                             this.byteArrayOutputStream.size());
                 } catch (IllegalBlockSizeException | BadPaddingException e) {
-                    throw new CryptoException(0x000000150004L, "Utils", "Process_Data_Crypto_Error", e);
+                    throw new CryptoException(0x000000150004L, "Process_Data_Crypto_Error", e);
                 } finally {
                     this.reset();
                 }
-            }
-            case SIGNATURE, VERIFY ->
-                    throw new CryptoException(0x00000015000CL, "Utils", "Not_Support_Mode_Crypto_Error");
-            default -> throw new CryptoException(0x000000150003L, "Utils", "Mode_Invalid_Crypto_Error");
+            case SIGNATURE:
+            case VERIFY:
+                throw new CryptoException(0x00000015000CL, "Not_Support_Mode_Crypto_Error");
+            default:
+                throw new CryptoException(0x000000150003L, "Mode_Invalid_Crypto_Error");
         }
     }
     /**
@@ -136,7 +142,7 @@ public abstract class SymmetricCryptoAdapter extends BaseCryptoAdapter {
      */
     @Override
     public final boolean verify(final byte[] signature) throws CryptoException {
-        throw new CryptoException(0x00000015000CL, "Utils", "Not_Support_Mode_Crypto_Error");
+        throw new CryptoException(0x00000015000CL, "Not_Support_Mode_Crypto_Error");
     }
     /**
 	 * <h3 class="en-US">Reset current adapter</h3>
@@ -149,11 +155,13 @@ public abstract class SymmetricCryptoAdapter extends BaseCryptoAdapter {
     @Override
     public final void reset() throws CryptoException {
         switch (this.cryptoMode) {
-            case ENCRYPT, DECRYPT -> {
+            case ENCRYPT:
+            case DECRYPT:
                 this.cipher = this.initCipher();
                 this.byteArrayOutputStream = new ByteArrayOutputStream();
-            }
-            default -> throw new CryptoException(0x000000150003L, "Utils", "Mode_Invalid_Crypto_Error");
+                break;
+            default:
+                throw new CryptoException(0x000000150003L, "Mode_Invalid_Crypto_Error");
         }
     }
 }

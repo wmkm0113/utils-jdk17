@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -158,7 +158,7 @@ public class GeneX509TrustManager implements X509TrustManager {
 		try {
 			KeyStore keyStore = KeyStore.getInstance("JKS");
 			if (!FileUtils.isExists(SystemUtils.systemCertPath())) {
-				this.logger.warn("Utils", "System_Certificate_Not_Found_Warn");
+				this.logger.warn("System_Certificate_Not_Found_Warn");
 			} else {
 				keyStore.load(FileUtils.loadFile(SystemUtils.systemCertPath()), this.passPhrase.toCharArray());
 			}
@@ -176,9 +176,9 @@ public class GeneX509TrustManager implements X509TrustManager {
 				}
 			}
 		} catch (Exception e) {
-			throw new CertInfoException(0x000000150001L, "Utils", "Init_Trust_Manager_Certificate_Error", e);
+			throw new CertInfoException(0x000000160001L, "Init_Trust_Manager_Certificate_Error", e);
 		}
 
-		throw new CertInfoException(0x000000150002L, "Utils", "NotFound_X509TrustManager_Certificate_Error");
+		throw new CertInfoException(0x000000160002L, "NotFound_X509TrustManager_Certificate_Error");
 	}
 }

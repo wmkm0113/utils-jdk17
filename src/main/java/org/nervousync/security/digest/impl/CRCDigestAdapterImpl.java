@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -18,7 +18,7 @@ package org.nervousync.security.digest.impl;
 
 import org.nervousync.exceptions.utils.DataInvalidException;
 import org.nervousync.security.api.SecureAdapter;
-import org.nervousync.security.config.CRCConfig;
+import org.nervousync.security.digest.config.CRCConfig;
 import org.nervousync.exceptions.crypto.CryptoException;
 import org.nervousync.utils.RawUtils;
 
@@ -119,7 +119,7 @@ public final class CRCDigestAdapterImpl extends SecureAdapter {
     @Override
     public void append(final byte[] dataBytes, final int position, final int length) throws CryptoException {
         if (dataBytes.length < (position + length)) {
-            throw new CryptoException(0x000000150001L, "Utils", "Length_Not_Enough_Crypto_Error");
+            throw new CryptoException(0x000000150001L, "Length_Not_Enough_Crypto_Error");
         }
         for (int i = position ; i < length ; i++) {
             long crc = (dataBytes[i] < 0) ? ((int)dataBytes[i]) + 256 : dataBytes[i];

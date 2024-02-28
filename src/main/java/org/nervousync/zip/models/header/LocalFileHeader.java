@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -111,7 +111,7 @@ public final class LocalFileHeader extends FileHeader {
 		try {
 			if (this.getEncryptionMethod() == Globals.ENC_METHOD_AES) {
 				if (this.getAesExtraDataRecord() != null) {
-					byte[] salt = new byte[HeaderOperator.retrieveSaltLength(this.getAesExtraDataRecord().getAesStrength())];
+					byte[] salt = new byte[HeaderOperator.saltLength(this.getAesExtraDataRecord().getAesStrength())];
 					int readLength = Globals.DEFAULT_VALUE_INT;
 					if (input instanceof RandomAccessFile) {
 						((RandomAccessFile) input).seek(this.getOffsetStartOfData());
@@ -141,10 +141,10 @@ public final class LocalFileHeader extends FileHeader {
 				}
 				return Boolean.FALSE;
 			} else if (this.getEncryptionMethod() == Globals.ENC_METHOD_STANDARD) {
-				//	Not supported verify password of standard encrypt
+				//	Not supported verify password of standard encrypting
 				return Boolean.TRUE;
 			} else {
-				throw new ZipException(0x0000001B0001L, "Utils", "Not_Supported_Encryption_Mode_Zip_Error");
+				throw new ZipException(0x0000001B0001L, "Not_Supported_Encryption_Mode_Zip_Error");
 			}
 		} catch (Exception e) {
 			return Boolean.FALSE;

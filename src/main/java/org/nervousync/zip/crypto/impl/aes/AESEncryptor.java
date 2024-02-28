@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -47,7 +47,7 @@ public final class AESEncryptor extends AESCrypto implements Encryptor {
 	@Override
 	public void encryptData(byte[] buff) throws ZipException {
 		if (buff == null) {
-			throw new ZipException(0x000000FF0001L, "Utils", "Parameter_Invalid_Error");
+			throw new ZipException(0x000000FF0001L, "Parameter_Invalid_Error");
 		}
 		this.encryptData(buff, 0, buff.length);
 	}
@@ -55,7 +55,7 @@ public final class AESEncryptor extends AESCrypto implements Encryptor {
 	@Override
 	public void encryptData(byte[] buff, int start, int len) throws ZipException {
 		if (this.finished) {
-			throw new ZipException(0x0000001B0012L, "Utils", "Finished_Encryptor_AES_Zip_Error");
+			throw new ZipException(0x0000001B0012L, "Finished_Encryptor_AES_Zip_Error");
 		}
 		
 		if (len % 16 != 0) {
@@ -72,7 +72,7 @@ public final class AESEncryptor extends AESCrypto implements Encryptor {
 				this.macBasedPRF.append(buff, i, this.loopCount);
 			}
 		} catch (CryptoException | DataInvalidException e) {
-			throw new ZipException(0x0000001B000CL, "Utils", "Encrypt_Crypto_Zip_Error", e);
+			throw new ZipException(0x0000001B000CL, "Encrypt_Crypto_Zip_Error", e);
 		}
 	}
 

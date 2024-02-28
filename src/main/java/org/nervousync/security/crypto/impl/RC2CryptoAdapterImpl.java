@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -18,7 +18,7 @@ package org.nervousync.security.crypto.impl;
 
 import org.nervousync.enumerations.crypto.CryptoMode;
 import org.nervousync.exceptions.crypto.CryptoException;
-import org.nervousync.security.config.CipherConfig;
+import org.nervousync.security.crypto.config.CipherConfig;
 import org.nervousync.security.crypto.BaseCryptoAdapter;
 import org.nervousync.security.crypto.SymmetricCryptoAdapter;
 

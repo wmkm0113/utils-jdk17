@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -35,8 +35,8 @@ public final class MailObject implements Serializable {
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
-    private static final long serialVersionUID = -4277408041510934598L;
+    @Serial
+	private static final long serialVersionUID = -4277408041510934598L;
 	/**
 	 * <span class="en-US">Unified identified ID</span>
 	 * <span class="zh-CN">统一识别代码</span>

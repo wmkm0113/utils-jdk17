@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -25,7 +25,6 @@ import org.nervousync.commons.Globals;
 import org.nervousync.proxy.ProxyConfig;
 import org.nervousync.enumerations.mail.MailProtocol;
 import org.nervousync.mail.config.MailConfig;
-import org.nervousync.security.factory.SecureFactory;
 import org.nervousync.utils.StringUtils;
 
 /**
@@ -33,7 +32,7 @@ import org.nervousync.utils.StringUtils;
  * <h2 class="zh-CN">JavaMail的协议抽象类</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Jul 31, 2012 19:07:08 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 31, 2012 19:07:08 $
  */
 public abstract class BaseProtocol implements Serializable {
 	/**
@@ -78,11 +77,6 @@ public abstract class BaseProtocol implements Serializable {
 	 */
     protected String timeoutParam;
     /**
-	 * <span class="en-US">Secure config name</span>
-	 * <span class="zh-CN">安全配置名称</span>
-     */
-    private final String secureName;
-    /**
 	 * <span class="en-US">Proxy configure information</span>
 	 * <span class="zh-CN">代理服务器配置信息</span>
      */
@@ -91,13 +85,10 @@ public abstract class BaseProtocol implements Serializable {
      * <h3 class="en-US">Constructor method for BaseProtocol</h3>
      * <h3 class="zh-CN">BaseProtocol构造方法</h3>
      *
-     * @param secureName    <span class="en-US">Secure config name</span>
-     *                      <span class="zh-CN">安全配置名称</span>
      * @param proxyConfig   <span class="en-US">Proxy configure information</span>
      *                      <span class="zh-CN">代理服务器配置信息</span>
      */
-    protected BaseProtocol(final String secureName, final ProxyConfig proxyConfig) {
-        this.secureName = secureName;
+    protected BaseProtocol(final ProxyConfig proxyConfig) {
         this.proxyConfig = proxyConfig;
     }
     /**
@@ -134,12 +125,14 @@ public abstract class BaseProtocol implements Serializable {
         }
 
         switch (serverConfig.getProtocolOption()) {
-            case IMAP -> {
+            case IMAP:
                 properties.setProperty(MAIL_STORE_PROTOCOL, "imap");
+
                 if (serverConfig.isAuthLogin()) {
                     properties.setProperty("mail.imap.auth.plain.disable", Boolean.TRUE.toString());
                     properties.setProperty("mail.imap.auth.login.disable", Boolean.TRUE.toString());
                 }
+
                 if (serverConfig.isSsl()) {
                     properties.setProperty(MAIL_STORE_PROTOCOL, "imaps");
                     properties.setProperty("mail.imap.socketFactory.class", SSL_FACTORY_CLASS);
@@ -148,13 +141,15 @@ public abstract class BaseProtocol implements Serializable {
                     }
                     properties.setProperty("mail.imap.starttls.enable", Boolean.TRUE.toString());
                 }
-            }
-            case SMTP -> {
+                break;
+            case SMTP:
                 properties.setProperty(MAIL_STORE_PROTOCOL, "smtp");
                 properties.setProperty(MAIL_TRANSPORT_PROTOCOL, "smtp");
+
                 if (serverConfig.isAuthLogin()) {
                     properties.setProperty("mail.smtp.auth", Boolean.TRUE.toString());
                 }
+
                 if (serverConfig.isSsl()) {
                     properties.setProperty(MAIL_STORE_PROTOCOL, "smtps");
                     properties.setProperty("mail.smtp.ssl.enable", Boolean.TRUE.toString());
@@ -165,10 +160,11 @@ public abstract class BaseProtocol implements Serializable {
                     }
                     properties.setProperty("mail.smtp.starttls.enable", Boolean.TRUE.toString());
                 }
-            }
-            case POP3 -> {
+                break;
+            case POP3:
                 properties.setProperty(MAIL_STORE_PROTOCOL, "pop3");
                 properties.setProperty(MAIL_TRANSPORT_PROTOCOL, "pop3");
+
                 if (serverConfig.isSsl()) {
                     properties.setProperty(MAIL_STORE_PROTOCOL, "pop3s");
                     properties.setProperty(MAIL_TRANSPORT_PROTOCOL, "pop3s");
@@ -180,10 +176,9 @@ public abstract class BaseProtocol implements Serializable {
                     properties.setProperty("mail.pop3.ssl.enable", Boolean.TRUE.toString());
                     properties.setProperty("mail.pop3.useStartTLS", Boolean.TRUE.toString());
                 }
-            }
-            default -> {
+                break;
+            default:
                 return new Properties();
-            }
         }
         this.configProxy(serverConfig.getProtocolOption(), properties);
         return properties;
@@ -200,16 +195,21 @@ public abstract class BaseProtocol implements Serializable {
     private void configProxy(final MailProtocol mailProtocol, final Properties properties) {
         final String configPrefix;
         switch (mailProtocol) {
-            case SMTP -> configPrefix = "mail.smtp";
-            case IMAP -> configPrefix = "mail.imap";
-            case POP3 -> configPrefix = "mail.pop3";
-            default -> {
+            case SMTP:
+                configPrefix = "mail.smtp";
+                break;
+            case IMAP:
+                configPrefix = "mail.imap";
+                break;
+            case POP3:
+                configPrefix = "mail.pop3";
+                break;
+            default:
                 return;
-            }
         }
 
         switch (this.proxyConfig.getProxyType()) {
-            case HTTP -> {
+            case HTTP:
                 properties.setProperty(configPrefix + ".proxy.host", this.proxyConfig.getProxyAddress());
                 if (this.proxyConfig.getProxyPort() != Globals.DEFAULT_VALUE_INT) {
                     properties.setProperty(configPrefix + ".proxy.port",
@@ -218,14 +218,13 @@ public abstract class BaseProtocol implements Serializable {
                 if (StringUtils.notBlank(this.proxyConfig.getUserName())
                         && StringUtils.notBlank(this.proxyConfig.getPassword())) {
                     properties.setProperty(configPrefix + ".proxy.user", this.proxyConfig.getUserName());
-                    properties.setProperty(configPrefix + ".proxy.password",
-                            SecureFactory.decrypt(this.secureName, this.proxyConfig.getPassword()));
+                    properties.setProperty(configPrefix + ".proxy.password", this.proxyConfig.getPassword());
                 }
-            }
-            case SOCKS -> {
+                break;
+            case SOCKS:
                 properties.setProperty(configPrefix + ".socks.host", this.proxyConfig.getProxyAddress());
                 properties.setProperty(configPrefix + ".socks.port", Integer.toString(this.proxyConfig.getProxyPort()));
-            }
+                break;
         }
     }
 }

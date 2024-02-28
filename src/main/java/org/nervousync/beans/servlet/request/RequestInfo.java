@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -37,7 +37,7 @@ import org.nervousync.utils.FileUtils;
  * <p class="en-US">用于方法org.nervousync.utils.RequestUtils#sendRequest的参数值</p>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $ $Date: Aug 25, 2017 11:04:17 $
+ * @version $Revision: 1.1.4 $ $Date: Sep 25, 2022 11:04:17 $
  */
 public final class RequestInfo {
     /**
@@ -291,7 +291,7 @@ public final class RequestInfo {
          *                          <span class="zh-CN">RequestBuilder实例对象</span>
          */
         private RequestProxyBuilder(@Nonnull final RequestBuilder requestBuilder) {
-            super(requestBuilder, Globals.DEFAULT_VALUE_STRING, requestBuilder.proxyConfig);
+            super(requestBuilder, requestBuilder.proxyConfig);
         }
         /**
          * <h3 class="en-US">Confirm proxy configure</h3>

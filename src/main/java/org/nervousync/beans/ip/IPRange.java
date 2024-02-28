@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -27,14 +27,14 @@ import java.io.Serializable;
  * <h2 class="zh-CN">IP地址范围定义</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $Date: Sep 21, 2018 18:25:52 $
+ * @version $Revision: 1.1.3 $Date: Dec 10, 2021 18:25:52 $
  */
 public final class IPRange implements Serializable {
 	/**
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
+    @Serial
 	private static final long serialVersionUID = 7569297312912043791L;
 	/**
 	 * <span class="en-US">Enumeration value of IPType</span>

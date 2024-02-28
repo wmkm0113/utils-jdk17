@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -33,19 +33,17 @@ public final class SMTPProtocol extends BaseProtocol implements SendOperator {
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
-    private static final long serialVersionUID = -5226459745420272131L;
+    @Serial
+	private static final long serialVersionUID = -5226459745420272131L;
     /**
      * <h3 class="en-US">Constructor method for SMTPProtocol</h3>
      * <h3 class="zh-CN">SMTPProtocol构造方法</h3>
      *
-     * @param secureName    <span class="en-US">Secure config name</span>
-     *                      <span class="zh-CN">安全配置名称</span>
      * @param proxyConfig   <span class="en-US">Proxy configure information</span>
      *                      <span class="zh-CN">代理服务器配置信息</span>
      */
-	public SMTPProtocol(final String secureName, final ProxyConfig proxyConfig) {
-		super(secureName, proxyConfig);
+	public SMTPProtocol(final ProxyConfig proxyConfig) {
+		super(proxyConfig);
 		this.hostParam = "mail.smtp.host";
 		this.portParam = "mail.smtp.port";
 		this.connectionTimeoutParam = "mail.smtp.connectiontimeout";

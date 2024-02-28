@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -16,20 +16,17 @@
  */
 package org.nervousync.utils;
 
+import org.nervousync.annotations.beans.BeanProperty;
+import org.nervousync.beans.config.TransferConfig;
+import org.nervousync.exceptions.utils.DataInvalidException;
+
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.nervousync.annotations.beans.BeanProperty;
-import org.nervousync.beans.converter.Adapter;
-import org.nervousync.beans.converter.impl.beans.AbstractBeanAdapter;
-import org.nervousync.commons.Globals;
-import org.nervousync.enumerations.beans.DataFlow;
 
 /**
  * <h2 class="en-US">JavaBean Utilities</h2>
  * <span class="en-US">
- *     <span>Current utilities implements features:</span>
+ * <span>Current utilities implements features:</span>
  *     <ul>Copy object fields value from source object to target object based field name</ul>
  *     <ul>Copy object fields value from source object array to target object based annotation: BeanProperty</ul>
  *     <ul>Copy object fields value from source object to target object arrays based annotation: BeanProperty</ul>
@@ -43,7 +40,7 @@ import org.nervousync.enumerations.beans.DataFlow;
  * </span>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0.0 $ $Date: Jun 25, 2015 14:55:15 $
+ * @version $Revision: 1.2.0 $ $Date: Jun 25, 2015 14:55:15 $
  */
 public final class BeanUtils {
     /**
@@ -56,12 +53,14 @@ public final class BeanUtils {
      * <span class="zh-CN">已注册的JavaBean映射</span>
      */
     private static final Map<String, BeanMapping> BEAN_CONFIG_MAP = new HashMap<>();
+
     /**
      * <h3 class="en-US">Private constructor for BeanUtils</h3>
      * <h3 class="zh-CN">JavaBean工具集的私有构造函数</h3>
      */
     private BeanUtils() {
     }
+
     /**
      * <h3 class="en-US">Remove registered JavaBean class</h3>
      * <h3 class="zh-CN">移除已注册的JavaBean类映射</h3>
@@ -72,9 +71,27 @@ public final class BeanUtils {
     public static void removeBeanConfig(final Class<?>... classes) {
         Arrays.asList(classes).forEach(clazz -> BEAN_CONFIG_MAP.remove(ClassUtils.originalClassName(clazz)));
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Utils", "Register_Bean_Config_Count_Debug", BEAN_CONFIG_MAP.size());
+            LOGGER.debug("Register_Bean_Config_Count_Debug", BEAN_CONFIG_MAP.size());
         }
     }
+
+    /**
+     * <h3 class="en-US">Copy the property values from the source object to the target object, based field name</h3>
+     * <h3 class="zh-CN">从源数据对象复制数据到目标对象，复制依据属性名称</h3>
+     *
+     * @param sourceObject <span class="en-US">Source object instance</span>
+     *                     <span class="zh-CN">源数据对象</span>
+     * @param targetObject <span class="en-US">Target object instance</span>
+     *                     <span class="zh-CN">目标数据对象</span>
+     */
+    public static void copyData(final Object sourceObject, final Object targetObject) {
+        ReflectionUtils.getAllDeclaredFields(sourceObject.getClass(), Boolean.TRUE)
+                .forEach(field ->
+                        Optional.ofNullable(ReflectionUtils.getFieldValue(field, sourceObject))
+                                .ifPresent(fieldValue ->
+                                        ReflectionUtils.setField(field.getName(), targetObject, fieldValue)));
+    }
+
     /**
      * <h3 class="en-US">Copy the map values into the target JavaBean instance</h3>
      * <p class="en-US">Data mapping to JavaBean field identified by map key</p>
@@ -86,15 +103,16 @@ public final class BeanUtils {
      * @param targetObject <span class="en-US">Target JavaBean instance</span>
      *                     <span class="zh-CN">目标JavaBean实例</span>
      */
-    public static void copyProperties(final Map<String, Object> originalMap, final Object targetObject) {
+    public static void copyData(final Map<String, Object> originalMap, final Object targetObject) {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Utils", "Data_Map_Debug",
+            LOGGER.debug("Data_Map_Debug",
                     StringUtils.objectToString(originalMap, StringUtils.StringType.JSON, Boolean.TRUE));
         }
         checkRegister(targetObject.getClass());
         Optional.ofNullable(BEAN_CONFIG_MAP.get(ClassUtils.originalClassName(targetObject.getClass())))
                 .ifPresent(beanMapping -> beanMapping.copyData(targetObject, originalMap));
     }
+
     /**
      * <h3 class="en-US">Copy the property values of the given source bean arrays into the target bean</h3>
      * <p class="en-US">Data mapping by field annotated with org.nervousync.annotations.beans.BeanProperty</p>
@@ -110,10 +128,9 @@ public final class BeanUtils {
         if (targetObject == null || originalObjects.length == 0) {
             return;
         }
-        checkRegister(targetObject.getClass());
-        Optional.ofNullable(BEAN_CONFIG_MAP.get(ClassUtils.originalClassName(targetObject.getClass())))
-                .ifPresent(beanMapping -> beanMapping.copyData(DataFlow.IN, targetObject, originalObjects));
+        Arrays.asList(originalObjects).forEach(originalObject -> copyTo(originalObject, targetObject));
     }
+
     /**
      * <h3 class="en-US">Copy the property values into the given target JavaBean instance arrays</h3>
      * <p class="en-US">Data mapping by field annotated with org.nervousync.annotations.beans.Mappings</p>
@@ -131,8 +148,9 @@ public final class BeanUtils {
         }
         checkRegister(originalObject.getClass());
         Optional.ofNullable(BEAN_CONFIG_MAP.get(ClassUtils.originalClassName(originalObject.getClass())))
-                .ifPresent(beanMapping -> beanMapping.copyData(DataFlow.OUT, originalObject, targetObjects));
+                .ifPresent(beanMapping -> beanMapping.copyProperties(originalObject, targetObjects));
     }
+
     /**
      * <h3 class="en-US">Check and register JavaBean mapping configs</h3>
      * <p class="en-US">If given JavaBean class instance not registered, generate BeanMapping instance and register the given JavaBean class mapping configure</p>
@@ -148,6 +166,7 @@ public final class BeanUtils {
                 .filter(className -> !BEAN_CONFIG_MAP.containsKey(className))
                 .ifPresent(className -> BEAN_CONFIG_MAP.put(className, new BeanMapping(clazz)));
     }
+
     /**
      * <h2 class="en-US">JavaBean mapping configure define</h2>
      * <p class="en-US">Private inner class for define JavaBean mapping configure</p>
@@ -160,6 +179,7 @@ public final class BeanUtils {
          * <span class="zh-CN">JavaBean属性映射配置列表</span>
          */
         private final List<FieldMapping> fieldMappings;
+
         /**
          * <h3 class="en-US">Constructor for parse given JavaBean class instance and generate BeanMapping instance</h3>
          * <h3 class="zh-CN">构造方法用于解析给定的JavaBean类对象，并生成BeanMapping对象</h3>
@@ -172,6 +192,7 @@ public final class BeanUtils {
             ReflectionUtils.getAllDeclaredFields(beanClass, Boolean.TRUE)
                     .forEach(field -> this.fieldMappings.add(new FieldMapping(field)));
         }
+
         /**
          * <h3 class="en-US">Copy property value from data map</h3>
          * <h3 class="zh-CN">从数据Map复制属性数据</h3>
@@ -184,22 +205,21 @@ public final class BeanUtils {
         void copyData(final Object targetObject, final Map<String, Object> originalMap) {
             this.fieldMappings.forEach(fieldMapping -> fieldMapping.copyData(targetObject, originalMap));
         }
+
         /**
          * <h3 class="en-US">Copy the property values between the JavaBean instance and JavaBean instance arrays</h3>
          * <h3 class="zh-CN">在JavaBean对象实例和JavaBean对象实例数组间复制数据</h3>
          *
-         * @see org.nervousync.enumerations.beans.DataFlow
-         * @param dataFlow  <span class="en-US">Data flow, <code>IN</code> from arrays to object, <code>OUT</code> from object to arrays</span>
-         *                  <span class="zh-CN">数据流向<，<code>IN</code>从实例数组复制数据到实例对象，<code>OUT</code>从实例对象复制数据到实例数组/span>
-         * @param object    <span class="en-US">JavaBean instance</span>
-         *                  <span class="zh-CN">JavaBean实例</span>
-         * @param objects   <span class="en-US">JavaBean instance array</span>
-         *                  <span class="zh-CN">JavaBean实例数组</span>
+         * @param object  <span class="en-US">JavaBean instance</span>
+         *                <span class="zh-CN">JavaBean实例</span>
+         * @param objects <span class="en-US">JavaBean instance array</span>
+         *                <span class="zh-CN">JavaBean实例数组</span>
          */
-        void copyData(final DataFlow dataFlow, final Object object, final Object... objects) {
-            this.fieldMappings.forEach(fieldMapping -> fieldMapping.copyData(dataFlow, object, objects));
+        void copyProperties(final Object object, final Object... objects) {
+            this.fieldMappings.forEach(fieldMapping -> fieldMapping.copyProperties(object, objects));
         }
     }
+
     /**
      * <h2 class="en-US">JavaBean field mapping configure define</h2>
      * <p class="en-US">Private inner class for define JavaBean field mapping configure</p>
@@ -213,15 +233,16 @@ public final class BeanUtils {
          */
         private final String fieldName;
         /**
-         * <span class="en-US">JavaBean field type class</span>
-         * <span class="zh-CN">JavaBean属性数据类型</span>
+         * <span class="en-US">JavaBean field type</span>
+         * <span class="zh-CN">JavaBean属性类型</span>
          */
         private final Class<?> fieldType;
         /**
          * <span class="en-US">JavaBean field data mapping configure</span>
          * <span class="zh-CN">JavaBean属性数据映射配置</span>
          */
-        private final List<PropertyMapping> propertyMappings;
+        private final List<PropertyMapping<?, ?>> propertyMappings;
+
         /**
          * <h3 class="en-US">Constructor for parse given JavaBean field instance and generate FieldMapping instance</h3>
          * <h3 class="zh-CN">构造方法用于解析给定的JavaBean属性对象，并生成FieldMapping对象</h3>
@@ -236,6 +257,7 @@ public final class BeanUtils {
             Arrays.asList(field.getAnnotationsByType(BeanProperty.class)).forEach(this::registerProperty);
             this.propertyMappings.sort((o1, o2) -> o2.compare(o1));
         }
+
         /**
          * <h3 class="en-US">Copy property value from data map</h3>
          * <h3 class="zh-CN">从数据Map复制属性数据</h3>
@@ -245,210 +267,130 @@ public final class BeanUtils {
          * @param originalMap  <span class="en-US">Original data map</span>
          *                     <span class="zh-CN">来源数据Map</span>
          */
+        @SuppressWarnings("unchecked")
         void copyData(final Object targetObject, final Map<String, Object> originalMap) {
             if (originalMap == null || originalMap.isEmpty()) {
                 return;
             }
-            Optional.ofNullable(originalMap.get(this.fieldName))
-                    .map(fieldValue ->
-                            this.propertyMappings.stream()
-                                    .filter(propertyMapping ->
-                                            DataFlow.IN.equals(propertyMapping.dataFlow)
-                                                    && Map.class.equals(propertyMapping.beanClass))
-                                    .findFirst()
-                                    .map(propertyMapping ->
-                                            propertyMapping.convertData(fieldValue, this.fieldType))
-                                    .orElse(fieldValue))
-                    .ifPresent(fieldValue -> ReflectionUtils.setField(this.fieldName, targetObject, fieldValue));
+            Object fieldValue = originalMap.get(this.fieldName);
+            if (fieldValue instanceof Map
+                    && !ObjectUtils.nullSafeEquals(this.fieldType, fieldValue.getClass())) {
+                Object targetValue = ReflectionUtils.getFieldValue(this.fieldName, targetObject);
+                if (targetValue == null) {
+                    targetValue = ObjectUtils.newInstance(this.fieldType);
+                }
+                BeanUtils.copyData((Map<String, Object>) fieldValue, targetValue);
+                ReflectionUtils.setField(this.fieldName, targetObject, targetValue);
+            } else {
+                ReflectionUtils.setField(this.fieldName, targetObject, fieldValue);
+            }
         }
+
         /**
          * <h3 class="en-US">Copy the property values between the JavaBean instance and JavaBean instance arrays</h3>
          * <h3 class="zh-CN">在JavaBean对象实例和JavaBean对象实例数组间复制数据</h3>
          *
-         * @param dataFlow  <span class="en-US">Data flow, <code>IN</code> from arrays to object, <code>OUT</code> from object to arrays</span>
-         *                  <span class="zh-CN">数据流向<，<code>IN</code>从实例数组复制数据到实例对象，<code>OUT</code>从实例对象复制数据到实例数组/span>
-         * @see org.nervousync.enumerations.beans.DataFlow
-         * @param object    <span class="en-US">JavaBean instance</span>
-         *                  <span class="zh-CN">JavaBean实例</span>
-         * @param objects   <span class="en-US">JavaBean instance array</span>
-         *                  <span class="zh-CN">JavaBean实例数组</span>
+         * @param object  <span class="en-US">JavaBean instance</span>
+         *                <span class="zh-CN">JavaBean实例</span>
+         * @param objects <span class="en-US">JavaBean instance array</span>
+         *                <span class="zh-CN">JavaBean实例数组</span>
          */
-        void copyData(final DataFlow dataFlow, final Object object, final Object... objects) {
+        void copyProperties(final Object object, final Object... objects) {
             if (object == null || objects == null || objects.length == 0) {
                 return;
             }
-            final AtomicInteger priority = new AtomicInteger(Globals.DEFAULT_VALUE_INT);
-            if (this.propertyMappings.isEmpty()) {
-                switch (dataFlow) {
-                    case IN -> Arrays.asList(objects).forEach(obj -> copyProperties(obj, object));
-                    case OUT -> Arrays.asList(objects).forEach(obj -> copyProperties(object, obj));
-                }
-            } else {
-                this.propertyMappings.stream()
-                        .filter(propertyMapping -> propertyMapping.getDataFlow().equals(dataFlow))
-                        .forEach(propertyMapping -> {
-                            if (propertyMapping.copyData(priority.get(), this.fieldName, this.fieldType, object, objects)) {
-                                priority.set(propertyMapping.getSortCode());
-                            }
-                        });
-            }
+
+            Optional.ofNullable(ReflectionUtils.getFieldValue(this.fieldName, object))
+                    .ifPresent(fieldValue -> {
+                        for (Object obj : objects) {
+                            this.propertyMappings.stream()
+                                    .filter(propertyMapping -> propertyMapping.match(obj))
+                                    .forEach(propertyMapping -> {
+                                        Object convertValue = propertyMapping.convert(fieldValue);
+                                        ReflectionUtils.setField(propertyMapping.getFieldName(), obj, convertValue);
+                                    });
+                        }
+                    });
         }
-        /**
-         * <h3 class="en-US">Copy the property values from the source object to the target object, based field name</h3>
-         * <h3 class="zh-CN">从源数据对象复制数据到目标对象，复制依据属性名称</h3>
-         *
-         * @param sourceObject  <span class="en-US">Source object instance</span>
-         *                      <span class="zh-CN">源数据对象</span>
-         * @param targetObject  <span class="en-US">Target object instance</span>
-         *                      <span class="zh-CN">目标数据对象</span>
-         */
-        void copyProperties(final Object sourceObject, final Object targetObject) {
-            ReflectionUtils.getAllDeclaredFields(sourceObject.getClass(), Boolean.TRUE)
-                    .forEach(field -> Optional.ofNullable(ReflectionUtils.getFieldValue(field, sourceObject))
-                            .ifPresent(fieldValue ->
-                                    ReflectionUtils.setField(field.getName(), targetObject, fieldValue)));
-        }
+
         /**
          * <h3 class="en-US">Register BeanProperty annotation who was annotated at field</h3>
          * <h3 class="zh-CN">注册注解在属性上的BeanProperty注解</h3>
          *
-         * @param beanProperty  <span class="en-US">Annotation instance of BeanProperty</span>
-         *                      <span class="zh-CN">BeanProperty注解实例</span>
+         * @param beanProperty <span class="en-US">Annotation instance of BeanProperty</span>
+         *                     <span class="zh-CN">BeanProperty注解实例</span>
          */
         private void registerProperty(final BeanProperty beanProperty) {
-            if (this.propertyMappings.stream().anyMatch(propertyMapping -> propertyMapping.exists(beanProperty))) {
-                LOGGER.warn("Utils", "JavaBean_Property_Mapping_Existed_Warn",
-                        beanProperty.beanClass(), beanProperty.targetField());
-            }
-            if (Map.class.equals(beanProperty.beanClass())) {
-                this.propertyMappings.add(new PropertyMapping(beanProperty));
+            Field field = ReflectionUtils.getFieldIfAvailable(beanProperty.targetBean(), beanProperty.targetField());
+            if (field == null) {
                 return;
             }
-            Optional.ofNullable(ReflectionUtils.getFieldIfAvailable(beanProperty.beanClass(), beanProperty.targetField()))
-                    .ifPresent(field -> this.propertyMappings.add(new PropertyMapping(beanProperty)));
+            PropertyMapping<?, ?> propertyMapping;
+            try {
+                propertyMapping = new PropertyMapping<>(beanProperty);
+            } catch (DataInvalidException e) {
+                return;
+            }
+            if (this.propertyMappings.stream().anyMatch(existMapping -> existMapping.exists(beanProperty))) {
+                LOGGER.warn("JavaBean_Property_Mapping_Existed_Warn",
+                        beanProperty.targetBean(), beanProperty.targetField());
+                this.propertyMappings.replaceAll(existMapping -> {
+                    if (existMapping.exists(beanProperty)) {
+                        return propertyMapping;
+                    }
+                    return existMapping;
+                });
+            } else {
+                this.propertyMappings.add(propertyMapping);
+            }
         }
     }
-    private static final class PropertyMapping {
+
+    private static final class PropertyMapping<ValueType, BoundType> {
         private final int sortCode;
-        private final DataFlow dataFlow;
-        private final Class<?> beanClass;
+        private final String targetBeanClass;
         private final String fieldName;
-        private final String className;
-        PropertyMapping(final BeanProperty beanProperty) {
+        private final TransferConfig<ValueType, BoundType> transferConfig;
+
+        PropertyMapping(final BeanProperty beanProperty) throws DataInvalidException {
             this.sortCode = beanProperty.sortCode();
-            this.dataFlow = beanProperty.dataFlow();
-            this.beanClass = beanProperty.beanClass();
+            this.targetBeanClass = beanProperty.targetBean().getName();
             this.fieldName = beanProperty.targetField();
-            this.className = beanProperty.converter().getName();
+            this.transferConfig = new TransferConfig<>(beanProperty.transfer());
         }
+
         public int getSortCode() {
             return sortCode;
         }
-        public DataFlow getDataFlow() {
-            return dataFlow;
-        }
-        public Class<?> getBeanClass() {
-            return beanClass;
-        }
+
         public String getFieldName() {
             return fieldName;
         }
+
         boolean exists(final BeanProperty beanProperty) {
-            return this.dataFlow.equals(beanProperty.dataFlow())
-                    && this.beanClass.equals(beanProperty.beanClass())
-                    && this.fieldName.equals(beanProperty.targetField());
+            return ObjectUtils.nullSafeEquals(this.targetBeanClass, beanProperty.targetBean().getName())
+                    && ObjectUtils.nullSafeEquals(this.fieldName, beanProperty.targetField());
         }
-        int compare(final PropertyMapping propertyMapping) {
+
+        boolean match(final Object object) {
+            if (object == null) {
+                return Boolean.FALSE;
+            }
+            return ObjectUtils.nullSafeEquals(this.targetBeanClass, ClassUtils.originalClassName(object.getClass()));
+        }
+
+        int compare(final PropertyMapping<?, ?> propertyMapping) {
             if (this.sortCode != propertyMapping.getSortCode()) {
                 return Integer.compare(propertyMapping.getSortCode(), this.sortCode);
             }
-            if (!this.beanClass.equals(propertyMapping.getBeanClass())) {
-                return propertyMapping.getBeanClass().getName().compareTo(this.beanClass.getName());
+            if (!ObjectUtils.nullSafeEquals(this.targetBeanClass, propertyMapping.targetBeanClass)) {
+                return propertyMapping.targetBeanClass.compareTo(this.targetBeanClass);
             }
             return propertyMapping.getFieldName().compareTo(this.fieldName);
         }
-        @SuppressWarnings("unchecked")
-        Object convertData(final Object fieldValue, final Class<?> sourceClass) {
-            final Object wrapperObject;
-            if (fieldValue.getClass().isPrimitive()) {
-                Class<?> primitiveClass = fieldValue.getClass();
-                wrapperObject =
-                        Optional.ofNullable(ReflectionUtils.findMethod(ClassUtils.primitiveWrapper(primitiveClass),
-                                        "valueOf", new Class[]{primitiveClass}))
-                                .map(method -> ReflectionUtils.invokeMethod(method, null, new Object[]{fieldValue}))
-                                .orElse(fieldValue);
-            } else {
-                wrapperObject = fieldValue;
-            }
-            return Optional.ofNullable(this.className)
-                    .filter(StringUtils::notBlank)
-                    .map(ClassUtils::forName)
-                    .filter(converterClass ->
-                            Adapter.class.isAssignableFrom(converterClass) && !Adapter.class.equals(converterClass))
-                    .map(converterClass -> (Adapter<Object, Object>) ObjectUtils.newInstance(converterClass))
-                    .map(adapter -> convertData(adapter, sourceClass, wrapperObject))
-                    .orElse(fieldValue);
-        }
 
-        Object convertData(final Adapter<Object, Object> adapter, final Class<?> beanClass, final Object wrapperObject) {
-            try {
-                switch (this.dataFlow) {
-                    case IN -> {
-                        if (adapter instanceof AbstractBeanAdapter) {
-                            ((AbstractBeanAdapter<Object, Object>) adapter).setBeanClass(beanClass);
-                        }
-                        return adapter.unmarshal(wrapperObject);
-                    }
-                    case OUT -> {
-                        return adapter.marshal(wrapperObject);
-                    }
-                    default -> {
-                        return null;
-                    }
-                }
-            } catch (Exception e) {
-                LOGGER.error("Utils", "Convert_Data_Error");
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Utils", "Stack_Message_Error", e);
-                }
-                return null;
-            }
-        }
-        boolean copyData(final int priority, final String fieldName, final Class<?> sourceClass,
-                         final Object object, final Object... objects) {
-            final Object targetObject;
-            final String targetField;
-            switch (this.dataFlow) {
-                case IN -> {
-                    targetObject = object;
-                    targetField = fieldName;
-                }
-                case OUT -> {
-                    targetObject = Arrays.stream(objects)
-                            .filter(obj -> obj != null && obj.getClass().equals(this.beanClass))
-                            .findFirst()
-                            .orElse(null);
-                    targetField = this.fieldName;
-                }
-                default -> {
-                    return Boolean.FALSE;
-                }
-            }
-            final Object fieldValue = switch (this.dataFlow) {
-                case IN -> Arrays.stream(objects)
-                        .filter(obj -> obj != null && obj.getClass().equals(this.beanClass))
-                        .findFirst()
-                        .map(obj -> ReflectionUtils.getFieldValue(this.fieldName, obj))
-                        .orElse(null);
-                case OUT -> ReflectionUtils.getFieldValue(fieldName, object);
-            };
-            if (targetObject != null && fieldValue != null
-                    && (DataFlow.OUT.equals(this.dataFlow) || (priority == Globals.DEFAULT_VALUE_INT || priority < this.sortCode))) {
-                ReflectionUtils.setField(targetField, targetObject, this.convertData(fieldValue, sourceClass));
-                return Boolean.TRUE;
-
-            }
-            return Boolean.FALSE;
+        Object convert(final Object object) {
+            return this.transferConfig.convert(object);
         }
     }
 }

@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -16,7 +16,7 @@
  */
 package org.nervousync.generator.snowflake;
 
-import org.nervousync.annotations.generator.GeneratorProvider;
+import org.nervousync.annotations.provider.Provider;
 import org.nervousync.commons.Globals;
 import org.nervousync.generator.IGenerator;
 import org.nervousync.utils.DateTimeUtils;
@@ -28,9 +28,9 @@ import org.nervousync.utils.LoggerUtils;
  * <h2 class="zh-CN">雪花ID生成器</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Jul 06, 2022 12:44:27 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 06, 2022 12:44:27 $
  */
-@GeneratorProvider(IDUtils.SNOWFLAKE)
+@Provider(name = IDUtils.SNOWFLAKE, titleKey = "snowflake.id.generator.name")
 public final class SnowflakeGenerator implements IGenerator<Long> {
     /**
      * <span class="en-US">Logger instance</span>
@@ -89,7 +89,7 @@ public final class SnowflakeGenerator implements IGenerator<Long> {
         this.instanceId = (instanceId >= 0L && instanceId <= 64L) ? instanceId : DEFAULT_ID;
         this.sequenceIndex = 0L;
         if (this.logger.isDebugEnabled()) {
-            this.logger.debug("Utils", "Config_Snowflake_Error",
+            this.logger.debug("Config_Snowflake_Error",
                     this.referenceTime, this.deviceId, this.instanceId);
         }
     }
@@ -124,7 +124,7 @@ public final class SnowflakeGenerator implements IGenerator<Long> {
         this.lastTime = currentTime;
 
         if (this.logger.isDebugEnabled()) {
-            this.logger.debug("Utils", "Generate_Snowflake_Debug",
+            this.logger.debug("Generate_Snowflake_Debug",
                     this.lastTime, this.referenceTime, this.deviceId, this.instanceId, this.sequenceIndex);
         }
 

@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -16,7 +16,7 @@
  */
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -62,7 +62,7 @@ public final class HeaderOperator {
 	 * @return the int
 	 * @throws ZipException the zip exception
 	 */
-	public static int retrieveSaltLength(int aesStrength) throws ZipException {
+	public static int saltLength(int aesStrength) throws ZipException {
 		return switch (aesStrength) {
 			case Globals.AES_STRENGTH_128 -> 8;
 			case Globals.AES_STRENGTH_192 -> 12;

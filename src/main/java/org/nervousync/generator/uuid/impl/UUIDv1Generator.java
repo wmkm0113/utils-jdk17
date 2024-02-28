@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -16,7 +16,7 @@
  */
 package org.nervousync.generator.uuid.impl;
 
-import org.nervousync.annotations.generator.GeneratorProvider;
+import org.nervousync.annotations.provider.Provider;
 import org.nervousync.commons.Globals;
 import org.nervousync.generator.uuid.UUIDGenerator;
 import org.nervousync.utils.IDUtils;
@@ -34,9 +34,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <h2 class="zh-CN">UUID版本1生成器</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Jul 06, 2022 12:51:08 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 06, 2022 12:51:08 $
  */
-@GeneratorProvider(IDUtils.UUIDv1)
+@Provider(name = IDUtils.UUIDv1, titleKey = "version1.uuid.id.generator.name")
 public final class UUIDv1Generator extends UUIDGenerator {
 
     private static final long INTERVAL = 0x01B21DD213814000L;

@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -16,7 +16,7 @@
  */
 package org.nervousync.security.crypto.impl;
 
-import org.nervousync.security.config.CipherConfig;
+import org.nervousync.security.crypto.config.CipherConfig;
 import org.nervousync.security.crypto.BaseCryptoAdapter;
 import org.nervousync.security.crypto.SymmetricCryptoAdapter;
 import org.nervousync.enumerations.crypto.CryptoMode;
@@ -66,7 +66,7 @@ public final class DESCryptoAdapterImpl extends SymmetricCryptoAdapter {
             return super.generateCipher(keyFactory.generateSecret(desKeySpec),
                     this.cipherConfig.mode().equalsIgnoreCase("ECB") ? 0 : 8);
         } catch (Exception e) {
-            throw new CryptoException(0x00000015000BL, "Utils", "Init_Cipher_Crypto_Error", e);
+            throw new CryptoException(0x00000015000BL, "Init_Cipher_Crypto_Error", e);
         }
     }
 }

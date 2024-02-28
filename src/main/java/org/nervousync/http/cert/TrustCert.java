@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -94,7 +94,7 @@ public final class TrustCert {
 			keyManagerFactory.init(clientStore, this.certPassword.toCharArray());
 			return keyManagerFactory.getKeyManagers();
 		} catch (Exception e) {
-			throw new CertInfoException(0x000000010001L, "Utils", "Parse_Certificate_Error", e);
+			throw new CertInfoException(0x000000010001L, "Parse_Certificate_Error", e);
 		}
 	}
     /**

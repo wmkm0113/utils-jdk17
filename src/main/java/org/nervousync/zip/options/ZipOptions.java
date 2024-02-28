@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -144,7 +144,7 @@ public final class ZipOptions implements Cloneable {
 	 */
 	public static ZipOptions standardEncryptOptions(final String password) throws ZipException {
 		if (StringUtils.isEmpty(password)) {
-			throw new ZipException(0x0000001B0006L, "Utils", "Invalid_Password_Zip_Error");
+			throw new ZipException(0x0000001B0006L, "Invalid_Password_Zip_Error");
 		}
 		return new ZipOptions(password);
 	}
@@ -170,14 +170,14 @@ public final class ZipOptions implements Cloneable {
 	 */
 	public static ZipOptions aesEncryptOptions(final String password, final int aesKeyLength) throws ZipException {
 		if (StringUtils.isEmpty(password)) {
-			throw new ZipException(0x0000001B0006L, "Utils", "Invalid_Password_Zip_Error");
+			throw new ZipException(0x0000001B0006L, "Invalid_Password_Zip_Error");
 		}
 
 		return switch (aesKeyLength) {
 			case 128 -> new ZipOptions(password, Globals.AES_STRENGTH_128);
 			case 192 -> new ZipOptions(password, Globals.AES_STRENGTH_192);
 			case 256 -> new ZipOptions(password, Globals.AES_STRENGTH_256);
-			default -> throw new ZipException(0x0000001B0005L, "Utils", "Invalid_Key_Strength_AES_Zip_Error");
+			default -> throw new ZipException(0x0000001B0005L, "Invalid_Key_Strength_AES_Zip_Error");
 		};
 	}
 
@@ -228,13 +228,23 @@ public final class ZipOptions implements Cloneable {
 
 	public void compressLevel(final CompressLevel compressLevel) {
 		switch (compressLevel) {
-			case FASTEST -> this.compressionLevel = Globals.DEFLATE_LEVEL_FASTEST;
-			case FAST -> this.compressionLevel = Globals.DEFLATE_LEVEL_FAST;
-			case NORMAL -> this.compressionLevel = Globals.DEFLATE_LEVEL_NORMAL;
-			case MAXIMUM -> this.compressionLevel = Globals.DEFLATE_LEVEL_MAXIMUM;
-			case ULTRA -> this.compressionLevel = Globals.DEFLATE_LEVEL_ULTRA;
-			default -> {
-			}
+			case FASTEST:
+				this.compressionLevel = Globals.DEFLATE_LEVEL_FASTEST;
+				break;
+			case FAST:
+				this.compressionLevel = Globals.DEFLATE_LEVEL_FAST;
+				break;
+			case NORMAL:
+				this.compressionLevel = Globals.DEFLATE_LEVEL_NORMAL;
+				break;
+			case MAXIMUM:
+				this.compressionLevel = Globals.DEFLATE_LEVEL_MAXIMUM;
+				break;
+			case ULTRA:
+				this.compressionLevel = Globals.DEFLATE_LEVEL_ULTRA;
+				break;
+			default:
+
 		}
 	}
 

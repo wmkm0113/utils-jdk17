@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public final class MultilingualTest extends BaseTest {
 
-    private final MultilingualUtils.Agent multiAgent = MultilingualUtils.newAgent("org.nervousync", "utils-jdk11");
+    private final MultilingualUtils.Agent multiAgent = MultilingualUtils.newAgent("org.nervousync", "utils-jdk17");
 
     @Test
     @Order(10)
@@ -21,9 +21,9 @@ public final class MultilingualTest extends BaseTest {
     @Test
     @Order(20)
     public void destroy() {
-        MultilingualUtils.removeResource("org.nervousync", "utils-jdk11", "zh-CN");
+        MultilingualUtils.disableLanguage("zh-CN");
         this.logger.info(this.multiAgent.findMessage("Out_Of_Index_Raw_Error", Locale.CHINA, 10, 8, 3));
-        MultilingualUtils.removeBundle("org.nervousync", "utils-jdk11");
+        MultilingualUtils.removeBundle("org.nervousync", "utils-jdk17");
         this.logger.info(this.multiAgent.findMessage("Not_Support_Type_Location_Error"));
     }
 }

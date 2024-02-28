@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -30,14 +30,14 @@ import org.nervousync.enumerations.snmp.auth.SNMPPrivProtocol;
  * <h2 class="zh-CN">SNMP目标主机定义</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Oct 25, 2017 21:47:36 $
+ * @version $Revision: 1.1.2 $ $Date: Sep 25, 2022 21:47:36 $
  */
 public final class TargetHost implements Serializable {
 	/**
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
+    @Serial
 	private static final long serialVersionUID = -7043141633658888918L;
 	/**
 	 * <span class="en-US">Default port number of SNMP</span>

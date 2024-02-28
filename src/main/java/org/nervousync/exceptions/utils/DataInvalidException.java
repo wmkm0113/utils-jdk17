@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -32,7 +32,7 @@ public final class DataInvalidException extends AbstractException {
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
+    @Serial
     private static final long serialVersionUID = -2896313924690716673L;
 	/**
 	 * <h3 class="en-US">Constructor method for DataInvalidException</h3>
@@ -42,14 +42,11 @@ public final class DataInvalidException extends AbstractException {
 	 *
 	 * @param errorCode 	<span class="en-US">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param messageKey    <span class="en-US">Message identify key</span>
-     *                      <span class="zh-CN">信息识别键值</span>
      * @param collections   <span class="en-US">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	public DataInvalidException(final long errorCode, final String messageKey,
-								final Object... collections) {
-		super(errorCode, messageKey, collections);
+	public DataInvalidException(final long errorCode, final Object... collections) {
+		super(errorCode, collections);
 	}
 	/**
 	 * <h3 class="en-US">Constructor method for DataInvalidException</h3>
@@ -59,15 +56,12 @@ public final class DataInvalidException extends AbstractException {
 	 *
 	 * @param errorCode 	<span class="en-US">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param messageKey    <span class="en-US">Message identify key</span>
-     *                      <span class="zh-CN">信息识别键值</span>
 	 * @param cause 		<span class="en-US">The root cause</span>
 	 *              		<span class="zh-CN">异常信息对象实例</span>
      * @param collections   <span class="en-US">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	public DataInvalidException(final long errorCode, final String messageKey,
-								final Throwable cause, final Object... collections) {
-		super(errorCode, messageKey, cause, collections);
+	public DataInvalidException(final long errorCode, final Throwable cause, final Object... collections) {
+		super(errorCode, cause, collections);
 	}
 }

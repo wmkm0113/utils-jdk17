@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -73,7 +73,7 @@ public final class SHA1DigestAdapterImpl extends BaseDigestAdapter {
         if ("SHA-1".equalsIgnoreCase(algorithm)) {
             return new SHA1.Digest();
         }
-        throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error");
+        throw new CryptoException(0x00000015000DL, "Unknown_Algorithm_Digits_Error");
     }
     /**
 	 * <h3 class="en-US">Abstract method for initialize Hmac instance</h3>
@@ -94,6 +94,6 @@ public final class SHA1DigestAdapterImpl extends BaseDigestAdapter {
             hmac.init(new KeyParameter(keyBytes));
             return hmac;
         }
-        throw new CryptoException(0x00000015000DL, "Utils", "Unknown_Algorithm_Digits_Error", algorithm);
+        throw new CryptoException(0x00000015000DL, "Unknown_Algorithm_Digits_Error", algorithm);
     }
 }

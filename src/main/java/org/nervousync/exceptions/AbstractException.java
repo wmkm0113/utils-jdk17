@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -34,7 +34,7 @@ public abstract class AbstractException extends Exception {
 	 * <span class="en-US">Serial version UID</span>
 	 * <span class="zh-CN">序列化UID</span>
 	 */
-	@Serial
+    @Serial
 	private static final long serialVersionUID = 3698481050554660066L;
 	private final MultilingualUtils.Agent multiAgent = MultilingualUtils.newAgent(this.getClass());
 	/**
@@ -51,15 +51,13 @@ public abstract class AbstractException extends Exception {
 	 *
 	 * @param errorCode 	<span class="en-US">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param messageKey    <span class="en-US">Message identify key</span>
-     *                      <span class="zh-CN">信息识别键值</span>
      * @param collections   <span class="en-US">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	protected AbstractException(final long errorCode, final String messageKey, final Object... collections) {
+	protected AbstractException(final long errorCode, final Object... collections) {
 		super(Globals.DEFAULT_VALUE_STRING);
 		this.errorCode = errorCode;
-		this.detailMessage = this.multiAgent.findMessage(messageKey, collections);
+		this.detailMessage = this.multiAgent.errorMessage(errorCode, collections);
 	}
 	/**
 	 * <h3 class="en-US">Constructor method for NetworkInfoException</h3>
@@ -69,18 +67,15 @@ public abstract class AbstractException extends Exception {
 	 *
 	 * @param errorCode 	<span class="en-US">Error identified code</span>
      *                      <span class="zh-CN">错误识别代码</span>
-     * @param messageKey    <span class="en-US">Message identify key</span>
-     *                      <span class="zh-CN">信息识别键值</span>
 	 * @param cause 		<span class="en-US">The root cause</span>
 	 *              		<span class="zh-CN">异常信息对象实例</span>
      * @param collections   <span class="en-US">given parameters of information formatter</span>
      *                      <span class="zh-CN">用于资源信息格式化的参数</span>
 	 */
-	protected AbstractException(final long errorCode, final String messageKey,
-								final Throwable cause, final Object... collections) {
+	protected AbstractException(final long errorCode, final Throwable cause, final Object... collections) {
 		super(Globals.DEFAULT_VALUE_STRING, cause);
 		this.errorCode = errorCode;
-		this.detailMessage = this.multiAgent.findMessage(messageKey, collections);
+		this.detailMessage = this.multiAgent.errorMessage(errorCode, collections);
 	}
 	/**
 	 * <h3 class="en-US">Getter method for error identified code</h3>
@@ -112,8 +107,9 @@ public abstract class AbstractException extends Exception {
 		}
 		if (ObjectUtils.nullSafeEquals(other.getClass(), this.getClass())) {
 			AbstractException otherBe = (AbstractException) other;
-			return (ObjectUtils.nullSafeEquals(this.getMessage(), otherBe.getMessage()) &&
-					ObjectUtils.nullSafeEquals(this.getCause(), otherBe.getCause()));
+			return (this.errorCode == otherBe.getErrorCode()
+					&& ObjectUtils.nullSafeEquals(this.getMessage(), otherBe.getMessage())
+					&& ObjectUtils.nullSafeEquals(this.getCause(), otherBe.getCause()));
 		}
 		return Boolean.FALSE;
 	}

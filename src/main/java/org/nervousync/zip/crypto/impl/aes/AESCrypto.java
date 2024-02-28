@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -131,24 +131,25 @@ public class AESCrypto {
 	void preInit(int aesStrength) throws ZipException {
 		this.iv = new byte[Globals.AES_BLOCK_SIZE];
 		this.countBlock = new byte[Globals.AES_BLOCK_SIZE];
-
+		
 		switch (aesStrength) {
-			case Globals.AES_STRENGTH_128 -> {
+			case Globals.AES_STRENGTH_128:
 				this.keyLength = 16;
 				this.macLength = 16;
 				this.saltLength = 8;
-			}
-			case Globals.AES_STRENGTH_192 -> {
+				break;
+			case Globals.AES_STRENGTH_192:
 				this.keyLength = 24;
 				this.macLength = 24;
 				this.saltLength = 12;
-			}
-			case Globals.AES_STRENGTH_256 -> {
+				break;
+			case Globals.AES_STRENGTH_256:
 				this.keyLength = 32;
 				this.macLength = 32;
 				this.saltLength = 16;
-			}
-			default -> throw new ZipException(0x0000001B0005L, "Utils", "Invalid_Key_Strength_AES_Zip_Error");
+				break;
+			default:
+				throw new ZipException(0x0000001B0005L, "Invalid_Key_Strength_AES_Zip_Error");
 		}
 	}
 
@@ -160,13 +161,13 @@ public class AESCrypto {
 	 */
 	void init(char[] password) throws ZipException {
 		if (password == null || password.length == 0) {
-			throw new ZipException(0x0000001B0006L, "Utils", "Invalid_Password_Zip_Error");
+			throw new ZipException(0x0000001B0006L, "Invalid_Password_Zip_Error");
 		}
 		this.generateSalt();
 		try {
 			this.initCrypto(password);
 		} catch (CryptoException e) {
-			throw new ZipException(0x0000001B000AL, "Utils", "Init_Crypto_Zip_Error", e);
+			throw new ZipException(0x0000001B000AL, "Init_Crypto_Zip_Error", e);
 		}
 	}
 
@@ -179,13 +180,13 @@ public class AESCrypto {
 	 */
 	void init(byte[] salt, char[] password) throws ZipException {
 		if (password == null || password.length == 0) {
-			throw new ZipException(0x0000001B0006L, "Utils", "Invalid_Password_Zip_Error");
+			throw new ZipException(0x0000001B0006L, "Invalid_Password_Zip_Error");
 		}
 		this.saltBytes = salt == null ? new byte[0] : salt.clone();
 		try {
 			this.initCrypto(password);
 		} catch (CryptoException e) {
-			throw new ZipException(0x0000001B000AL, "Utils", "Init_Crypto_Zip_Error", e);
+			throw new ZipException(0x0000001B000AL, "Init_Crypto_Zip_Error", e);
 		}
 	}
 
@@ -256,7 +257,7 @@ public class AESCrypto {
 	 */
 	boolean verifyPassword(byte[] password) throws ZipException {
 		if (this.derivedPasswordVerifier == null) {
-			throw new ZipException(0x0000001B0007L, "Utils", "Invalid_Derived_Password_Verifier_Zip_Error");
+			throw new ZipException(0x0000001B0007L, "Invalid_Derived_Password_Verifier_Zip_Error");
 		}
 
 		return Arrays.equals(password, this.derivedPasswordVerifier);
@@ -303,11 +304,11 @@ public class AESCrypto {
 			keyBytes = this.deriveKey(this.saltBytes, password,
 				this.keyLength + this.macLength + Globals.PASSWORD_VERIFIER_LENGTH);
 		} catch (DataInvalidException e) {
-			throw new ZipException(0x0000001B000AL, "Utils", "Init_Crypto_Zip_Error", e);
+			throw new ZipException(0x0000001B000AL, "Init_Crypto_Zip_Error", e);
 		}
 		
 		if (keyBytes.length != (this.keyLength + this.macLength + Globals.PASSWORD_VERIFIER_LENGTH)) {
-			throw new ZipException(0x0000001B0008L, "Utils", "Invalid_Derived_Key_Zip_Error");
+			throw new ZipException(0x0000001B0008L, "Invalid_Derived_Key_Zip_Error");
 		}
 
 		byte[] aesKey = new byte[this.keyLength];
@@ -330,7 +331,7 @@ public class AESCrypto {
 	private void generateSalt() throws ZipException {
 		int rounds = this.saltLength / 4;
 		if (rounds < 2 || rounds > 4) {
-			throw new ZipException(0x0000001B0009, "Utils", "Invalid_Salt_Length_Zip_Error");
+			throw new ZipException(0x0000001B0009, "Invalid_Salt_Length_Zip_Error");
 		}
 
 		this.saltBytes = new byte[this.saltLength];

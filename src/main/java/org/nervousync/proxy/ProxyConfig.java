@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -20,6 +20,7 @@ import java.io.Serial;
 import java.net.Proxy.Type;
 
 import jakarta.xml.bind.annotation.*;
+import org.nervousync.annotations.configs.Password;
 import org.nervousync.beans.core.BeanObject;
 import org.nervousync.commons.Globals;
 
@@ -30,7 +31,6 @@ import org.nervousync.commons.Globals;
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
  * @version $Revision: 1.0.0 $ $Date: Jan 4, 2018 16:05:54 $
  */
-@XmlType(name = "proxy_config", namespace = "https://nervousync.org/schemas/proxy")
 @XmlRootElement(name = "proxy_config", namespace = "https://nervousync.org/schemas/proxy")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class ProxyConfig extends BeanObject {
@@ -68,6 +68,7 @@ public final class ProxyConfig extends BeanObject {
      * <span class="en-US">Authenticate password</span>
      * <span class="zh-CN">身份认证密码</span>
      */
+    @Password
     @XmlElement(name = "password")
     private String password = Globals.DEFAULT_VALUE_STRING;
     /**

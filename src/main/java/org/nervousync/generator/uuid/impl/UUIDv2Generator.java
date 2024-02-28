@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -16,7 +16,7 @@
  */
 package org.nervousync.generator.uuid.impl;
 
-import org.nervousync.annotations.generator.GeneratorProvider;
+import org.nervousync.annotations.provider.Provider;
 import org.nervousync.generator.uuid.UUIDGenerator;
 import org.nervousync.generator.uuid.timer.TimeSynchronizer;
 import org.nervousync.utils.IDUtils;
@@ -32,9 +32,9 @@ import java.util.concurrent.TimeUnit;
  * <h2 class="zh-CN">UUID版本2生成器</h2>
  *
  * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
- * @version $Revision: 1.0 $ $Date: Jul 06, 2022 12:53:06 $
+ * @version $Revision: 1.0.0 $ $Date: Jul 06, 2022 12:53:06 $
  */
-@GeneratorProvider(IDUtils.UUIDv2)
+@Provider(name = IDUtils.UUIDv2, titleKey = "version2.uuid.id.generator.name")
 public final class UUIDv2Generator extends UUIDGenerator {
     /**
      * <span class="en-US">Logger instance</span>
@@ -201,7 +201,7 @@ public final class UUIDv2Generator extends UUIDGenerator {
         public synchronized long getTimestamp() {
             long currentTimeMillis = System.currentTimeMillis();
             if (currentTimeMillis < this.systemTimestamp) {
-                LOGGER.warn("Utils", "Go_Back_Time_UUID_Debug",
+                LOGGER.warn("Go_Back_Time_UUID_Debug",
                         currentTimeMillis, this.systemTimestamp);
                 this.systemTimestamp = currentTimeMillis;
             }
@@ -213,7 +213,7 @@ public final class UUIDv2Generator extends UUIDGenerator {
                     long actDiff = this.usedTimestamp - currentTimeMillis;
                     long origTime = currentTimeMillis;
                     currentTimeMillis = this.usedTimestamp + 1L;
-                    LOGGER.warn("Utils", "Timestamp_Over_Run_Warn");
+                    LOGGER.warn("Timestamp_Over_Run_Warn");
                     this.initCounters();
                     if (actDiff >= 100L) {
                         slowDown(origTime, actDiff);
@@ -253,7 +253,7 @@ public final class UUIDv2Generator extends UUIDGenerator {
                 delayMillis = 5L;
             }
 
-            LOGGER.warn("Utils", "Virtual_Clock_Warn", delayMillis);
+            LOGGER.warn("Virtual_Clock_Warn", delayMillis);
             long timeOutMillis = startTime + delayMillis;
             int counter = 0;
 

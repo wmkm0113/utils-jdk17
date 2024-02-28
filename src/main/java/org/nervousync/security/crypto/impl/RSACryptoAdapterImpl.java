@@ -1,6 +1,6 @@
 /*
  * Licensed to the Nervousync Studio (NSYC) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -17,7 +17,7 @@
 package org.nervousync.security.crypto.impl;
 
 import org.nervousync.commons.Globals;
-import org.nervousync.security.config.CipherConfig;
+import org.nervousync.security.crypto.config.CipherConfig;
 import org.nervousync.security.crypto.AsymmetricCryptoAdapter;
 import org.nervousync.enumerations.crypto.CryptoMode;
 import org.nervousync.exceptions.crypto.CryptoException;
@@ -53,16 +53,16 @@ public final class RSACryptoAdapterImpl extends AsymmetricCryptoAdapter {
 
     private static int PADDING_LENGTH(final CryptoMode cryptoMode, final String padding) {
         if (CryptoMode.ENCRYPT.equals(cryptoMode) || CryptoMode.DECRYPT.equals(cryptoMode)) {
-            return switch (padding) {
-                case "PKCS1Padding" -> 11;
-                case "OAEPWithMD5AndMGF1Padding" -> 34;
-                case "OAEPPadding", "OAEPWithSHA-1AndMGF1Padding" -> 42;
-                case "OAEPWithSHA3-224AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding" -> 58;
-                case "OAEPWithSHA3-256AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding" -> 66;
-                case "OAEPWithSHA3-384AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding" -> 98;
-                case "OAEPWithSHA3-512AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding" -> 130;
-                default -> 0;
-            };
+	        return switch (padding) {
+		        case "PKCS1Padding" -> 11;
+		        case "OAEPWithMD5AndMGF1Padding" -> 34;
+		        case "OAEPPadding", "OAEPWithSHA-1AndMGF1Padding" -> 42;
+		        case "OAEPWithSHA3-224AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding" -> 58;
+		        case "OAEPWithSHA3-256AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding" -> 66;
+		        case "OAEPWithSHA3-384AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding" -> 98;
+		        case "OAEPWithSHA3-512AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding" -> 130;
+		        default -> 0;
+	        };
         }
         return Globals.INITIALIZE_INT_VALUE;
     }

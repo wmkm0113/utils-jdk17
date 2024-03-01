@@ -28,7 +28,7 @@ import java.io.Serial;
  * <h2 class="en-US">Set property value</h2>
  * <h2 class="zh-CN">设置属性值</h2>
  *
- * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
+ * @author Steven Wee	<a href="mailto:wmkm0113@gmail.com">wmkm0113@gmail.com</a>
  * @version $Revision: 1.0.0 $ $Date: Dec 26, 2023 18:26:33 $
  */
 public final class AttributeTag extends TagSupport {

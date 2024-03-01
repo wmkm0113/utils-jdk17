@@ -24,7 +24,7 @@ package org.nervousync.http.header;
  *                    <span class="zh-CN">Header名</span>
  * @param headerValue <span class="en-US">Header value</span>
  *                    <span class="zh-CN">Header值</span>
- * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
+ * @author Steven Wee	<a href="mailto:wmkm0113@gmail.com">wmkm0113@gmail.com</a>
  * @version $Revision: 1.0.0 $ $Date: Jan 4, 2018 12:15:18 $
  */
 public record SimpleHeader(String headerName, String headerValue) {

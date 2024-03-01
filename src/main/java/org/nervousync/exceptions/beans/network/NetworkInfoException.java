@@ -24,7 +24,7 @@ import java.io.Serial;
  * <h2 class="en-US">Network Information Exception</h2>
  * <h2 class="zh-CN">网络信息异常</h2>
  *
- * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
+ * @author Steven Wee	<a href="mailto:wmkm0113@gmail.com">wmkm0113@gmail.com</a>
  * @version $Revision: 1.0.0 $ $Date: Jul 24, 2015 12:25:26 $
  */
 public final class NetworkInfoException extends AbstractException {

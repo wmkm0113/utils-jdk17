@@ -30,7 +30,7 @@ import java.io.Serializable;
  *                  Cipher Mode
  * @param padding   <span class="en-US">Padding Mode</span>
  *                  <span class="zh-CN">数据填充模式</span>
- * @author Steven Wee	<a href="mailto:wmkm0113@Hotmail.com">wmkm0113@Hotmail.com</a>
+ * @author Steven Wee	<a href="mailto:wmkm0113@gmail.com">wmkm0113@gmail.com</a>
  * @version $Revision: 1.0.0 $ $Date: Jan 13, 2016 15:47:22 $
  */
 public record CipherConfig(String algorithm, String mode, String padding) implements Serializable {
